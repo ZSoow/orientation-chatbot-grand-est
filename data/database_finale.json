@@ -5,7 +5,8 @@
     "diplome_acronyme": "BPA",
     "niveau": 3,
     "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
-    "etablissements": [{"nom": "Campus Terres de l’Aube", "ville": "Saint-Pouange", "code_postal": "10360", "region_nom": "Champagne-Ardenne", "site_web": "https://www.campus-terresdelaube.fr/", "lien_formation": "https://www.campus-terresdelaube.fr/nos-formations/voie-professionnelle/", "jpo_dates": "Non disponible (vérifier début 2026)"}]
+    "description": "Ce brevet forme des ouvriers qualifiés spécialisés dans les travaux de la vigne. Il couvre l'ensemble du cycle, de la taille à la vendange, en intégrant les nouvelles pratiques agro-écologiques.",
+    "etablissements": [{"nom": "Campus Terres de l’Aube", "ville": "Saint-Pouange", "code_postal": "10360", "region_nom": "Champagne-Ardenne", "site_web": "https://www.campus-terresdelaube.fr/", "lien_formation": "https://www.campus-terresdelaube.fr/nos-formations/voie-professionnelle/", "jpo_dates": "Non disponible (vérifier début 2026)", "coordonnees": [48.21, 4.07]}]
   },
   {
     "id": "BACPRO_CGEA_SAINT_LAURENT",
@@ -13,9 +14,10 @@
     "diplome_acronyme": "Bac Pro",
     "niveau": 4,
     "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
+    "description": "Le Bac Pro CGEA prépare à devenir responsable d'une exploitation agricole. Il enseigne la gestion technique, économique et humaine d'une entreprise dans le secteur de l'élevage ou des grandes cultures.",
     "etablissements": [
-      {"nom": "Campus Agro Environnemental", "ville": "Saint-Laurent", "code_postal": "08090", "region_nom": "Champagne-Ardenne", "site_web": "https://www.campus-saintlaurent.fr/", "lien_formation": "https://www.campus-saintlaurent.fr/formations-scolaires/bac-pro-cgea/", "jpo_dates": "Non disponible (vérifier début 2026)"},
-      {"nom": "EPLEFPA Edgard PISANI", "ville": "Chamarandes-Choignes", "code_postal": "52000", "region_nom": "Champagne-Ardenne", "site_web": "https://epl.chaumont.educagri.fr/", "lien_formation": "https://epl.chaumont.educagri.fr/formations/bac-pro-conduite-et-gestion-de-lentreprise-agricole-cgea/", "jpo_dates": "Non disponible (vérifier début 2026)"}
+      {"nom": "Campus Agro Environnemental", "ville": "Saint-Laurent", "code_postal": "08090", "region_nom": "Champagne-Ardenne", "site_web": "https://www.campus-saintlaurent.fr/", "lien_formation": "https://www.campus-saintlaurent.fr/formations-scolaires/bac-pro-cgea/", "jpo_dates": "Non disponible (vérifier début 2026)", "coordonnees": [49.77, 4.63]},
+      {"nom": "EPLEFPA Edgard PISANI", "ville": "Chamarandes-Choignes", "code_postal": "52000", "region_nom": "Champagne-Ardenne", "site_web": "https://epl.chaumont.educagri.fr/", "lien_formation": "https://epl.chaumont.educagri.fr/formations/bac-pro-conduite-et-gestion-de-lentreprise-agricole-cgea/", "jpo_dates": "Non disponible (vérifier début 2026)", "coordonnees": [48.10, 5.16]}
     ]
   },
   {
@@ -24,7 +26,8 @@
     "diplome_acronyme": "BTSA",
     "niveau": 5,
     "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
-    "etablissements": [{"nom": "Lycée La Salle Reims-Thillois", "ville": "Thillois", "code_postal": "51370", "region_nom": "Champagne-Ardenne", "site_web": "https://www.lasalle-reims.com/", "lien_formation": "https://www.lasalle-reims.com/formations/btsa-analyse-conduite-et-strategie-de-lentreprise-agricole/", "jpo_dates": "Samedi 25 janvier 2026 et Samedi 15 mars 2026"}]
+    "description": "Le BTSA ACSE est destiné aux futurs gestionnaires d'exploitations ou conseillers agricoles. Il approfondit les compétences en diagnostic stratégique, pilotage d'entreprise et gestion financière.",
+    "etablissements": [{"nom": "Lycée La Salle Reims-Thillois", "ville": "Thillois", "code_postal": "51370", "region_nom": "Champagne-Ardenne", "site_web": "https://www.lasalle-reims.com/", "lien_formation": "https://www.lasalle-reims.com/formations/btsa-analyse-conduite-et-strategie-de-lentreprise-agricole/", "jpo_dates": "Samedi 25 janvier 2026 et Samedi 15 mars 2026", "coordonnees": [49.25, 3.96]}]
   },
   {
     "id": "BUT_GIM_CHALONS",
@@ -32,7 +35,8 @@
     "diplome_acronyme": "BUT",
     "niveau": 6,
     "categorie": "INDUSTRIE, PRODUCTION, PROCÉDÉS ET USINAGE",
-    "etablissements": [{"nom": "IUT RCC (Reims-Châlons-Charleville)", "ville": "Châlons-en-Champagne", "code_postal": "51000", "region_nom": "Champagne-Ardenne", "site_web": "https://www.univ-reims.fr/iut-rcc/", "lien_formation": "https://www.univ-reims.fr/iut-rcc/formation/but-genie-industriel-et-maintenance,22588,38908.html", "jpo_dates": "Généralement en février, date à confirmer sur le site de l'université."}]
+    "description": "Le BUT GIM forme des techniciens polyvalents capables d'assurer la maintenance, l'amélioration et l'installation d'équipements industriels. Les diplômés sont essentiels à la performance des usines.",
+    "etablissements": [{"nom": "IUT RCC (Reims-Châlons-Charleville)", "ville": "Châlons-en-Champagne", "code_postal": "51000", "region_nom": "Champagne-Ardenne", "site_web": "https://www.univ-reims.fr/iut-rcc/", "lien_formation": "https://www.univ-reims.fr/iut-rcc/formation/but-genie-industriel-et-maintenance,22588,38908.html", "jpo_dates": "Généralement en février, date à confirmer sur le site de l'université.", "coordonnees": [48.95, 4.36]}]
   },
   {
     "id": "ING_MECA_UTT",
@@ -40,7 +44,8 @@
     "diplome_acronyme": "Ingénieur",
     "niveau": 7,
     "categorie": "MÉCANIQUE ET MAINTENANCE",
-    "etablissements": [{"nom": "Université de technologie de Troyes", "ville": "Rosières-près-Troyes", "code_postal": "10430", "region_nom": "Champagne-Ardenne", "site_web": "https://www.utt.fr/", "lien_formation": "https://www.utt.fr/formations/genie-mecanique-gm", "jpo_dates": "Samedi 1er février 2026"}]
+    "description": "Le cursus ingénieur en Génie Mécanique de l'UTT forme des experts en conception, simulation et fabrication de systèmes mécaniques complexes, de la pièce d'avion au dispositif médical.",
+    "etablissements": [{"nom": "Université de technologie de Troyes", "ville": "Rosières-près-Troyes", "code_postal": "10430", "region_nom": "Champagne-Ardenne", "site_web": "https://www.utt.fr/", "lien_formation": "https://www.utt.fr/formations/genie-mecanique-gm", "jpo_dates": "Samedi 1er février 2026", "coordonnees": [48.27, 4.07]}]
   },
   {
     "id": "MASTER_SVV_REIMS",
@@ -48,14 +53,25 @@
     "diplome_acronyme": "Master",
     "niveau": 7,
     "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
-    "etablissements": [{"nom": "UFR SEN, Univ. Reims Champagne-Ardenne", "ville": "Reims", "code_postal": "51100", "region_nom": "Champagne-Ardenne", "site_web": "https://www.univ-reims.fr/", "lien_formation": "https://www.univ-reims.fr/formation/master-sciences-de-la-vigne-et-du-vin,21869,37648.html", "jpo_dates": "Généralement en février, date à confirmer sur le site de l'université."}]
+    "description": "Ce Master forme des cadres de haut niveau pour la filière viti-vinicole. Il couvre l'œnologie, la viticulture de précision et le marketing du vin, avec un fort accent sur la recherche et l'innovation.",
+    "etablissements": [{"nom": "UFR SEN, Univ. Reims Champagne-Ardenne", "ville": "Reims", "code_postal": "51100", "region_nom": "Champagne-Ardenne", "site_web": "https://www.univ-reims.fr/", "lien_formation": "https://www.univ-reims.fr/formation/master-sciences-de-la-vigne-et-du-vin,21869,37648.html", "jpo_dates": "Généralement en février", "coordonnees": [49.25, 4.03]}]
   },
-    {
-    "id": "BTS_BIOQUALITE_JEAN_ROSTAND",
+  {
+    "id": "BTS_BIOQUALITE_STRASBOURG",
     "diplome_nom": "Brevet de Technicien Supérieur – BTS BIOQUALITÉ",
     "diplome_acronyme": "BTS",
     "niveau": 5,
     "categorie": "INDUSTRIE, PRODUCTION, PROCÉDÉS ET USINAGE",
-    "etablissements": [{"nom": "Lycée Jean Rostand", "ville": "Strasbourg", "code_postal": "67000", "region_nom": "Alsace", "site_web": "https://www.lycee-jean-rostand.fr/", "lien_formation": "https://www.lycee-jean-rostand.fr/nos-formations/enseignement-superieur/bts-bioqualite/", "jpo_dates": "Samedi 4 février 2026 (à confirmer sur le site)"}]
+    "description": "Le BTS Bioqualité forme des techniciens spécialisés dans le contrôle qualité au sein des bio-industries (pharmaceutique, cosmétique, agroalimentaire). Ils garantissent la conformité et la sécurité des produits.",
+    "etablissements": [{"nom": "Lycée Jean Rostand", "ville": "Strasbourg", "code_postal": "67000", "region_nom": "Alsace", "site_web": "https://www.lycee-jean-rostand.fr/", "lien_formation": "https://www.lycee-jean-rostand.fr/nos-formations/enseignement-superieur/bts-bioqualite/", "jpo_dates": "Samedi 4 février 2026 (à confirmer)", "coordonnees": [48.58, 7.75]}]
+  },
+  {
+    "id": "ING_AGROBIOSCIENCES_NANCY",
+    "diplome_nom": "Ingénieur en Agronomie et Industries Alimentaires (spécialité Agrobiosciences)",
+    "diplome_acronyme": "Ingénieur",
+    "niveau": 7,
+    "categorie": "BIOECONOMIE, CHIMIE VERTE ET BIO-RESSOURCES",
+    "description": "Formation d'ingénieur de pointe axée sur la valorisation de la biomasse végétale et les biotechnologies. Les diplômés travaillent sur les bioénergies, les biomatériaux et les molécules d'intérêt pour la chimie verte.",
+    "etablissements": [{"nom": "ENSAIA - Université de Lorraine", "ville": "Vandœuvre-lès-Nancy", "code_postal": "54500", "region_nom": "Lorraine", "site_web": "https://ensaia.univ-lorraine.fr/", "lien_formation": "https://ensaia.univ-lorraine.fr/fr/formation/ingenieur-agronomie", "jpo_dates": "Généralement en février/mars", "coordonnees": [48.66, 6.16]}]
   }
 ]
