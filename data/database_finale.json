@@ -1,0 +1,61 @@
+[
+  {
+    "id": "BPA_VITICOLE_CAMPUS_AUBE",
+    "diplome_nom": "Brevet Professionnel Agricole – BPA OUVRIER VITICOLE",
+    "diplome_acronyme": "BPA",
+    "niveau": 3,
+    "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
+    "etablissements": [{"nom": "Campus Terres de l’Aube", "ville": "Saint-Pouange", "code_postal": "10360", "region_nom": "Champagne-Ardenne", "site_web": "https://www.campus-terresdelaube.fr/", "lien_formation": "https://www.campus-terresdelaube.fr/nos-formations/voie-professionnelle/", "jpo_dates": "Non disponible (vérifier début 2026)"}]
+  },
+  {
+    "id": "BACPRO_CGEA_SAINT_LAURENT",
+    "diplome_nom": "Baccalauréat professionnel CONDUITE ET GESTION DE L’ENTREPRISE AGRICOLE (CGEA)",
+    "diplome_acronyme": "Bac Pro",
+    "niveau": 4,
+    "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
+    "etablissements": [
+      {"nom": "Campus Agro Environnemental", "ville": "Saint-Laurent", "code_postal": "08090", "region_nom": "Champagne-Ardenne", "site_web": "https://www.campus-saintlaurent.fr/", "lien_formation": "https://www.campus-saintlaurent.fr/formations-scolaires/bac-pro-cgea/", "jpo_dates": "Non disponible (vérifier début 2026)"},
+      {"nom": "EPLEFPA Edgard PISANI", "ville": "Chamarandes-Choignes", "code_postal": "52000", "region_nom": "Champagne-Ardenne", "site_web": "https://epl.chaumont.educagri.fr/", "lien_formation": "https://epl.chaumont.educagri.fr/formations/bac-pro-conduite-et-gestion-de-lentreprise-agricole-cgea/", "jpo_dates": "Non disponible (vérifier début 2026)"}
+    ]
+  },
+  {
+    "id": "BTSA_ACSE_THILLOIS",
+    "diplome_nom": "BTSA ANALYSE, CONDUITE ET STRATÉGIE DE L’ENTREPRISE AGRICOLE (ACSE)",
+    "diplome_acronyme": "BTSA",
+    "niveau": 5,
+    "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
+    "etablissements": [{"nom": "Lycée La Salle Reims-Thillois", "ville": "Thillois", "code_postal": "51370", "region_nom": "Champagne-Ardenne", "site_web": "https://www.lasalle-reims.com/", "lien_formation": "https://www.lasalle-reims.com/formations/btsa-analyse-conduite-et-strategie-de-lentreprise-agricole/", "jpo_dates": "Samedi 25 janvier 2026 et Samedi 15 mars 2026"}]
+  },
+  {
+    "id": "BUT_GIM_CHALONS",
+    "diplome_nom": "Bachelor Universitaire de Technologie – BUT GÉNIE INDUSTRIEL ET MAINTENANCE (GIM)",
+    "diplome_acronyme": "BUT",
+    "niveau": 6,
+    "categorie": "INDUSTRIE, PRODUCTION, PROCÉDÉS ET USINAGE",
+    "etablissements": [{"nom": "IUT RCC (Reims-Châlons-Charleville)", "ville": "Châlons-en-Champagne", "code_postal": "51000", "region_nom": "Champagne-Ardenne", "site_web": "https://www.univ-reims.fr/iut-rcc/", "lien_formation": "https://www.univ-reims.fr/iut-rcc/formation/but-genie-industriel-et-maintenance,22588,38908.html", "jpo_dates": "Généralement en février, date à confirmer sur le site de l'université."}]
+  },
+  {
+    "id": "ING_MECA_UTT",
+    "diplome_nom": "Ingénieur GÉNIE MÉCANIQUE (GM)",
+    "diplome_acronyme": "Ingénieur",
+    "niveau": 7,
+    "categorie": "MÉCANIQUE ET MAINTENANCE",
+    "etablissements": [{"nom": "Université de technologie de Troyes", "ville": "Rosières-près-Troyes", "code_postal": "10430", "region_nom": "Champagne-Ardenne", "site_web": "https://www.utt.fr/", "lien_formation": "https://www.utt.fr/formations/genie-mecanique-gm", "jpo_dates": "Samedi 1er février 2026"}]
+  },
+  {
+    "id": "MASTER_SVV_REIMS",
+    "diplome_nom": "Master SCIENCES DE LA VIGNE ET DU VIN (SVV)",
+    "diplome_acronyme": "Master",
+    "niveau": 7,
+    "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
+    "etablissements": [{"nom": "UFR SEN, Univ. Reims Champagne-Ardenne", "ville": "Reims", "code_postal": "51100", "region_nom": "Champagne-Ardenne", "site_web": "https://www.univ-reims.fr/", "lien_formation": "https://www.univ-reims.fr/formation/master-sciences-de-la-vigne-et-du-vin,21869,37648.html", "jpo_dates": "Généralement en février, date à confirmer sur le site de l'université."}]
+  },
+    {
+    "id": "BTS_BIOQUALITE_JEAN_ROSTAND",
+    "diplome_nom": "Brevet de Technicien Supérieur – BTS BIOQUALITÉ",
+    "diplome_acronyme": "BTS",
+    "niveau": 5,
+    "categorie": "INDUSTRIE, PRODUCTION, PROCÉDÉS ET USINAGE",
+    "etablissements": [{"nom": "Lycée Jean Rostand", "ville": "Strasbourg", "code_postal": "67000", "region_nom": "Alsace", "site_web": "https://www.lycee-jean-rostand.fr/", "lien_formation": "https://www.lycee-jean-rostand.fr/nos-formations/enseignement-superieur/bts-bioqualite/", "jpo_dates": "Samedi 4 février 2026 (à confirmer sur le site)"}]
+  }
+]
