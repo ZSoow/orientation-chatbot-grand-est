@@ -37,25 +37,135 @@ body {
     flex-shrink: 0; /* Empêche le chat de rétrécir */
 }
 
-/* ... (le reste de ton CSS pour .chat-header, .chat-box, etc. ne change pas) ... */
-.chat-header { background: linear-gradient(135deg, #4CAF50, #388E3C); color: white; padding: 20px; text-align: center; border-bottom: 1px solid #dee2e6; }
-.chat-header h1 { margin: 0; font-size: 1.8em; font-weight: 700; }
-.chat-header p { margin: 5px 0 0; font-size: 1em; opacity: 0.9; }
-.chat-box { flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; }
-.message { padding: 12px 18px; border-radius: 20px; margin-bottom: 15px; max-width: 80%; line-height: 1.5; word-wrap: break-word; }
-.bot-message { background-color: #e9ecef; color: #333; align-self: flex-start; border-bottom-left-radius: 5px; }
-.user-message { background-color: #4CAF50; color: white; align-self: flex-end; border-bottom-right-radius: 5px; }
-.user-input { padding: 20px; border-top: 1px solid #e9ecef; display: flex; flex-direction: column; gap: 10px; }
-.choice-button { background-color: #fff; color: #4CAF50; border: 2px solid #4CAF50; padding: 12px 20px; border-radius: 25px; cursor: pointer; text-align: center; font-size: 1em; font-weight: 500; transition: all 0.2s ease-in-out; }
-.choice-button:hover { background-color: #4CAF50; color: white; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2); }
-.result-card { background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 12px; padding: 15px; margin-bottom: 15px; animation: fadeIn 0.5s ease-in-out; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-.result-card h3 { margin-top: 0; margin-bottom: 10px; color: #388E3C; font-size: 1.2em; }
-.result-card p { margin: 5px 0; font-size: 0.95em; }
-.result-card a { color: #4CAF50; text-decoration: none; font-weight: 500; }
-.result-card a:hover { text-decoration: underline; }
-.header-logo { max-width: 80px; margin-bottom: 10px; border-radius: 50%; background-color: white; padding: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+/* --- En-tête du Chat --- */
+.chat-header {
+    background: linear-gradient(135deg, #4CAF50, #388E3C);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #dee2e6;
+}
 
+.chat-header h1 {
+    margin: 0;
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+.chat-header p {
+    margin: 5px 0 0;
+    font-size: 1em;
+    opacity: 0.9;
+}
+
+/* --- Boîte des Messages --- */
+.chat-box {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Style des Bulles de Message --- */
+.message {
+    padding: 12px 18px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    max-width: 80%;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+.bot-message {
+    background-color: #e9ecef;
+    color: #333;
+    align-self: flex-start;
+    border-bottom-left-radius: 5px;
+}
+
+.user-message {
+    background-color: #4CAF50;
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 5px;
+}
+
+/* --- Zone de Réponse Utilisateur (Boutons) --- */
+.user-input {
+    padding: 20px;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.choice-button {
+    background-color: #fff;
+    color: #4CAF50;
+    border: 2px solid #4CAF50;
+    padding: 12px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1em;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.choice-button:hover {
+    background-color: #4CAF50;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+}
+
+/* --- Cartes de Résultat --- */
+.result-card {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.result-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #388E3C;
+    font-size: 1.2em;
+}
+
+.result-card p {
+    margin: 5px 0;
+    font-size: 0.95em;
+}
+
+.result-card a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.result-card a:hover {
+    text-decoration: underline;
+}
+
+/* --- Style du Logo --- */
+.header-logo {
+    max-width: 80px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    background-color: white;
+    padding: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
 /* --- NOUVEAU : Styles pour la carte --- */
 .map-container {
