@@ -143,3 +143,14 @@ body {
 .result-card a:hover {
     text-decoration: underline;
 }
+/* ... (tout le code CSS existant) ... */
+
+/* --- Style du Logo --- */
+.header-logo {
+    max-width: 80px;  /* Ajuste la taille si besoin */
+    margin-bottom: 10px;
+    border-radius: 50%; /* Met le logo en cercle, enlève si ton logo n'est pas fait pour */
+    background-color: white; /* Ajoute un fond blanc si le logo est transparent */
+    padding: 5px; /* Petite marge intérieure */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
