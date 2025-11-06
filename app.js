@@ -23,7 +23,7 @@ const conversation = {
             { text: "Crée la présentation pour la rendre inoubliable.", points: ["CONCEPTION, CRÉATION ET DESIGN", "COMMUNICATION ET ÉVÉNEMENTIEL"] },
             { text: "S'assure que tout le monde s'entend bien et communique.", points: ["SOCIAL, SANTÉ, SOIN ET SERVICES À LA PERSONNE"] }
         ]},
-        { id: 'Q3', question: "La matière qui t'intéressait le plus (ou le moins détestable) :", answers: [
+        { id: 'Q3', question: "La matière qui t'intéressait le plus (ou la moins détestable) :", answers: [
             { text: "Les Maths ou la Physique-Chimie.", points: ["MÉCANIQUE ET MAINTENANCE", "INDUSTRIE, PRODUCTION, PROCÉDÉS ET USINAGE"] },
             { text: "L'Économie ou la Gestion.", points: ["MANAGEMENT, GESTION, RH ET STRATÉGIE", "COMMERCE, VENTE ET MARKETING"] },
             { text: "Les Arts Plastiques ou la Philosophie.", points: ["CONCEPTION, CRÉATION ET DESIGN"] },
@@ -110,41 +110,31 @@ function handleChoice(choice) {
 
     state = choice.nextState;
     
-    const quizQuestionMatch = state.match(/QUIZ_Q(\d+)/);
-    if (quizQuestionMatch) {
-        const questionNum = parseInt(quizQuestionMatch[1], 10);
-        askQuizQuestion(questionNum - 1);
-    } else {
-        switch (state) {
-            case 'SHOW_QUIZ_RESULTS':
-                showQuizResults();
-                break;
-            case 'FILTER_CATEGORY':
-                askFilterCategory();
-                break;
-            case 'FILTER_LEVEL':
-                // Si on vient des résultats du quiz, la catégorie est pré-remplie
+    // Gère la transition d'état
+    const nextStateAction = state.startsWith('QUIZ_Q') ? () => askQuizQuestion(parseInt(state.split('Q')[1]) - 1)
+        : {
+            'SHOW_QUIZ_RESULTS': showQuizResults,
+            'FILTER_CATEGORY': askFilterCategory,
+            'FILTER_LEVEL': () => {
                 if (choice.value) filterCriteria.category = choice.value;
                 askFilterLevel();
-                break;
-            case 'FILTER_LOCATION':
-                filterCriteria.level = choice.value;
+            },
+            'FILTER_LOCATION': () => {
+                if (choice.value) filterCriteria.level = choice.value;
                 askFilterLocation();
-                break;
-            case 'SHOW_FILTER_RESULTS':
-                // Si on vient de la sélection de catégorie, on la sauvegarde
-                if (choice.category) filterCriteria.category = choice.category;
-                 // Si on vient de la sélection de localisation
-                if (choice.location) filterCriteria.location = choice.location;
+            },
+            'SHOW_FILTER_RESULTS': () => {
+                if (choice.value) filterCriteria.location = choice.value;
                 showFilterResults();
-                break;
-            case 'RESTART':
-                startChat();
-                break;
-            default:
-                addBotMessage("Je suis un peu perdu. Recommençons.");
-                startChat();
-        }
+            },
+            'RESTART': startChat
+        }[state];
+
+    if (nextStateAction) {
+        nextStateAction();
+    } else {
+        addBotMessage("Oups, je me suis embrouillé. Recommençons.");
+        startChat();
     }
 }
 
@@ -160,6 +150,7 @@ function askQuizQuestion(questionIndex) {
         }));
         showChoices(choices);
     } else {
+        // Fin du quiz, on passe aux résultats
         handleChoice({ nextState: 'SHOW_QUIZ_RESULTS' });
     }
 }
@@ -215,10 +206,10 @@ function askFilterLevel() {
 function askFilterLocation() {
     addBotMessage("Et pour finir, une préférence géographique ?");
     showChoices([
-        { text: "Alsace", nextState: 'SHOW_FILTER_RESULTS', location: 'Alsace' },
-        { text: "Lorraine", nextState: 'SHOW_FILTER_RESULTS', location: 'Lorraine' },
-        { text: "Champagne-Ardenne", nextState: 'SHOW_FILTER_RESULTS', location: 'Champagne-Ardenne' },
-        { text: "Peu importe, je suis mobile !", nextState: 'SHOW_FILTER_RESULTS', location: 'all' }
+        { text: "Alsace", nextState: 'SHOW_FILTER_RESULTS', value: 'Alsace' },
+        { text: "Lorraine", nextState: 'SHOW_FILTER_RESULTS', value: 'Lorraine' },
+        { text: "Champagne-Ardenne", nextState: 'SHOW_FILTER_RESULTS', value: 'Champagne-Ardenne' },
+        { text: "Peu importe, je suis mobile !", nextState: 'SHOW_FILTER_RESULTS', value: 'all' }
     ]);
 }
 
@@ -228,8 +219,13 @@ function showFilterResults() {
     
     let results = db.filter(item => {
         const categoryMatch = item.categorie === filterCriteria.category;
-        const levelMatch = filterCriteria.level === 'all' || (Array.isArray(filterCriteria.level) && filterCriteria.level.includes(item.niveau));
-        const locationMatch = filterCriteria.location === 'all' || item.etablissements.some(e => e.region_nom === filterCriteria.location);
+        
+        const levelMatch = filterCriteria.level === 'all' || 
+                           (Array.isArray(filterCriteria.level) && filterCriteria.level.includes(item.niveau));
+                           
+        const locationMatch = filterCriteria.location === 'all' || 
+                              item.etablissements.some(e => e.region_nom === filterCriteria.location);
+
         return categoryMatch && levelMatch && locationMatch;
     });
 
