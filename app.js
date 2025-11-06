@@ -109,18 +109,20 @@ function handleChoice(choice) {
         });
     }
 
-    const previousState = state;
     state = choice.nextState;
 
-    // --- LOGIQUE CENTRALE ---
+    // --- LOGIQUE CENTRALE CORRIGÉE ---
     if (state.startsWith('QUIZ_Q')) {
-        const questionNum = parseInt(state.split('Q')[1], 10);
-        askQuizQuestion(questionNum - 1);
+        // CORRECTION : On utilise une expression régulière pour extraire le nombre proprement.
+        const questionNum = parseInt(state.match(/\d+/)[0], 10);
+        if (!isNaN(questionNum) && questionNum > 0 && questionNum <= conversation.quiz.length) {
+            askQuizQuestion(questionNum - 1);
+        } else {
+            // Si on arrive à une question qui n'existe pas (ex: QUIZ_Q6), on montre les résultats.
+            showQuizResults();
+        }
     } else {
         switch (state) {
-            case 'SHOW_QUIZ_RESULTS':
-                showQuizResults();
-                break;
             case 'FILTER_CATEGORY':
                 askFilterCategory();
                 break;
@@ -140,20 +142,14 @@ function handleChoice(choice) {
                 startChat();
                 break;
             default:
-                 // Cas où le quiz se termine (ex: de QUIZ_Q6 qui n'existe pas)
-                if (previousState.startsWith('QUIZ_Q')) {
-                    showQuizResults();
-                } else {
-                    addBotMessage("Je suis un peu perdu. Recommençons.");
-                    startChat();
-                }
+                addBotMessage("Je suis un peu perdu. Recommençons.");
+                startChat();
         }
     }
 }
 
 // --- LOGIQUE DU QUIZ ---
 function askQuizQuestion(questionIndex) {
-    console.log("askQuizQuestion a été appelée avec l'index :", questionIndex);
     const q = conversation.quiz[questionIndex];
     addBotMessage(q.question);
     const choices = q.answers.map(answer => ({
