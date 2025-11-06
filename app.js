@@ -1,12 +1,15 @@
 // --- Éléments du DOM ---
 const chatBox = document.getElementById('chat-box');
 const userInput = document.getElementById('user-input');
+const mapContainer = document.getElementById('map-container');
+const mapElement = document.getElementById('map');
 
-// --- Variables d'état du Chat ---
+// --- Variables d'état ---
 let state = 'START';
 let quizScores = {};
 let filterCriteria = {};
 let db = [];
+let map = null; // Variable pour garder une référence à la carte
 
 // --- Base de données de la conversation (Quiz) ---
 const conversation = {
@@ -47,13 +50,14 @@ const conversation = {
 // --- DÉMARRAGE DE L'APPLICATION ---
 document.addEventListener('DOMContentLoaded', async () => {
     try {
+        // J'ai laissé l'ancien nom de fichier ici au cas où, mais tu as raison, il faudra le mettre à jour
         const response = await fetch('./data/database_finale.json');
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         db = await response.json();
         startChat();
     } catch (error) {
         console.error("Erreur fatale : Impossible de charger la base de données.", error);
-        addBotMessage("Oups ! Je n'arrive pas à charger les données des formations. Veuillez rafraîchir la page.");
+        addBotMessage("Oups ! Je n'arrive pas à charger les données des formations. Veuillez rafraîchir la page ou vérifier le fichier de données.");
     }
 });
 
@@ -63,7 +67,15 @@ function startChat() {
     filterCriteria = {};
     chatBox.innerHTML = '';
     userInput.innerHTML = '';
-    addBotMessage("Bonjour ! Je suis ton frero pour l'orientation. Prêt(e) à trouver ta voie dans le Grand Est BG ?");
+    
+    // NOUVEAU : Cacher la carte et détruire l'ancienne instance si elle existe
+    if (map) {
+        map.remove();
+        map = null;
+    }
+    mapContainer.style.display = 'none';
+
+    addBotMessage("Bonjour ! Je suis ton copilote pour l'orientation. Prêt(e) à trouver ta voie dans le Grand Est ?");
     showChoices([
         { text: "🚀 Commencer le quiz !", nextState: 'QUIZ_Q1' },
         { text: "🔍 J'ai déjà une idée, montre-moi les filtres.", nextState: 'FILTER_CATEGORY' }
@@ -111,14 +123,11 @@ function handleChoice(choice) {
 
     state = choice.nextState;
 
-    // --- LOGIQUE CENTRALE CORRIGÉE ---
     if (state.startsWith('QUIZ_Q')) {
-        // CORRECTION : On utilise une expression régulière pour extraire le nombre proprement.
         const questionNum = parseInt(state.match(/\d+/)[0], 10);
         if (!isNaN(questionNum) && questionNum > 0 && questionNum <= conversation.quiz.length) {
             askQuizQuestion(questionNum - 1);
         } else {
-            // Si on arrive à une question qui n'existe pas (ex: QUIZ_Q6), on montre les résultats.
             showQuizResults();
         }
     } else {
@@ -201,9 +210,9 @@ function askFilterCategory() {
 function askFilterLevel() {
     addBotMessage("Très bien. Quel niveau d'études vises-tu ?");
     showChoices([
-        { text: "CAP / Bac Pro (Niveau 3 & 4)", nextState: 'FILTER_LOCATION', value: [3, 4] },
-        { text: "Bac+2 / Bac+3 (Niveau 5 & 6)", nextState: 'FILTER_LOCATION', value: [5, 6] },
-        { text: "Bac+5 et plus (Niveau 7)", nextState: 'FILTER_LOCATION', value: [7] },
+        { text: "Niveau 3 & 4 (CAP, Bac Pro)", nextState: 'FILTER_LOCATION', value: [3, 4] },
+        { text: "Niveau 5 & 6 (Bac+2/3)", nextState: 'FILTER_LOCATION', value: [5, 6] },
+        { text: "Niveau 7 et plus (Bac+5)", nextState: 'FILTER_LOCATION', value: [7] },
         { text: "Peu importe, montre-moi tout !", nextState: 'FILTER_LOCATION', value: 'all' }
     ]);
 }
@@ -220,35 +229,55 @@ function askFilterLocation() {
 
 // --- AFFICHAGE DES RÉSULTATS ---
 function showFilterResults() {
-    addBotMessage("Voici les formations qui correspondent à tes critères :");
+    addBotMessage("Voici les formations qui correspondent à tes critères sur la carte !");
     
     let results = db.filter(item => {
-        const categoryMatch = item.categorie === filterCriteria.category;
-        const levelMatch = filterCriteria.level === 'all' || (Array.isArray(filterCriteria.level) && filterCriteria.level.includes(item.niveau));
-        const locationMatch = filterCriteria.location === 'all' || item.etablissements.some(e => e.region_nom === filterCriteria.location);
+        const categoryMatch = filterCriteria.category ? (item.categorie === filterCriteria.category) : true;
+        const levelMatch = (filterCriteria.level === 'all' || !filterCriteria.level) ? true : (Array.isArray(filterCriteria.level) && filterCriteria.level.includes(item.niveau));
+        const locationMatch = (filterCriteria.location === 'all' || !filterCriteria.location) ? true : item.etablissements.some(e => e.region_nom === filterCriteria.location);
         return categoryMatch && levelMatch && locationMatch;
     });
 
     if (results.length === 0) {
         addBotMessage("Désolé, je n'ai trouvé aucune formation avec ces critères précis. Essayons autre chose !");
     } else {
+        // Afficher et initialiser la carte
+        mapContainer.style.display = 'block';
+
+        // Détruire l'ancienne carte si elle existe, pour éviter les erreurs
+        if (map) {
+            map.remove();
+        }
+
+        // Coordonnées du centre du Grand Est et niveau de zoom
+        map = L.map('map').setView([48.6921, 6.1844], 7);
+
+        // Ajout du fond de carte (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Ajouter un marqueur pour chaque résultat
         results.forEach(res => {
             res.etablissements.forEach(etab => {
-                if (filterCriteria.location === 'all' || etab.region_nom === filterCriteria.location) {
-                    const card = `
-                        <div class="result-card">
-                            <h3>${res.diplome_nom} (${res.diplome_acronyme})</h3>
-                            <p><strong>🎓 Niveau :</strong> ${res.niveau}</p>
-                            <p><strong>📍 Établissement :</strong> ${etab.nom}, ${etab.ville}</p>
-                            <p><strong>🗓️ JPO :</strong> ${etab.jpo_dates}</p>
-                            <p>
-                                <a href="${etab.site_web}" target="_blank">Site de l'école</a> | 
-                                <a href="${etab.lien_formation}" target="_blank">Page de la formation</a>
-                            </p>
-                        </div>
-                    `;
-                    addBotMessage(card);
-                }
+                // Vérifier si l'établissement correspond au filtre de localisation (si un filtre est appliqué)
+                 if (filterCriteria.location === 'all' || !filterCriteria.location || etab.region_nom === filterCriteria.location) {
+                    // Vérifier si les coordonnées existent et sont valides
+                    if (etab.coordonnees && etab.coordonnees.length === 2) {
+                        const marker = L.marker(etab.coordonnees).addTo(map);
+                        
+                        // Créer le contenu du popup
+                        const popupContent = `
+                            <h3>${res.diplome_nom}</h3>
+                            <p><strong>Niveau:</strong> ${res.niveau}</p>
+                            <p><strong>Établissement:</strong> ${etab.nom}, ${etab.ville}</p>
+                            <p>${res.description || 'Pas de description disponible.'}</p>
+                            ${etab.site_web ? `<a href="${etab.site_web}" target="_blank">Site de l'école</a>` : ''}
+                        `;
+                        
+                        marker.bindPopup(popupContent);
+                    }
+                 }
             });
         });
     }
