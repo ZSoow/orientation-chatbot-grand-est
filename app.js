@@ -153,6 +153,7 @@ function handleChoice(choice) {
 
 // --- LOGIQUE DU QUIZ ---
 function askQuizQuestion(questionIndex) {
+    console.log("askQuizQuestion a été appelée avec l'index :", questionIndex);
     const q = conversation.quiz[questionIndex];
     addBotMessage(q.question);
     const choices = q.answers.map(answer => ({
