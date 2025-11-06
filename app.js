@@ -11,7 +11,7 @@ let db = [];
 // --- Base de données de la conversation (Quiz) ---
 const conversation = {
     quiz: [
-        { id: 'Q1', question: "Tu es dans un atelier. Quel est ton premier réflexe ?", answers: [
+        { id: 'Q1', question: "TTu es dans un atelier. Quel est ton premier réflexe ?", answers: [
             { text: "Démonter un moteur pour voir comment ça marche.", points: ["MÉCANIQUE ET MAINTENANCE", "INDUSTRIE, PRODUCTION, PROCÉDÉS ET USINAGE"] },
             { text: "Réorganiser l'espace pour que tout soit plus logique.", points: ["LOGISTIQUE, TRANSPORT ET DISTRIBUTION"] },
             { text: "Imaginer une nouvelle machine plus performante.", points: ["CONCEPTION, CRÉATION ET DESIGN"] },
