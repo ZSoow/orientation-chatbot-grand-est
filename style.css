@@ -1,0 +1,145 @@
+/* --- Style Général --- */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+}
+
+/* --- Conteneur Principal du Chat --- */
+.chat-container {
+    width: 90%;
+    max-width: 600px;
+    height: 90vh;
+    max-height: 800px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* --- En-tête du Chat --- */
+.chat-header {
+    background: linear-gradient(135deg, #007BFF, #0056b3);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.chat-header h1 {
+    margin: 0;
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+.chat-header p {
+    margin: 5px 0 0;
+    font-size: 1em;
+    opacity: 0.9;
+}
+
+/* --- Boîte des Messages --- */
+.chat-box {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Style des Bulles de Message --- */
+.message {
+    padding: 12px 18px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    max-width: 80%;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+.bot-message {
+    background-color: #e9ecef;
+    color: #333;
+    align-self: flex-start;
+    border-bottom-left-radius: 5px;
+}
+
+.user-message {
+    background-color: #007BFF;
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 5px;
+}
+
+/* --- Zone de Réponse Utilisateur (Boutons) --- */
+.user-input {
+    padding: 20px;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.choice-button {
+    background-color: #fff;
+    color: #007BFF;
+    border: 2px solid #007BFF;
+    padding: 12px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1em;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.choice-button:hover {
+    background-color: #007BFF;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+}
+
+/* --- Cartes de Résultat --- */
+.result-card {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.result-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #0056b3;
+    font-size: 1.2em;
+}
+
+.result-card p {
+    margin: 5px 0;
+    font-size: 0.95em;
+}
+
+.result-card a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.result-card a:hover {
+    text-decoration: underline;
+}
