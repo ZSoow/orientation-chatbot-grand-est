@@ -3,33 +3,53 @@ const chatBox = document.getElementById('chat-box');
 const userInput = document.getElementById('user-input');
 
 // --- Variables d'état du Chat ---
-let state = 'START'; // État actuel de la conversation
-let quizAnswers = {}; // Pour stocker les réponses du quiz
-let filterCriteria = {}; // Pour stocker les critères de filtre
-let db = []; // Pour stocker les données de la base
+let state = 'START';
+let quizScores = {};
+let filterCriteria = {};
+let db = [];
 
-// --- Base de données de la conversation (Quiz et Filtres) ---
+// --- Base de données de la conversation (Quiz) ---
 const conversation = {
     quiz: [
-        { id: 1, question: "Tu es dans un atelier. Quel est ton premier réflexe ?", answers: [
+        { id: 'Q1', question: "Tu es dans un atelier. Quel est ton premier réflexe ?", answers: [
             { text: "Démonter un moteur pour voir comment ça marche.", points: ["MÉCANIQUE ET MAINTENANCE", "INDUSTRIE, PRODUCTION, PROCÉDÉS ET USINAGE"] },
             { text: "Réorganiser l'espace pour que tout soit plus logique.", points: ["LOGISTIQUE, TRANSPORT ET DISTRIBUTION"] },
-            { text: "Imaginer une nouvelle machine qui ferait le travail plus vite.", points: ["CONCEPTION, CRÉATION ET DESIGN"] },
+            { text: "Imaginer une nouvelle machine plus performante.", points: ["CONCEPTION, CRÉATION ET DESIGN"] },
             { text: "Discuter avec les techniciens pour comprendre leurs besoins.", points: ["COMMERCE, VENTE ET MARKETING"] }
         ]},
-        // ... (Les autres questions du quiz sont structurées de la même manière)
-    ],
-    // ... (d'autres éléments de conversation pourraient être ajoutés ici)
+        { id: 'Q2', question: "Pour un projet de groupe, tu préfères être celui/celle qui...", answers: [
+            { text: "Définit le plan d'action et distribue les tâches.", points: ["MANAGEMENT, GESTION, RH ET STRATÉGIE"] },
+            { text: "Se charge de la partie technique la plus complexe.", points: ["MÉCANIQUE ET MAINTENANCE", "INFORMATIQUE ET NUMÉRIQUE"] },
+            { text: "Crée la présentation pour la rendre inoubliable.", points: ["CONCEPTION, CRÉATION ET DESIGN", "COMMUNICATION ET ÉVÉNEMENTIEL"] },
+            { text: "S'assure que tout le monde s'entend bien et communique.", points: ["SOCIAL, SANTÉ, SOIN ET SERVICES À LA PERSONNE"] }
+        ]},
+        { id: 'Q3', question: "La matière qui t'intéressait le plus (ou le moins détestable) :", answers: [
+            { text: "Les Maths ou la Physique-Chimie.", points: ["MÉCANIQUE ET MAINTENANCE", "INDUSTRIE, PRODUCTION, PROCÉDÉS ET USINAGE"] },
+            { text: "L'Économie ou la Gestion.", points: ["MANAGEMENT, GESTION, RH ET STRATÉGIE", "COMMERCE, VENTE ET MARKETING"] },
+            { text: "Les Arts Plastiques ou la Philosophie.", points: ["CONCEPTION, CRÉATION ET DESIGN"] },
+            { text: "Les SVT ou le Sport.", points: ["AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE", "SOCIAL, SANTÉ, SOIN ET SERVICES À LA PERSONNE"] }
+        ]},
+        { id: 'Q4', question: "Pendant ton temps libre, tu aimes bien...", answers: [
+            { text: "Bricoler, réparer des objets, ou bidouiller sur un ordinateur.", points: ["MÉCANIQUE ET MAINTENANCE", "INFORMATIQUE ET NUMÉRIQUE"] },
+            { text: "Organiser une sortie ou gérer le budget d'une association.", points: ["MANAGEMENT, GESTION, RH ET STRATÉGIE", "LOGISTIQUE, TRANSPORT ET DISTRIBUTION"] },
+            { text: "Dessiner, écrire, faire de la musique, créer quelque chose.", points: ["CONCEPTION, CRÉATION ET DESIGN"] },
+            { text: "Participer à des débats ou rencontrer de nouvelles personnes.", points: ["COMMERCE, VENTE ET MARKETING", "COMMUNICATION ET ÉVÉNEMENTIEL"] }
+        ]},
+        { id: 'Q5', question: "Qu'est-ce qui t'énerve le plus au quotidien ?", answers: [
+            { text: "Les choses qui ne sont pas efficaces ou mal organisées.", points: ["LOGISTIQUE, TRANSPORT ET DISTRIBUTION", "MANAGEMENT, GESTION, RH ET STRATÉGIE"] },
+            { text: "Un appareil qui tombe en panne et ne pas savoir le réparer.", points: ["MÉCANIQUE ET MAINTENANCE"] },
+            { text: "Un design laid ou quelque chose qui manque d'harmonie.", points: ["CONCEPTION, CRÉATION ET DESIGN"] },
+            { text: "L'injustice ou le manque de communication entre les gens.", points: ["SOCIAL, SANTÉ, SOIN ET SERVICES À LA PERSONNE", "DROIT ET JUSTICE"] }
+        ]}
+    ]
 };
 
 // --- DÉMARRAGE DE L'APPLICATION ---
 document.addEventListener('DOMContentLoaded', async () => {
-    // 1. Charger la base de données des formations
     try {
         const response = await fetch('./data/database_finale.json');
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         db = await response.json();
-        // 2. Démarrer la conversation
         startChat();
     } catch (error) {
         console.error("Erreur fatale : Impossible de charger la base de données.", error);
@@ -39,6 +59,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 function startChat() {
     state = 'START';
+    quizScores = {};
+    filterCriteria = {};
+    chatBox.innerHTML = '';
     addBotMessage("Bonjour ! Je suis ton copilote pour l'orientation. Prêt(e) à trouver ta voie dans le Grand Est ?");
     showChoices([
         { text: "🚀 Commencer le quiz !", nextState: 'QUIZ_Q1' },
@@ -47,17 +70,14 @@ function startChat() {
 }
 
 // --- MOTEUR DE CONVERSATION ---
-
-// Affiche un message du bot
 function addBotMessage(text) {
     const message = document.createElement('div');
     message.classList.add('message', 'bot-message');
-    message.innerHTML = text; // innerHTML pour permettre les balises comme <br> ou <b>
+    message.innerHTML = text;
     chatBox.appendChild(message);
     scrollToBottom();
 }
 
-// Affiche un message de l'utilisateur
 function addUserMessage(text) {
     const message = document.createElement('div');
     message.classList.add('message', 'user-message');
@@ -66,9 +86,8 @@ function addUserMessage(text) {
     scrollToBottom();
 }
 
-// Affiche les boutons de choix
 function showChoices(choices) {
-    userInput.innerHTML = ''; // Nettoyer les anciens boutons
+    userInput.innerHTML = '';
     choices.forEach(choice => {
         const button = document.createElement('button');
         button.classList.add('choice-button');
@@ -78,86 +97,103 @@ function showChoices(choices) {
     });
 }
 
-// Gère le clic sur un bouton
 function handleChoice(choice) {
     if (choice.text) {
         addUserMessage(choice.text);
     }
     
-    // Logique de transition d'état
+    if (choice.points) {
+        choice.points.forEach(category => {
+            quizScores[category] = (quizScores[category] || 0) + 1;
+        });
+    }
+
     state = choice.nextState;
     
-    // Appeler la fonction correspondante au nouvel état
-    switch (state) {
-        case 'QUIZ_Q1':
-            askQuizQuestion(0);
-            break;
-        case 'QUIZ_Q2':
-            askQuizQuestion(1);
-            break;
-        // ... Ajouter les autres cas pour les questions du quiz
-        case 'SHOW_QUIZ_RESULTS':
-            showQuizResults();
-            break;
-        case 'FILTER_CATEGORY':
-            askFilterCategory();
-            break;
-        case 'FILTER_LEVEL':
-            filterCriteria.category = choice.value;
-            askFilterLevel();
-            break;
-        case 'FILTER_LOCATION':
-            filterCriteria.level = choice.value;
-            askFilterLocation();
-            break;
-        case 'SHOW_FILTER_RESULTS':
-            filterCriteria.location = choice.value;
-            showFilterResults();
-            break;
-        case 'RESTART':
-            startChat();
-            break;
-        default:
-            addBotMessage("Je suis un peu perdu. Recommençons.");
-            startChat();
+    const quizQuestionMatch = state.match(/QUIZ_Q(\d+)/);
+    if (quizQuestionMatch) {
+        const questionNum = parseInt(quizQuestionMatch[1], 10);
+        askQuizQuestion(questionNum - 1);
+    } else {
+        switch (state) {
+            case 'SHOW_QUIZ_RESULTS':
+                showQuizResults();
+                break;
+            case 'FILTER_CATEGORY':
+                askFilterCategory();
+                break;
+            case 'FILTER_LEVEL':
+                // Si on vient des résultats du quiz, la catégorie est pré-remplie
+                if (choice.value) filterCriteria.category = choice.value;
+                askFilterLevel();
+                break;
+            case 'FILTER_LOCATION':
+                filterCriteria.level = choice.value;
+                askFilterLocation();
+                break;
+            case 'SHOW_FILTER_RESULTS':
+                // Si on vient de la sélection de catégorie, on la sauvegarde
+                if (choice.category) filterCriteria.category = choice.category;
+                 // Si on vient de la sélection de localisation
+                if (choice.location) filterCriteria.location = choice.location;
+                showFilterResults();
+                break;
+            case 'RESTART':
+                startChat();
+                break;
+            default:
+                addBotMessage("Je suis un peu perdu. Recommençons.");
+                startChat();
+        }
     }
 }
 
-
 // --- LOGIQUE DU QUIZ ---
-
 function askQuizQuestion(questionIndex) {
-    // Note: Pour une version complète, on aurait les 5 questions dans conversation.quiz
-    // Ici, on simule avec une seule question pour la structure.
-    const q = conversation.quiz[0]; // On prend la première question comme exemple
-    addBotMessage(q.question);
-    const choices = q.answers.map(answer => ({
-        text: answer.text,
-        nextState: 'SHOW_QUIZ_RESULTS', // Pour simplifier, on passe directement aux résultats
-        points: answer.points
-    }));
-    showChoices(choices);
-    // Dans une version complète, le nextState serait 'QUIZ_Q' + (questionIndex + 2)
+    if (questionIndex < conversation.quiz.length) {
+        const q = conversation.quiz[questionIndex];
+        addBotMessage(q.question);
+        const choices = q.answers.map(answer => ({
+            text: answer.text,
+            nextState: `QUIZ_Q${questionIndex + 2}`,
+            points: answer.points
+        }));
+        showChoices(choices);
+    } else {
+        handleChoice({ nextState: 'SHOW_QUIZ_RESULTS' });
+    }
 }
 
 function showQuizResults() {
-    // Cette fonction devrait calculer les scores et afficher les catégories
-    addBotMessage("Quiz terminé ! D'après tes réponses, les domaines qui te correspondent le plus sont la <b>Mécanique</b> et l'<b>Industrie</b>.");
+    addBotMessage("Quiz terminé ! Voyons ce que ça donne...");
+
+    const sortedScores = Object.entries(quizScores)
+        .sort(([, a], [, b]) => b - a);
+
+    if (sortedScores.length < 2) {
+        addBotMessage("Je n'ai pas assez d'informations pour te proposer un résultat. Essayons la recherche par filtres !");
+        askFilterCategory();
+        return;
+    }
+
+    const topCategory1 = sortedScores[0][0];
+    const topCategory2 = sortedScores[1][0];
+
+    addBotMessage(`D'après tes réponses, les domaines qui semblent te correspondre le plus sont : <b>${topCategory1}</b> et <b>${topCategory2}</b>.`);
     addBotMessage("On explore les formations dans un de ces deux secteurs ?");
+    
     showChoices([
-        { text: "Explorer la Mécanique", nextState: 'FILTER_LEVEL', value: 'MÉCANIQUE ET MAINTENANCE' },
-        { text: "Explorer l'Industrie", nextState: 'FILTER_LEVEL', value: 'INDUSTRIE, PRODUCTION, PROCÉDÉS ET USINAGE' },
-        { text: "Refaire le quiz", nextState: 'QUIZ_Q1' }
+        { text: `Explorer "${topCategory1}"`, nextState: 'FILTER_LEVEL', value: topCategory1 },
+        { text: `Explorer "${topCategory2}"`, nextState: 'FILTER_LEVEL', value: topCategory2 },
+        { text: "Non, choisir un autre domaine", nextState: 'FILTER_CATEGORY' },
+        { text: "Refaire le quiz", nextState: 'RESTART' }
     ]);
 }
 
-
 // --- LOGIQUE DES FILTRES ---
-
 function askFilterCategory() {
     addBotMessage("Super ! Quel grand domaine t'intéresse ?");
-    // On extrait les catégories uniques de la base de données
-    const categories = [...new Set(db.map(item => item.categorie))];
+    const categories = [...new Set(db.map(item => item.categorie))].sort();
     const choices = categories.map(cat => ({
         text: cat,
         nextState: 'FILTER_LEVEL',
@@ -169,38 +205,31 @@ function askFilterCategory() {
 function askFilterLevel() {
     addBotMessage("Très bien. Quel niveau d'études vises-tu ?");
     showChoices([
-        { text: "Bac+2 / Bac+3", nextState: 'FILTER_LOCATION', value: [5, 6] },
-        { text: "Bac+5 et plus", nextState: 'FILTER_LOCATION', value: [7] },
-        { text: "CAP / Bac Pro", nextState: 'FILTER_LOCATION', value: [3, 4] },
-        { text: "Montre-moi tout !", nextState: 'FILTER_LOCATION', value: 'all' }
+        { text: "CAP / Bac Pro (Niveau 3 & 4)", nextState: 'FILTER_LOCATION', value: [3, 4] },
+        { text: "Bac+2 / Bac+3 (Niveau 5 & 6)", nextState: 'FILTER_LOCATION', value: [5, 6] },
+        { text: "Bac+5 et plus (Niveau 7)", nextState: 'FILTER_LOCATION', value: [7] },
+        { text: "Peu importe, montre-moi tout !", nextState: 'FILTER_LOCATION', value: 'all' }
     ]);
 }
 
 function askFilterLocation() {
     addBotMessage("Et pour finir, une préférence géographique ?");
     showChoices([
-        { text: "Alsace", nextState: 'SHOW_FILTER_RESULTS', value: 'Alsace' },
-        { text: "Lorraine", nextState: 'SHOW_FILTER_RESULTS', value: 'Lorraine' },
-        { text: "Champagne-Ardenne", nextState: 'SHOW_FILTER_RESULTS', value: 'Champagne-Ardenne' },
-        { text: "Peu importe, je suis mobile !", nextState: 'SHOW_FILTER_RESULTS', value: 'all' }
+        { text: "Alsace", nextState: 'SHOW_FILTER_RESULTS', location: 'Alsace' },
+        { text: "Lorraine", nextState: 'SHOW_FILTER_RESULTS', location: 'Lorraine' },
+        { text: "Champagne-Ardenne", nextState: 'SHOW_FILTER_RESULTS', location: 'Champagne-Ardenne' },
+        { text: "Peu importe, je suis mobile !", nextState: 'SHOW_FILTER_RESULTS', location: 'all' }
     ]);
 }
 
-
 // --- AFFICHAGE DES RÉSULTATS ---
-
 function showFilterResults() {
     addBotMessage("Voici les formations qui correspondent à tes critères :");
     
     let results = db.filter(item => {
         const categoryMatch = item.categorie === filterCriteria.category;
-        
-        const levelMatch = filterCriteria.level === 'all' || 
-                           filterCriteria.level.includes(item.niveau);
-                           
-        const locationMatch = filterCriteria.location === 'all' || 
-                              item.etablissements.some(e => e.region_nom === filterCriteria.location);
-
+        const levelMatch = filterCriteria.level === 'all' || (Array.isArray(filterCriteria.level) && filterCriteria.level.includes(item.niveau));
+        const locationMatch = filterCriteria.location === 'all' || item.etablissements.some(e => e.region_nom === filterCriteria.location);
         return categoryMatch && levelMatch && locationMatch;
     });
 
@@ -209,7 +238,6 @@ function showFilterResults() {
     } else {
         results.forEach(res => {
             res.etablissements.forEach(etab => {
-                 // On affiche la carte uniquement si l'établissement correspond au filtre de localisation (ou si pas de filtre)
                 if (filterCriteria.location === 'all' || etab.region_nom === filterCriteria.location) {
                     const card = `
                         <div class="result-card">
@@ -229,13 +257,9 @@ function showFilterResults() {
         });
     }
 
-    // Proposer de recommencer
     userInput.innerHTML = '';
-    showChoices([
-        { text: 'Merci ! Recommencer une recherche.', nextState: 'RESTART' }
-    ]);
+    showChoices([{ text: 'Merci ! Faire une nouvelle recherche.', nextState: 'RESTART' }]);
 }
-
 
 // --- FONCTION UTILITAIRE ---
 function scrollToBottom() {
