@@ -1,7 +1,7 @@
 /* --- Style Général --- */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f4f7f6;
+    background-color: #f0f5f1; /* Un fond très légèrement vert */
     margin: 0;
     display: flex;
     justify-content: center;
@@ -26,7 +26,7 @@ body {
 
 /* --- En-tête du Chat --- */
 .chat-header {
-    background: linear-gradient(135deg, #007BFF, #0056b3);
+    background: linear-gradient(135deg, #4CAF50, #388E3C); /* Dégradé de vert */
     color: white;
     padding: 20px;
     text-align: center;
@@ -72,7 +72,7 @@ body {
 }
 
 .user-message {
-    background-color: #007BFF;
+    background-color: #4CAF50; /* Vert principal */
     color: white;
     align-self: flex-end;
     border-bottom-right-radius: 5px;
@@ -89,8 +89,8 @@ body {
 
 .choice-button {
     background-color: #fff;
-    color: #007BFF;
-    border: 2px solid #007BFF;
+    color: #4CAF50; /* Vert principal */
+    border: 2px solid #4CAF50; /* Vert principal */
     padding: 12px 20px;
     border-radius: 25px;
     cursor: pointer;
@@ -101,10 +101,10 @@ body {
 }
 
 .choice-button:hover {
-    background-color: #007BFF;
+    background-color: #4CAF50; /* Vert principal */
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2); /* Ombre verte */
 }
 
 /* --- Cartes de Résultat --- */
@@ -125,7 +125,7 @@ body {
 .result-card h3 {
     margin-top: 0;
     margin-bottom: 10px;
-    color: #0056b3;
+    color: #388E3C; /* Vert foncé */
     font-size: 1.2em;
 }
 
@@ -135,7 +135,7 @@ body {
 }
 
 .result-card a {
-    color: #007BFF;
+    color: #4CAF50; /* Vert principal */
     text-decoration: none;
     font-weight: 500;
 }
