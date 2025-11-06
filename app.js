@@ -63,10 +63,10 @@ function startChat() {
     filterCriteria = {};
     chatBox.innerHTML = '';
     userInput.innerHTML = '';
-    addBotMessage("Bonjour ! Je suis ton copilote pour l'orientation. Prêt(e) à trouver ta voie dans le Grand Est ?");
+    addBotMessage("Bonjour ! Je suis ton frero pour l'orientation. Prêt(e) à trouver ta voie dans le Grand Est BG ?");
     showChoices([
         { text: "🚀 Commencer le quiz !", nextState: 'QUIZ_Q1' },
-        { text: "🔍 J'ai déjà une idée, montre-moi les filtres.", nextState: 'FILTER_CATEGORY' }
+        { text: "🔍 J'ai déjà une idée connard, montre-moi les filtres.", nextState: 'FILTER_CATEGORY' }
     ]);
 }
 
