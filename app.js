@@ -62,6 +62,7 @@ function startChat() {
     quizScores = {};
     filterCriteria = {};
     chatBox.innerHTML = '';
+    userInput.innerHTML = '';
     addBotMessage("Bonjour ! Je suis ton copilote pour l'orientation. Prêt(e) à trouver ta voie dans le Grand Est ?");
     showChoices([
         { text: "🚀 Commencer le quiz !", nextState: 'QUIZ_Q1' },
@@ -108,51 +109,58 @@ function handleChoice(choice) {
         });
     }
 
+    const previousState = state;
     state = choice.nextState;
-    
-    // Gère la transition d'état
-    const nextStateAction = state.startsWith('QUIZ_Q') ? () => askQuizQuestion(parseInt(state.split('Q')[1]) - 1)
-        : {
-            'SHOW_QUIZ_RESULTS': showQuizResults,
-            'FILTER_CATEGORY': askFilterCategory,
-            'FILTER_LEVEL': () => {
+
+    // --- LOGIQUE CENTRALE ---
+    if (state.startsWith('QUIZ_Q')) {
+        const questionNum = parseInt(state.split('Q')[1], 10);
+        askQuizQuestion(questionNum - 1);
+    } else {
+        switch (state) {
+            case 'SHOW_QUIZ_RESULTS':
+                showQuizResults();
+                break;
+            case 'FILTER_CATEGORY':
+                askFilterCategory();
+                break;
+            case 'FILTER_LEVEL':
                 if (choice.value) filterCriteria.category = choice.value;
                 askFilterLevel();
-            },
-            'FILTER_LOCATION': () => {
+                break;
+            case 'FILTER_LOCATION':
                 if (choice.value) filterCriteria.level = choice.value;
                 askFilterLocation();
-            },
-            'SHOW_FILTER_RESULTS': () => {
+                break;
+            case 'SHOW_FILTER_RESULTS':
                 if (choice.value) filterCriteria.location = choice.value;
                 showFilterResults();
-            },
-            'RESTART': startChat
-        }[state];
-
-    if (nextStateAction) {
-        nextStateAction();
-    } else {
-        addBotMessage("Oups, je me suis embrouillé. Recommençons.");
-        startChat();
+                break;
+            case 'RESTART':
+                startChat();
+                break;
+            default:
+                 // Cas où le quiz se termine (ex: de QUIZ_Q6 qui n'existe pas)
+                if (previousState.startsWith('QUIZ_Q')) {
+                    showQuizResults();
+                } else {
+                    addBotMessage("Je suis un peu perdu. Recommençons.");
+                    startChat();
+                }
+        }
     }
 }
 
 // --- LOGIQUE DU QUIZ ---
 function askQuizQuestion(questionIndex) {
-    if (questionIndex < conversation.quiz.length) {
-        const q = conversation.quiz[questionIndex];
-        addBotMessage(q.question);
-        const choices = q.answers.map(answer => ({
-            text: answer.text,
-            nextState: `QUIZ_Q${questionIndex + 2}`,
-            points: answer.points
-        }));
-        showChoices(choices);
-    } else {
-        // Fin du quiz, on passe aux résultats
-        handleChoice({ nextState: 'SHOW_QUIZ_RESULTS' });
-    }
+    const q = conversation.quiz[questionIndex];
+    addBotMessage(q.question);
+    const choices = q.answers.map(answer => ({
+        text: answer.text,
+        nextState: `QUIZ_Q${questionIndex + 2}`,
+        points: answer.points
+    }));
+    showChoices(choices);
 }
 
 function showQuizResults() {
@@ -219,13 +227,8 @@ function showFilterResults() {
     
     let results = db.filter(item => {
         const categoryMatch = item.categorie === filterCriteria.category;
-        
-        const levelMatch = filterCriteria.level === 'all' || 
-                           (Array.isArray(filterCriteria.level) && filterCriteria.level.includes(item.niveau));
-                           
-        const locationMatch = filterCriteria.location === 'all' || 
-                              item.etablissements.some(e => e.region_nom === filterCriteria.location);
-
+        const levelMatch = filterCriteria.level === 'all' || (Array.isArray(filterCriteria.level) && filterCriteria.level.includes(item.niveau));
+        const locationMatch = filterCriteria.location === 'all' || item.etablissements.some(e => e.region_nom === filterCriteria.location);
         return categoryMatch && levelMatch && locationMatch;
     });
 
