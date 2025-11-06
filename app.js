@@ -267,13 +267,18 @@ function showFilterResults() {
                         const marker = L.marker(etab.coordonnees).addTo(map);
                         
                         // Créer le contenu du popup
-                        const popupContent = `
-                            <h3>${res.diplome_nom}</h3>
-                            <p><strong>Niveau:</strong> ${res.niveau}</p>
-                            <p><strong>Établissement:</strong> ${etab.nom}, ${etab.ville}</p>
-                            <p>${res.description || 'Pas de description disponible.'}</p>
-                            ${etab.site_web ? `<a href="${etab.site_web}" target="_blank">Site de l'école</a>` : ''}
-                        `;
+                       // NOUVEAU BLOC
+const popupContent = `
+    <h3>${res.diplome_nom}</h3>
+    <p><strong>Niveau:</strong> ${res.niveau}</p>
+    <p><strong>Établissement:</strong> ${etab.nom} - ${etab.ville} (${etab.code_postal})</p>
+    <p><strong>Portes Ouvertes:</strong> ${etab.jpo_dates || 'Non communiquées'}</p>
+    <p>${res.description || 'Pas de description disponible.'}</p>
+    <p>
+        ${etab.site_web ? `<a href="${etab.site_web}" target="_blank">Site de l'école</a> | ` : ''}
+        ${res.lien_formation ? `<a href="${res.lien_formation}" target="_blank">Détails formation</a>` : ''}
+    </p>
+`;
                         
                         marker.bindPopup(popupContent);
                     }
