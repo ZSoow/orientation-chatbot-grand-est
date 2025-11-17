@@ -229,8 +229,6 @@ function askFilterLocation() {
 
 // --- AFFICHAGE DES RÉSULTATS ---
 function showFilterResults() {
-    addBotMessage("Voici les formations qui correspondent à tes critères sur la carte !");
-    
     let results = db.filter(item => {
         const categoryMatch = filterCriteria.category ? (item.categorie === filterCriteria.category) : true;
         const levelMatch = (filterCriteria.level === 'all' || !filterCriteria.level) ? true : (Array.isArray(filterCriteria.level) && filterCriteria.level.includes(item.niveau));
@@ -241,34 +239,49 @@ function showFilterResults() {
     if (results.length === 0) {
         addBotMessage("Désolé, je n'ai trouvé aucune formation avec ces critères précis. Essayons autre chose !");
     } else {
-        // Afficher et initialiser la carte
-        mapContainer.style.display = 'block';
-
-        // Détruire l'ancienne carte si elle existe, pour éviter les erreurs
-        if (map) {
-            map.remove();
-        }
-
-        // Coordonnées du centre du Grand Est et niveau de zoom
-        map = L.map('map').setView([48.6921, 6.1844], 7);
-
-        // Ajout du fond de carte (OpenStreetMap)
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        // Ajouter un marqueur pour chaque résultat
+        addBotMessage(`J'ai trouvé ${results.length} formation(s) qui correspondent à tes critères !`);
+        
+        // Compter combien d'établissements ont des coordonnées valides
+        let hasValidCoordinates = false;
         results.forEach(res => {
             res.etablissements.forEach(etab => {
-                // Vérifier si l'établissement correspond au filtre de localisation (si un filtre est appliqué)
-                 if (filterCriteria.location === 'all' || !filterCriteria.location || etab.region_nom === filterCriteria.location) {
-                    // Vérifier si les coordonnées existent et sont valides
+                if (filterCriteria.location === 'all' || !filterCriteria.location || etab.region_nom === filterCriteria.location) {
                     if (etab.coordonnees && etab.coordonnees.length === 2) {
-                        const marker = L.marker(etab.coordonnees).addTo(map);
-                        
-                        // Créer le contenu du popup
-                       // NOUVEAU BLOC
-const popupContent = `
+                        hasValidCoordinates = true;
+                    }
+                }
+            });
+        });
+
+        // Si des coordonnées valides existent, afficher la carte
+        if (hasValidCoordinates) {
+            addBotMessage("Voici les formations sur la carte :");
+            mapContainer.style.display = 'block';
+
+            // Détruire l'ancienne carte si elle existe, pour éviter les erreurs
+            if (map) {
+                map.remove();
+            }
+
+            // Coordonnées du centre du Grand Est et niveau de zoom
+            map = L.map('map').setView([48.6921, 6.1844], 7);
+
+            // Ajout du fond de carte (OpenStreetMap)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Ajouter un marqueur pour chaque résultat
+            results.forEach(res => {
+                res.etablissements.forEach(etab => {
+                    // Vérifier si l'établissement correspond au filtre de localisation (si un filtre est appliqué)
+                    if (filterCriteria.location === 'all' || !filterCriteria.location || etab.region_nom === filterCriteria.location) {
+                        // Vérifier si les coordonnées existent et sont valides
+                        if (etab.coordonnees && etab.coordonnees.length === 2) {
+                            const marker = L.marker(etab.coordonnees).addTo(map);
+                            
+                            // Créer le contenu du popup
+                            const popupContent = `
     <h3>${res.diplome_nom}</h3>
     <p><strong>Niveau:</strong> ${res.niveau}</p>
     <p><strong>Établissement:</strong> ${etab.nom} - ${etab.ville} (${etab.code_postal})</p>
@@ -279,10 +292,36 @@ const popupContent = `
         ${res.lien_formation ? `<a href="${res.lien_formation}" target="_blank">Détails formation</a>` : ''}
     </p>
 `;
-                        
-                        marker.bindPopup(popupContent);
+                            marker.bindPopup(popupContent);
+                        }
                     }
-                 }
+                });
+            });
+        }
+
+        // Afficher toutes les formations dans le chat sous forme de cartes
+        results.forEach(res => {
+            res.etablissements.forEach(etab => {
+                // Vérifier si l'établissement correspond au filtre de localisation
+                if (filterCriteria.location === 'all' || !filterCriteria.location || etab.region_nom === filterCriteria.location) {
+                    const cardContent = `
+                        <div class="result-card">
+                            <h3>${res.diplome_nom}</h3>
+                            <p><strong>Niveau:</strong> ${res.niveau}</p>
+                            <p><strong>Catégorie:</strong> ${res.categorie}</p>
+                            <p><strong>Établissement:</strong> ${etab.nom}</p>
+                            <p><strong>Ville:</strong> ${etab.ville} (${etab.code_postal}) - ${etab.region_nom}</p>
+                            <p><strong>Portes Ouvertes:</strong> ${etab.jpo_dates || 'Non communiquées'}</p>
+                            <p>${res.description || 'Pas de description disponible.'}</p>
+                            <p>
+                                ${etab.site_web ? `<a href="${etab.site_web}" target="_blank">🌐 Site de l'école</a>` : ''}
+                                ${etab.site_web && res.lien_formation ? ' | ' : ''}
+                                ${res.lien_formation ? `<a href="${res.lien_formation}" target="_blank">📚 Détails formation</a>` : ''}
+                            </p>
+                        </div>
+                    `;
+                    addBotMessage(cardContent);
+                }
             });
         });
     }
