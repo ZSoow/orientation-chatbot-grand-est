@@ -1,77 +1,3342 @@
 [
   {
-    "id": "BPA_VITICOLE_CAMPUS_AUBE",
-    "diplome_nom": "Brevet Professionnel Agricole – BPA OUVRIER VITICOLE",
+    "id": "BPA_OUVRIER_VITICOLE",
+    "diplome_nom": "BPA OUVRIER VITICOLE",
     "diplome_acronyme": "BPA",
     "niveau": 3,
     "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
     "description": "Ce brevet forme des ouvriers qualifiés spécialisés dans les travaux de la vigne. Il couvre l'ensemble du cycle, de la taille à la vendange, en intégrant les nouvelles pratiques agro-écologiques.",
-    "etablissements": [{"nom": "Campus Terres de l’Aube", "ville": "Saint-Pouange", "code_postal": "10360", "region_nom": "Champagne-Ardenne", "site_web": "https://www.campus-terresdelaube.fr/", "lien_formation": "https://www.campus-terresdelaube.fr/nos-formations/voie-professionnelle/", "jpo_dates": "Non disponible (vérifier début 2026)", "coordonnees": [48.21, 4.07]}]
-  },
-  {
-    "id": "BACPRO_CGEA_SAINT_LAURENT",
-    "diplome_nom": "Baccalauréat professionnel CONDUITE ET GESTION DE L’ENTREPRISE AGRICOLE (CGEA)",
-    "diplome_acronyme": "Bac Pro",
-    "niveau": 4,
-    "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
-    "description": "Le Bac Pro CGEA prépare à devenir responsable d'une exploitation agricole. Il enseigne la gestion technique, économique et humaine d'une entreprise dans le secteur de l'élevage ou des grandes cultures.",
     "etablissements": [
-      {"nom": "Campus Agro Environnemental", "ville": "Saint-Laurent", "code_postal": "08090", "region_nom": "Champagne-Ardenne", "site_web": "https://www.campus-saintlaurent.fr/", "lien_formation": "https://www.campus-saintlaurent.fr/formations-scolaires/bac-pro-cgea/", "jpo_dates": "Non disponible (vérifier début 2026)", "coordonnees": [49.77, 4.63]},
-      {"nom": "EPLEFPA Edgard PISANI", "ville": "Chamarandes-Choignes", "code_postal": "52000", "region_nom": "Champagne-Ardenne", "site_web": "https://epl.chaumont.educagri.fr/", "lien_formation": "https://epl.chaumont.educagri.fr/formations/bac-pro-conduite-et-gestion-de-lentreprise-agricole-cgea/", "jpo_dates": "Non disponible (vérifier début 2026)", "coordonnees": [48.10, 5.16]}
+      {
+        "nom": "Campus Terres de l'Aube",
+        "ville": "Saint-Pouange",
+        "code_postal": "10360",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
     ]
   },
   {
-    "id": "BTSA_ACSE_THILLOIS",
-    "diplome_nom": "BTSA ANALYSE, CONDUITE ET STRATÉGIE DE L’ENTREPRISE AGRICOLE (ACSE)",
+    "id": "BPA_OUVRIER_D_ELEVAGE_DE_RUMINANTS_ET_CULTURES_FOURRAGERES",
+    "diplome_nom": "BPA OUVRIER D'ELEVAGE DE RUMINANTS ET CULTURES FOURRAGERES",
+    "diplome_acronyme": "BPA",
+    "niveau": 3,
+    "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
+    "description": "Le Brevet Professionnel Agricole (BPA) prépare à des compétences professionnelles spécialisées dans le secteur agricole.",
+    "etablissements": [
+      {
+        "nom": "Campus Agro Environnemental",
+        "ville": "Saint-Laurent",
+        "code_postal": "08090",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "MFR de Ramonchamp",
+        "ville": "Ramonchamp",
+        "code_postal": "88160",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "ALPA",
+        "ville": "Haroué",
+        "code_postal": "54740",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "BPA_TRAVAUX_DE_LA_VIGNE_ET_DU_VIN_TVV",
+    "diplome_nom": "BPA TRAVAUX DE LA VIGNE ET DU VIN (TVV)",
+    "diplome_acronyme": "BPA",
+    "niveau": 3,
+    "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
+    "description": "Ce brevet forme des ouvriers qualifiés spécialisés dans les travaux de la vigne. Il couvre l'ensemble du cycle, de la taille à la vendange, en intégrant les nouvelles pratiques agro-écologiques.",
+    "etablissements": [
+      {
+        "nom": "Avize Viti Campus",
+        "ville": "Avize",
+        "code_postal": "51190",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "Transformation et commercialisation",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "BPA_BUCHERON",
+    "diplome_nom": "BPA BÛCHERON",
+    "diplome_acronyme": "BPA",
+    "niveau": 3,
+    "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
+    "description": "Le Brevet Professionnel Agricole (BPA) prépare à des compétences professionnelles spécialisées dans le secteur agricole.",
+    "etablissements": [
+      {
+        "nom": "Campus Terres de l'Aube",
+        "ville": "Les Loges-Margueron",
+        "code_postal": "10210",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Campus Agro Environnemental",
+        "ville": "Saint-Laurent",
+        "code_postal": "08090",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "BPA_CONDUITE_D_ENGINS_FORESTIERS",
+    "diplome_nom": "BPA CONDUITE D'ENGINS FORESTIERS",
+    "diplome_acronyme": "BPA",
+    "niveau": 3,
+    "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
+    "description": "Le Brevet Professionnel Agricole (BPA) prépare à des compétences professionnelles spécialisées dans le secteur agricole.",
+    "etablissements": [
+      {
+        "nom": "Campus de Mirecourt",
+        "ville": "Mirecourt",
+        "code_postal": "88500",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "CAP_CONDUCTEUR_D_INSTALLATIONS_DE_PRODUCTION_CIP",
+    "diplome_nom": "CAP CONDUCTEUR D'INSTALLATIONS DE PRODUCTION (CIP)",
+    "diplome_acronyme": "CAP",
+    "niveau": 3,
+    "categorie": "INDUSTRIE, PRODUCTION, PROCÉDÉS ET USINAGE",
+    "description": "Le Certificat d'Aptitude Professionnelle (CAP) offre une qualification d'ouvrier ou d'employé qualifié dans un métier précis.",
+    "etablissements": [
+      {
+        "nom": "Lycée Stéphane Hessel",
+        "ville": "Épernay",
+        "code_postal": "51200",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée La Briquerie",
+        "ville": "Thionville",
+        "code_postal": "57100",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Blaise Pascal",
+        "ville": "Forbach",
+        "code_postal": "57600",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Charles Jully",
+        "ville": "Saint-Avold",
+        "code_postal": "57500",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Philippe Charles Goulden",
+        "ville": "Bischwiller",
+        "code_postal": "67240",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Lazare de Schwendi",
+        "ville": "Ingersheim",
+        "code_postal": "68040",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "CAP_ELECTRICIEN_ELEC_PRO_ELEC",
+    "diplome_nom": "CAP ÉLECTRICIEN (ELEC) / PRO ELEC",
+    "diplome_acronyme": "CAP",
+    "niveau": 3,
+    "categorie": "ÉLECTRICITE, ELECTROTECHNIQUE et ELECTRONIQUE",
+    "description": "Le Certificat d'Aptitude Professionnelle (CAP) offre une qualification d'ouvrier ou d'employé qualifié dans un métier précis.",
+    "etablissements": [
+      {
+        "nom": "BTP CFA Aube",
+        "ville": "Pont-Sainte-Marie",
+        "code_postal": "10150",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Eugène Decomble",
+        "ville": "Chaumont",
+        "code_postal": "52000",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "BTP CFA Haute-Marne",
+        "ville": "Chaumont",
+        "code_postal": "52000",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "BTP CFA Marne",
+        "ville": "Reims",
+        "code_postal": "51100",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Georges Brière",
+        "ville": "Reims",
+        "code_postal": "51100",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "BTP CFA Ardennes",
+        "ville": "Poix-Terron",
+        "code_postal": "08430",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Charles de Gonzague",
+        "ville": "Charleville-Mézières",
+        "code_postal": "08000",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Jean-Baptiste Clément",
+        "ville": "Sedan",
+        "code_postal": "08200",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Groupe Saint-Joseph La Salle",
+        "ville": "Troyes",
+        "code_postal": "10000",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Frédéric Ozanam",
+        "ville": "Châlons-en-Champagne",
+        "code_postal": "51000",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée La Fontaine du Vé",
+        "ville": "Sézanne",
+        "code_postal": "51120",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "CMA 57 – Campus des Métiers de Moselle",
+        "ville": "Forbach",
+        "code_postal": "57600",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "CMA 57 – Campus des Métiers de Moselle",
+        "ville": "Metz",
+        "code_postal": "57070",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Emmanuel Héré",
+        "ville": "Laxou",
+        "code_postal": "54520",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Interentreprises",
+        "ville": "Boulay-Moselle",
+        "code_postal": "57220",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EREA François-Richard Joubert",
+        "ville": "Flavigny-sur-Moselle",
+        "code_postal": "54630",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "BTP CFA Vosges",
+        "ville": "Arches",
+        "code_postal": "88380",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "BTP CFA Meurthe Moselle-et-Meuse",
+        "ville": "Pont-à-Mousson",
+        "code_postal": "54700",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Théodore Deck",
+        "ville": "Guebwiller",
+        "code_postal": "68500",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Marcel Rudloff",
+        "ville": "Strasbourg",
+        "code_postal": "67200",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Le Corbusier",
+        "ville": "Illkirch-Graffenstaden",
+        "code_postal": "67400",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Jean-Jacques Henner",
+        "ville": "Altkirch",
+        "code_postal": "68130",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Jean-Baptiste Schwilgué",
+        "ville": "Sélestat",
+        "code_postal": "67600",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Heinrich-Nessel",
+        "ville": "Haguenau",
+        "code_postal": "67500",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "CFA Centre Alsace Marcel Rudloff",
+        "ville": "Colmar",
+        "code_postal": "68000",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Gustave Eiffel",
+        "ville": "Cernay",
+        "code_postal": "68700",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Charles Stoessel",
+        "ville": "Mulhouse",
+        "code_postal": "68200",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "CAP_OPERATEUR_EN_INDUSTRIE_ALIMENTAIRE_OIA",
+    "diplome_nom": "CAP OPÉRATEUR EN INDUSTRIE ALIMENTAIRE (OIA)",
+    "diplome_acronyme": "CAP",
+    "niveau": 3,
+    "categorie": "INDUSTRIE, PRODUCTION, PROCÉDÉS ET USINAGE",
+    "description": "Le Certificat d'Aptitude Professionnelle (CAP) offre une qualification d'ouvrier ou d'employé qualifié dans un métier précis.",
+    "etablissements": [
+      {
+        "nom": "Lycée Notre-Dame de Maubert-Fontaine",
+        "ville": "Maubert-Fontaine",
+        "code_postal": "08260",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPL Agro de la Meuse",
+        "ville": "Bar-le-Duc",
+        "code_postal": "55000",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "CAP_OPERATEUR_LOGISTIQUE_OL",
+    "diplome_nom": "CAP OPÉRATEUR LOGISTIQUE (OL)",
+    "diplome_acronyme": "CAP",
+    "niveau": 3,
+    "categorie": "LOGISTIQUE ET TRANSPORT",
+    "description": "Le Certificat d'Aptitude Professionnelle (CAP) offre une qualification d'ouvrier ou d'employé qualifié dans un métier précis.",
+    "etablissements": [
+      {
+        "nom": "Lycée Etienne Oehmichen",
+        "ville": "Châlons-en-Champagne",
+        "code_postal": "51000",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Jeanne Mance",
+        "ville": "Troyes",
+        "code_postal": "10000",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Le Château",
+        "ville": "Sedan",
+        "code_postal": "08200",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Isabelle Viviani",
+        "ville": "Épinal",
+        "code_postal": "88000",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Nicole Mangin",
+        "ville": "Verdun",
+        "code_postal": "57400",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Jean Macé",
+        "ville": "Fameck",
+        "code_postal": "57290",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Bertrand Schwartz",
+        "ville": "Pompey",
+        "code_postal": "54340",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Paul Lapie",
+        "ville": "Lunéville",
+        "code_postal": "54300",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée René Cassin",
+        "ville": "Metz",
+        "code_postal": "57050",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Ensemble scolaire Jeanne d'Arc – St Joseph",
+        "ville": "Remiremont",
+        "code_postal": "88200",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Louis Geisler",
+        "ville": "Raon-l'Étape",
+        "code_postal": "88110",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Ettore Bugatti",
+        "ville": "Illzach",
+        "code_postal": "68110",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Emile Mathis",
+        "ville": "Schiltigheim",
+        "code_postal": "67300",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "CAP_MAINTENANCE_DES_MATERIELS_MDM_MATERIELS_AGRICOLAS",
+    "diplome_nom": "CAP MAINTENANCE DES MATÉRIELS (MDM) - Matériels agricoles",
+    "diplome_acronyme": "CAP",
+    "niveau": 3,
+    "categorie": "MÉCANIQUE ET MAINTENANCE",
+    "description": "Le Certificat d'Aptitude Professionnelle (CAP) offre une qualification d'ouvrier ou d'employé qualifié dans un métier précis.",
+    "etablissements": [
+      {
+        "nom": "ALMEA Formations - Interpro",
+        "ville": "Châlons-en-Champagne",
+        "code_postal": "51000",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "MFR-CFA de Vigneulles",
+        "ville": "Vigneulles-lès-Hattonchâtel",
+        "code_postal": "55210",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Paul-Emile Victor",
+        "ville": "Obernai",
+        "code_postal": "67210",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "CAP_METIERS_DE_L_AGRICULTURE_MAGRI",
+    "diplome_nom": "CAP MÉTIERS DE L'AGRICULTURE (MAGRI)",
+    "diplome_acronyme": "CAP",
+    "niveau": 3,
+    "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
+    "description": "Le Certificat d'Aptitude Professionnelle (CAP) offre une qualification d'ouvrier ou d'employé qualifié dans un métier précis.",
+    "etablissements": [
+      {
+        "nom": "Avize Viti Campus",
+        "ville": "Avize",
+        "code_postal": "51190",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Campus Terres de l'Aube",
+        "ville": "Saint-Pouange",
+        "code_postal": "10120",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPLEFPA Edgard Pisani",
+        "ville": "Chamarandes-Choignes",
+        "code_postal": "52000",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPLEFPA de Rethel",
+        "ville": "Rethel",
+        "code_postal": "08300",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "MFR de Gionges",
+        "ville": "Blancs-Coteaux",
+        "code_postal": "51130",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EREA Robert Tritant",
+        "ville": "Châlons-en-Champagne",
+        "code_postal": "51000",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Agricole de Somme-Suippe",
+        "ville": "Somme-Suippe",
+        "code_postal": "51600",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "École de Roville",
+        "ville": "Roville-aux-Chênes",
+        "code_postal": "88700",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "MFR de Ramonchamp",
+        "ville": "Ramonchamp",
+        "code_postal": "88160",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "MFR de Stenay",
+        "ville": "Stenay",
+        "code_postal": "55700",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "MFR de Bulgnéville",
+        "ville": "Bulgnéville",
+        "code_postal": "88140",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Campus de Courcelles-Chaussy",
+        "ville": "Courcelles-Chaussy",
+        "code_postal": "57530",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPL Agro de la Meuse",
+        "ville": "Bar-le-Duc",
+        "code_postal": "55000",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPL54 Pixérécourt",
+        "ville": "Malzéville",
+        "code_postal": "54220",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EREA Henri Ebel",
+        "ville": "Illkirch-Graffenstaden",
+        "code_postal": "67400",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPLEFPA du Bas-Rhin",
+        "ville": "Obernai",
+        "code_postal": "67210",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPLEFPA Les Sillons de Haute-Alsace",
+        "ville": "Rouffach - Wintzenheim",
+        "code_postal": "68250",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "CAP_REALISATIONS_INDUSTRIELLES_CHAUDRONNERIE_SOUDAGE_RICS",
+    "diplome_nom": "CAP RÉALISATIONS INDUSTRIELLES EN CHAUDRONNERIE OU SOUDAGE (RICS)",
+    "diplome_acronyme": "CAP",
+    "niveau": 3,
+    "categorie": "MÉCANIQUE ET MAINTENANCE",
+    "description": "Le Certificat d'Aptitude Professionnelle (CAP) offre une qualification d'ouvrier ou d'employé qualifié dans un métier précis.",
+    "etablissements": [
+      {
+        "nom": "Lycée Jean-Baptiste Clément",
+        "ville": "Sedan",
+        "code_postal": "08200",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Pôle de formation UIMM – Champagne-A.",
+        "ville": "Rosières-près-Troyes",
+        "code_postal": "10430",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Pôle de formation UIMM – Champagne-A.",
+        "ville": "Saint-Dizier",
+        "code_postal": "52100",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Pôle de formation UIMM – Lorraine",
+        "ville": "Thaon-les-Vosges",
+        "code_postal": "88150",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Blaise Pascal",
+        "ville": "Colmar",
+        "code_postal": "68000",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Georges Imbert",
+        "ville": "Sarre-Union",
+        "code_postal": "67260",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "CAP_TRAVAUX_FORESTIERS_TF",
+    "diplome_nom": "CAP TRAVAUX FORESTIERS (TF)",
+    "diplome_acronyme": "CAP",
+    "niveau": 3,
+    "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
+    "description": "Le Certificat d'Aptitude Professionnelle (CAP) offre une qualification d'ouvrier ou d'employé qualifié dans un métier précis.",
+    "etablissements": [
+      {
+        "nom": "Campus Terres de l'Aube",
+        "ville": "Les Loges-Margueron",
+        "code_postal": "10210",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Campus Agro Environnemental",
+        "ville": "Saint-Laurent",
+        "code_postal": "08090",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPL Agro de la Meuse",
+        "ville": "Bar-le-Duc",
+        "code_postal": "55000",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "CS_COMMERCIALISATION_DES_VINS",
+    "diplome_nom": "CS COMMERCIALISATION DES VINS",
+    "diplome_acronyme": "CS",
+    "niveau": 3,
+    "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
+    "description": "Le Certificat de Spécialisation (CS) apporte une compétence complémentaire à un diplôme initial dans le secteur agricole, spécialisée dans un domaine précis.",
+    "etablissements": [
+      {
+        "nom": "Avize Viti Campus",
+        "ville": "Avize",
+        "code_postal": "51190",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "CS_CONDUITE_DE_PRODUCTION_EN_AGRICULTURE_BIOLOGIQUE",
+    "diplome_nom": "CS CONDUITE DE PRODUCTION EN AGRICULTURE BIOLOGIQUE",
+    "diplome_acronyme": "CS",
+    "niveau": 3,
+    "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
+    "description": "Le Certificat de Spécialisation (CS) apporte une compétence complémentaire à un diplôme initial dans le secteur agricole, spécialisée dans un domaine précis.",
+    "etablissements": [
+      {
+        "nom": "Avize Viti Campus",
+        "ville": "Avize",
+        "code_postal": "51190",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "Transformation et commercialisation",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "CS_MAINTENANCE_DES_INSTALLATIONS_OLEO_HYDRAULIQUES_ET_PNEUMATIQUES",
+    "diplome_nom": "CS MAINTENANCE DES INSTALLATIONS OLEO-HYDRAULIQUES ET PNEUMATIQUES",
+    "diplome_acronyme": "CS",
+    "niveau": 3,
+    "categorie": "MÉCANIQUE ET MAINTENANCE",
+    "description": "Le Certificat de Spécialisation (CS) apporte une compétence complémentaire à un diplôme initial dans le secteur agricole, spécialisée dans un domaine précis.",
+    "etablissements": [
+      {
+        "nom": "Lycée Jean-Baptiste Clément",
+        "ville": "Sedan",
+        "code_postal": "08200",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "CS_TRACTEURS_ET_MACHINES_AGRICOLAS",
+    "diplome_nom": "CS TRACTEURS ET MACHINES AGRICOLES",
+    "diplome_acronyme": "CS",
+    "niveau": 3,
+    "categorie": "MÉCANIQUE ET MAINTENANCE",
+    "description": "Le Certificat de Spécialisation (CS) apporte une compétence complémentaire à un diplôme initial dans le secteur agricole, spécialisée dans un domaine précis.",
+    "etablissements": [
+      {
+        "nom": "Avize Viti Campus",
+        "ville": "Avize",
+        "code_postal": "51190",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "CQP_TECHNICIEN_DE_MAINTENANCE_DES_MATERIELS_AGRICOLAS",
+    "diplome_nom": "CQP TECHNICIEN DE MAINTENANCE DES MATÉRIELS AGRICOLES",
+    "diplome_acronyme": "CQP",
+    "niveau": 3,
+    "categorie": "MÉCANIQUE ET MAINTENANCE",
+    "description": "Le Certificat de Qualification Professionnelle (CQP) atteste de la maîtrise de compétences spécifiques nécessaires à l'exercice d'un métier, délivré par la branche professionnelle.",
+    "etablissements": [
+      {
+        "nom": "MFR-CFA de Vigneulles",
+        "ville": "Vigneulles-lès-Hattonchâtel",
+        "code_postal": "55210",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "CQP_TRACTORISTE_AGRICOLAS",
+    "diplome_nom": "CQP TRACTORISTE AGRICOLE",
+    "diplome_acronyme": "CQP",
+    "niveau": 3,
+    "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
+    "description": "Le Certificat de Qualification Professionnelle (CQP) atteste de la maîtrise de compétences spécifiques nécessaires à l'exercice d'un métier, délivré par la branche professionnelle.",
+    "etablissements": [
+      {
+        "nom": "Campus Terres de l'Aube",
+        "ville": "Saint-Pouange",
+        "code_postal": "10120",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Avize Viti Campus",
+        "ville": "Avize",
+        "code_postal": "51190",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "MFR-CFA de Vigneulles",
+        "ville": "Vigneulles-lès-Hattonchâtel",
+        "code_postal": "55210",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "TP_SOUD EUR_ASSEMBLEUR_INDUSTRIEL_SAI",
+    "diplome_nom": "TP SOUDEUR ASSEMBLEUR INDUSTRIEL (SAI)",
+    "diplome_acronyme": "TP",
+    "niveau": 3,
+    "categorie": "MÉCANIQUE ET MAINTENANCE",
+    "description": "Le Titre Professionnel (TP) est une certification professionnelle délivrée par le ministère du Travail qui atteste de compétences pour un métier précis.",
+    "etablissements": [
+      {
+        "nom": "Pôle de formation UIMM – Lorraine",
+        "ville": "Thaon-les-Vosges",
+        "code_postal": "88150",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Pôle de formation UIMM – Alsace",
+        "ville": "Reichshoffen",
+        "code_postal": "67110",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Pôle de formation UIMM – Alsace",
+        "ville": "Mulhouse",
+        "code_postal": "68100",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "TP_TOURNEUR_REALISATION_DE_PIECES_MECANIQUES_TRPM",
+    "diplome_nom": "TP TOURNEUR EN RÉALISATION DE PIÈCES MÉCANIQUES (TRPM)",
+    "diplome_acronyme": "TP",
+    "niveau": 3,
+    "categorie": "MÉCANIQUE ET MAINTENANCE",
+    "description": "Le Titre Professionnel (TP) est une certification professionnelle délivrée par le ministère du Travail qui atteste de compétences pour un métier précis.",
+    "etablissements": [
+      {
+        "nom": "Pôle de formation UIMM – Alsace",
+        "ville": "Colmar",
+        "code_postal": "68000",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Pôle de formation UIMM – Alsace",
+        "ville": "Reichshoffen",
+        "code_postal": "67110",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "TP_TUYAUTEUR_INDUSTRIEL_TI",
+    "diplome_nom": "TP TUYAUTEUR INDUSTRIEL (TI)",
+    "diplome_acronyme": "TP",
+    "niveau": 3,
+    "categorie": "MÉCANIQUE ET MAINTENANCE",
+    "description": "Le Titre Professionnel (TP) est une certification professionnelle délivrée par le ministère du Travail qui atteste de compétences pour un métier précis.",
+    "etablissements": [
+      {
+        "nom": "Pôle de formation UIMM – Lorraine",
+        "ville": "Henriville",
+        "code_postal": "57450",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Pôle de formation UIMM – Lorraine",
+        "ville": "Nancy - Maxéville",
+        "code_postal": "54320",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Pôle de formation UIMM – Lorraine",
+        "ville": "Yutz - Thionville",
+        "code_postal": "57970",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Bac_Pro_AGROEQUIPEMENT",
+    "diplome_nom": "Bac Pro AGROÉQUIPEMENT",
+    "diplome_acronyme": "Bac Pro",
+    "niveau": 4,
+    "categorie": "MÉCANIQUE ET MAINTENANCE",
+    "description": "Le Baccalauréat Professionnel (Bac Pro) se prépare en trois ans après la troisième. Il vise une insertion professionnelle rapide mais permet aussi la poursuite d'études, notamment en BTS.",
+    "etablissements": [
+      {
+        "nom": "Lycée Somme-Suippe",
+        "ville": "Somme-Suippe",
+        "code_postal": "51600",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Campus de Courcelles-Chaussy",
+        "ville": "Courcelles-Chaussy",
+        "code_postal": "57530",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "MFR-CFA de Vigneulles",
+        "ville": "Vigneulles-lès-Hattonchâtel",
+        "code_postal": "55210",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Campus de Mirecourt",
+        "ville": "Mirecourt",
+        "code_postal": "88500",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPLEFPA du Bas-Rhin",
+        "ville": "Obernai",
+        "code_postal": "67210",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Bac_Pro_CONDUCTEUR_TRANSPORT_ROUTIER_DE_MARCHANDISES_CTRM",
+    "diplome_nom": "Bac Pro CONDUCTEUR TRANSPORT ROUTIER DE MARCHANDISES (CTRM)",
+    "diplome_acronyme": "Bac Pro",
+    "niveau": 4,
+    "categorie": "LOGISTIQUE ET TRANSPORT",
+    "description": "Le Baccalauréat Professionnel (Bac Pro) se prépare en trois ans après la troisième. Il vise une insertion professionnelle rapide mais permet aussi la poursuite d'études, notamment en BTS.",
+    "etablissements": [
+      {
+        "nom": "Lycée Etienne Oehmichen",
+        "ville": "Châlons-en-Champagne",
+        "code_postal": "51000",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Ensemble Scolaire Saint Michel",
+        "ville": "Art-sur-Meurthe",
+        "code_postal": "54510",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Gustave Eiffel",
+        "ville": "Talange",
+        "code_postal": "57525",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Pierre-Gilles de Gennes",
+        "ville": "Gérardmer",
+        "code_postal": "88400",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Emile Mathis",
+        "ville": "Schiltigheim",
+        "code_postal": "67300",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Ettore Bugatti",
+        "ville": "Illzach",
+        "code_postal": "68110",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Bac_Pro_CONDUITE_ET_GESTION_DE_L_ENTREPRISE_AGRICOLE_CGEA",
+    "diplome_nom": "Bac Pro CONDUITE ET GESTION DE L'ENTREPRISE AGRICOLE (CGEA)",
+    "diplome_acronyme": "Bac Pro",
+    "niveau": 4,
+    "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
+    "description": "Le Baccalauréat Professionnel (Bac Pro) se prépare en trois ans après la troisième. Il vise une insertion professionnelle rapide mais permet aussi la poursuite d'études, notamment en BTS.",
+    "etablissements": [
+      {
+        "nom": "Campus Agro Environnemental",
+        "ville": "Saint-Laurent",
+        "code_postal": "08090",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPLEFPA Edgard PISANI",
+        "ville": "Chamarandes-Choignes",
+        "code_postal": "52000",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPLEFPA de Rethel",
+        "ville": "Rethel",
+        "code_postal": "08300",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Campus Terres de l'Aube",
+        "ville": "Saint-Pouange",
+        "code_postal": "10120",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPLEFPA de Châlons-en-Champagne",
+        "ville": "Somme-Vesle",
+        "code_postal": "51460",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Sainte-Maure",
+        "ville": "Sainte-Maure",
+        "code_postal": "10150",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "MFR de Gionges",
+        "ville": "Blancs-Coteaux",
+        "code_postal": "51130",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "MFR de Stenay",
+        "ville": "Stenay",
+        "code_postal": "55700",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPL Val de Seille",
+        "ville": "Château-Salins",
+        "code_postal": "57170",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPL Agro de la Meuse",
+        "ville": "Bar-le-Duc",
+        "code_postal": "55000",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPL54 Pixérécourt",
+        "ville": "Malzéville",
+        "code_postal": "54220",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Campus de Courcelles-Chaussy",
+        "ville": "Courcelles-Chaussy",
+        "code_postal": "57530",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "MFR-CFA de Vigneulles",
+        "ville": "Vigneulles-lès-Hattonchâtel",
+        "code_postal": "55210",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "MFR de Bulgnéville",
+        "ville": "Bulgnéville",
+        "code_postal": "88140",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "MFR-CFR de Gugnécourt",
+        "ville": "Gugnécourt",
+        "code_postal": "88600",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Campus de Mirecourt",
+        "ville": "Mirecourt",
+        "code_postal": "88500",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPLEFPA du Bas-Rhin",
+        "ville": "Obernai",
+        "code_postal": "67210",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPLEFPA Les Sillons de Haute-Alsace",
+        "ville": "Rouffach - Wintzenheim",
+        "code_postal": "68250",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Bac_Pro_CONDUITE_ET_GESTION_DE_L_ENTREPRISE_VITIVINICOLE_CGEVV",
+    "diplome_nom": "Bac Pro CONDUITE ET GESTION DE L'ENTREPRISE VITIVINICOLE (CGEVV)",
+    "diplome_acronyme": "Bac Pro",
+    "niveau": 4,
+    "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
+    "description": "Le Baccalauréat Professionnel (Bac Pro) se prépare en trois ans après la troisième. Il vise une insertion professionnelle rapide mais permet aussi la poursuite d'études, notamment en BTS.",
+    "etablissements": [
+      {
+        "nom": "Campus Terres de l'Aube",
+        "ville": "Bar-sur-Seine",
+        "code_postal": "10110",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "MFR de Gionges",
+        "ville": "Blancs-Coteaux",
+        "code_postal": "51130",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Avize Viti Campus",
+        "ville": "Avize",
+        "code_postal": "51190",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPLEFPA Les Sillons de Haute-Alsace",
+        "ville": "Rouffach - Wintzenheim",
+        "code_postal": "68250",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Bac_Pro_FORET",
+    "diplome_nom": "Bac Pro FORÊT",
+    "diplome_acronyme": "Bac Pro",
+    "niveau": 4,
+    "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
+    "description": "Le Baccalauréat Professionnel (Bac Pro) se prépare en trois ans après la troisième. Il vise une insertion professionnelle rapide mais permet aussi la poursuite d'études, notamment en BTS.",
+    "etablissements": [
+      {
+        "nom": "Campus Terres de l'Aube",
+        "ville": "Les Loges-Margueron",
+        "code_postal": "10210",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPL Agro de la Meuse",
+        "ville": "Bar-le-Duc",
+        "code_postal": "55000",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Campus de Mirecourt",
+        "ville": "Mirecourt",
+        "code_postal": "88500",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Louise Weiss",
+        "ville": "Sainte-Marie-aux-Mines",
+        "code_postal": "68160",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Bac_Pro_LABORATOIRE_CONTROLE_QUALITE_LCQ",
+    "diplome_nom": "Bac Pro LABORATOIRE CONTRÔLE QUALITÉ (LCQ)",
+    "diplome_acronyme": "Bac Pro",
+    "niveau": 4,
+    "categorie": "INDUSTRIE, PRODUCTION, PROCÉDÉS ET USINAGE",
+    "description": "Le Baccalauréat Professionnel (Bac Pro) se prépare en trois ans après la troisième. Il vise une insertion professionnelle rapide mais permet aussi la poursuite d'études, notamment en BTS.",
+    "etablissements": [
+      {
+        "nom": "Lycée LaSalle Reims-Thillois",
+        "ville": "Thillois",
+        "code_postal": "51370",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPLEFPA Les Sillons de Haute-Alsace",
+        "ville": "Rouffach - Wintzenheim",
+        "code_postal": "68250",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Bac_Pro_LOGISTIQUE",
+    "diplome_nom": "Bac Pro LOGISTIQUE",
+    "diplome_acronyme": "Bac Pro",
+    "niveau": 4,
+    "categorie": "LOGISTIQUE ET TRANSPORT",
+    "description": "Le Baccalauréat Professionnel (Bac Pro) se prépare en trois ans après la troisième. Il vise une insertion professionnelle rapide mais permet aussi la poursuite d'études, notamment en BTS.",
+    "etablissements": [
+      {
+        "nom": "Lycée Etienne Oehmichen",
+        "ville": "Châlons-en-Champagne",
+        "code_postal": "51000",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Jeanne Mance",
+        "ville": "Troyes",
+        "code_postal": "10000",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Le Château",
+        "ville": "Sedan",
+        "code_postal": "08200",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Bertrand Schwartz",
+        "ville": "Pompey",
+        "code_postal": "54530",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Félix Mayer",
+        "ville": "Creutzwald",
+        "code_postal": "57150",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Paul Lapie",
+        "ville": "Lunéville",
+        "code_postal": "54300",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée René Cassin",
+        "ville": "Metz",
+        "code_postal": "57050",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Simon Lazard",
+        "ville": "Sarreguemines",
+        "code_postal": "57215",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Nicole Mangin",
+        "ville": "Verdun",
+        "code_postal": "55100",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Jean Macé",
+        "ville": "Fameck",
+        "code_postal": "57290",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Isabelle Viviani",
+        "ville": "Épinal",
+        "code_postal": "88000",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Louis Geisler",
+        "ville": "Raon-l'Étape",
+        "code_postal": "88110",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Philippe Charles Goulden",
+        "ville": "Bischwiller",
+        "code_postal": "67240",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Ettore Bugatti",
+        "ville": "Illzach",
+        "code_postal": "68110",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Emile Mathis",
+        "ville": "Schiltigheim",
+        "code_postal": "67300",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "BP_ELECTRICIEN",
+    "diplome_nom": "BP ÉLECTRICIEN",
+    "diplome_acronyme": "BP",
+    "niveau": 4,
+    "categorie": "ÉLECTRICITE, ELECTROTECHNIQUE et ELECTRONIQUE",
+    "description": "Le Brevet Professionnel (BP) prépare à des responsabilités techniques et d'exécution dans un métier spécialisé, souvent en alternance.",
+    "etablissements": [
+      {
+        "nom": "BTP CFA Haute-Marne",
+        "ville": "Chaumont",
+        "code_postal": "52000",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "BTP CFA Marne",
+        "ville": "Reims",
+        "code_postal": "51100",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "BTP CFA Meurthe-et-Moselle et Meuse",
+        "ville": "Pont-à-Mousson",
+        "code_postal": "54700",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "BP_RESPONSABLE_D_ENTREPRISE_AGRICOLE_REA",
+    "diplome_nom": "BP RESPONSABLE D'ENTREPRISE AGRICOLE (REA)",
+    "diplome_acronyme": "BP",
+    "niveau": 4,
+    "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
+    "description": "Le Brevet Professionnel (BP) prépare à des responsabilités techniques et d'exécution dans un métier spécialisé, souvent en alternance.",
+    "etablissements": [
+      {
+        "nom": "EPLEFPA Edgard PISANI",
+        "ville": "Chamarandes-Choignes",
+        "code_postal": "52000",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPLEFPA de Rethel",
+        "ville": "Rethel",
+        "code_postal": "08300",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Campus Agro Environnemental",
+        "ville": "Saint-Laurent",
+        "code_postal": "08090",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Campus Terres de l'Aube",
+        "ville": "Saint-Pouange",
+        "code_postal": "10120",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPL Agro de la Meuse",
+        "ville": "Bar-le-Duc",
+        "code_postal": "55000",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Campus de Courcelles-Chaussy",
+        "ville": "Courcelles-Chaussy",
+        "code_postal": "57530",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "ALPA",
+        "ville": "Haroué",
+        "code_postal": "54740",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Bachelor_ANIMATEUR_QUALITE_SECURITE_ENVIRONNEMENT",
+    "diplome_nom": "Bachelor ANIMATEUR QUALITÉ SÉCURITÉ ENVIRONNEMENT",
+    "diplome_acronyme": "Bachelor",
+    "niveau": 5,
+    "categorie": "QUALITÉ, SÉCURITÉ ET ENVIRONNEMENT",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "CESI Campus de Nancy",
+        "ville": "Vandœuvre-lès-Nancy",
+        "code_postal": "54500",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "CESI Campus de Strasbourg",
+        "ville": "Lingolsheim",
+        "code_postal": "67380",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "BTSA_AGRONOMIE_ET_CULTURES_DURABLES_ACD",
+    "diplome_nom": "BTSA AGRONOMIE ET CULTURES DURABLES (ACD)",
     "diplome_acronyme": "BTSA",
     "niveau": 5,
     "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
-    "description": "Le BTSA ACSE est destiné aux futurs gestionnaires d'exploitations ou conseillers agricoles. Il approfondit les compétences en diagnostic stratégique, pilotage d'entreprise et gestion financière.",
-    "etablissements": [{"nom": "Lycée La Salle Reims-Thillois", "ville": "Thillois", "code_postal": "51370", "region_nom": "Champagne-Ardenne", "site_web": "https://www.lasalle-reims.com/", "lien_formation": "https://www.lasalle-reims.com/formations/btsa-analyse-conduite-et-strategie-de-lentreprise-agricole/", "jpo_dates": "Samedi 25 janvier 2026 et Samedi 15 mars 2026", "coordonnees": [49.25, 3.96]}]
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "Lycée Sainte-Maure",
+        "ville": "Sainte-Maure",
+        "code_postal": "10150",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPLEFPA de Châlons-en-Champagne",
+        "ville": "Somme-Vesle",
+        "code_postal": "51460",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPLEFPA de Rethel",
+        "ville": "Rethel",
+        "code_postal": "08300",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Campus de Courcelles-Chaussy",
+        "ville": "Courcelles-Chaussy",
+        "code_postal": "57530",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPLEFPA du Bas-Rhin",
+        "ville": "Obernai",
+        "code_postal": "67210",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
   },
   {
-    "id": "BUT_GIM_CHALONS",
-    "diplome_nom": "Bachelor Universitaire de Technologie – BUT GÉNIE INDUSTRIEL ET MAINTENANCE (GIM)",
-    "diplome_acronyme": "BUT",
-    "niveau": 6,
-    "categorie": "INDUSTRIE, PRODUCTION, PROCÉDÉS ET USINAGE",
-    "description": "Le BUT GIM forme des techniciens polyvalents capables d'assurer la maintenance, l'amélioration et l'installation d'équipements industriels. Les diplômés sont essentiels à la performance des usines.",
-    "etablissements": [{"nom": "IUT RCC (Reims-Châlons-Charleville)", "ville": "Châlons-en-Champagne", "code_postal": "51000", "region_nom": "Champagne-Ardenne", "site_web": "https://www.univ-reims.fr/iut-rcc/", "lien_formation": "https://www.univ-reims.fr/iut-rcc/formation/but-genie-industriel-et-maintenance,22588,38908.html", "jpo_dates": "Généralement en février, date à confirmer sur le site de l'université.", "coordonnees": [48.95, 4.36]}]
-  },
-  {
-    "id": "ING_MECA_UTT",
-    "diplome_nom": "Ingénieur GÉNIE MÉCANIQUE (GM)",
-    "diplome_acronyme": "Ingénieur",
-    "niveau": 7,
-    "categorie": "MÉCANIQUE ET MAINTENANCE",
-    "description": "Le cursus ingénieur en Génie Mécanique de l'UTT forme des experts en conception, simulation et fabrication de systèmes mécaniques complexes, de la pièce d'avion au dispositif médical.",
-    "etablissements": [{"nom": "Université de technologie de Troyes", "ville": "Rosières-près-Troyes", "code_postal": "10430", "region_nom": "Champagne-Ardenne", "site_web": "https://www.utt.fr/", "lien_formation": "https://www.utt.fr/formations/genie-mecanique-gm", "jpo_dates": "Samedi 1er février 2026", "coordonnees": [48.27, 4.07]}]
-  },
-  {
-    "id": "MASTER_SVV_REIMS",
-    "diplome_nom": "Master SCIENCES DE LA VIGNE ET DU VIN (SVV)",
-    "diplome_acronyme": "Master",
-    "niveau": 7,
+    "id": "BTSA_ANALYSE_CONDUITE_ET_STRATEGIE_DE_L_ENTREPRISE_AGRICOLE",
+    "diplome_nom": "BTSA ANALYSE, CONDUITE ET STRATÉGIE DE L'ENTREPRISE AGRICOLE",
+    "diplome_acronyme": "BTSA",
+    "niveau": 5,
     "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
-    "description": "Ce Master forme des cadres de haut niveau pour la filière viti-vinicole. Il couvre l'œnologie, la viticulture de précision et le marketing du vin, avec un fort accent sur la recherche et l'innovation.",
-    "etablissements": [{"nom": "UFR SEN, Univ. Reims Champagne-Ardenne", "ville": "Reims", "code_postal": "51100", "region_nom": "Champagne-Ardenne", "site_web": "https://www.univ-reims.fr/", "lien_formation": "https://www.univ-reims.fr/formation/master-sciences-de-la-vigne-et-du-vin,21869,37648.html", "jpo_dates": "Généralement en février", "coordonnees": [49.25, 4.03]}]
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "EPLEFPA de Rethel",
+        "ville": "Rethel",
+        "code_postal": "08300",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Campus Terres de l'Aube",
+        "ville": "Les Loges-Margueron",
+        "code_postal": "10210",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée La Salle Reims-Thillois",
+        "ville": "Thillois",
+        "code_postal": "51370",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPL Agro de la Meuse",
+        "ville": "Bar-le-Duc",
+        "code_postal": "55000",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPL Val de Seille",
+        "ville": "Château-Salins",
+        "code_postal": "57170",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPL54 de Pixérécourt",
+        "ville": "Malzéville",
+        "code_postal": "54220",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "ALPA",
+        "ville": "Haroué",
+        "code_postal": "54740",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Campus de Mirecourt",
+        "ville": "Mirecourt",
+        "code_postal": "88500",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "MFR-CFR de Gugnécourt",
+        "ville": "Gugnécourt",
+        "code_postal": "88600",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPLEFPA du Bas-Rhin",
+        "ville": "Obernai",
+        "code_postal": "67210",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
   },
   {
-    "id": "BTS_BIOQUALITE_STRASBOURG",
-    "diplome_nom": "Brevet de Technicien Supérieur – BTS BIOQUALITÉ",
+    "id": "BTSA_VITICULTURE_OENOLOGIE_VO",
+    "diplome_nom": "BTSA VITICULTURE-ŒNOLOGIE (VO)",
+    "diplome_acronyme": "BTSA",
+    "niveau": 5,
+    "categorie": "AGRICULTURE, VITICULTURE, SYLVICULTURE ET ELEVAGE",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "Avize Viti Campus",
+        "ville": "Avize",
+        "code_postal": "51190",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Campus Terres de l'Aube",
+        "ville": "Saint-Pouange",
+        "code_postal": "10120",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "MFR de Gionges",
+        "ville": "Blancs-Coteaux",
+        "code_postal": "51130",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "EPLEFPA Les Sillons de Haute-Alsace",
+        "ville": "Rouffach - Wintzenheim",
+        "code_postal": "68250",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "BTS_ASSISTANCE_TECHNIQUE_D_INGENIEUR_ATI",
+    "diplome_nom": "BTS ASSISTANCE TECHNIQUE D'INGÉNIEUR (ATI)",
     "diplome_acronyme": "BTS",
     "niveau": 5,
     "categorie": "INDUSTRIE, PRODUCTION, PROCÉDÉS ET USINAGE",
-    "description": "Le BTS Bioqualité forme des techniciens spécialisés dans le contrôle qualité au sein des bio-industries (pharmaceutique, cosmétique, agroalimentaire). Ils garantissent la conformité et la sécurité des produits.",
-    "etablissements": [{"nom": "Lycée Jean Rostand", "ville": "Strasbourg", "code_postal": "67000", "region_nom": "Alsace", "site_web": "https://www.lycee-jean-rostand.fr/", "lien_formation": "https://www.lycee-jean-rostand.fr/nos-formations/enseignement-superieur/bts-bioqualite/", "jpo_dates": "Samedi 4 février 2026 (à confirmer)", "coordonnees": [48.58, 7.75]}]
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "Lycée François Bazin",
+        "ville": "Charleville-Mézières",
+        "code_postal": "08000",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Pôle de formation UIMM – Lorraine",
+        "ville": "Yutz - Thionville",
+        "code_postal": "57970",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Pôle de formation UIMM – Lorraine",
+        "ville": "Henriville",
+        "code_postal": "57450",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Pôle de formation UIMM – Lorraine",
+        "ville": "Thaon-les-Vosges",
+        "code_postal": "88150",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Louis Armand",
+        "ville": "Mulhouse",
+        "code_postal": "68200",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Pôle de formation UIMM – Alsace",
+        "ville": "Mulhouse",
+        "code_postal": "68100",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Pôle de formation UIMM – Alsace",
+        "ville": "Eckbolsheim",
+        "code_postal": "67201",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
   },
   {
-    "id": "ING_AGROBIOSCIENCES_NANCY",
-    "diplome_nom": "Ingénieur en Agronomie et Industries Alimentaires (spécialité Agrobiosciences)",
+    "id": "BTS_ELECTROTECHNIQUE_ET",
+    "diplome_nom": "BTS ÉLECTROTECHNIQUE (ET)",
+    "diplome_acronyme": "BTS",
+    "niveau": 5,
+    "categorie": "ÉLECTRICITE, ELECTROTECHNIQUE et ELECTRONIQUE",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "Pôle de formation UIMM – Champagne-A.",
+        "ville": "Reims",
+        "code_postal": "51100",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Maison de Troyes – Compagnons du Devoir",
+        "ville": "Troyes",
+        "code_postal": "10000",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Jean-Baptiste Clément",
+        "ville": "Sedan",
+        "code_postal": "08200",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Les Lombards",
+        "ville": "Troyes",
+        "code_postal": "10000",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Franklin Roosevelt",
+        "ville": "Reims",
+        "code_postal": "51100",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "BTP CFA Marne",
+        "ville": "Reims",
+        "code_postal": "51100",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Pôle de formation UIMM – Lorraine",
+        "ville": "Nancy - Maxéville",
+        "code_postal": "54320",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Pôle de formation UIMM – Lorraine",
+        "ville": "Yutz - Thionville",
+        "code_postal": "57970",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Henri Loritz",
+        "ville": "Nancy",
+        "code_postal": "54000",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Louis de Cormontaigne",
+        "ville": "Metz",
+        "code_postal": "57000",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Georges Baumont",
+        "ville": "Saint-Dié-des-Vosges",
+        "code_postal": "88100",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Louis Armand",
+        "ville": "Mulhouse",
+        "code_postal": "68200",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Charles de Foucauld",
+        "ville": "Schiltigheim",
+        "code_postal": "67300",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "BTS_MAINTENANCE_DES_SYSTEMES_MS",
+    "diplome_nom": "BTS MAINTENANCE DES SYSTÈMES (MS)",
+    "diplome_acronyme": "BTS",
+    "niveau": 5,
+    "categorie": "MÉCANIQUE ET MAINTENANCE",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "Pôle de formation UIMM – Champagne-A.",
+        "ville": "Charleville-Mézières",
+        "code_postal": "08000",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Denis Diderot",
+        "ville": "Romilly-sur-Seine",
+        "code_postal": "10100",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Blaise Pascal",
+        "ville": "Saint-Dizier",
+        "code_postal": "52100",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Les Lombards",
+        "ville": "Troyes",
+        "code_postal": "10000",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Georges Brière",
+        "ville": "Reims",
+        "code_postal": "51100",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Pôle de formation UIMM – Lorraine",
+        "ville": "Nancy - Maxéville",
+        "code_postal": "54320",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Pôle de formation UIMM – Lorraine",
+        "ville": "Henriville",
+        "code_postal": "57450",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Pôle de formation UIMM – Lorraine",
+        "ville": "Bar-le-Duc",
+        "code_postal": "55000",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Lycée Louis Armand",
+        "ville": "Mulhouse",
+        "code_postal": "68200",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Pôle de formation UIMM – Alsace",
+        "ville": "Colmar",
+        "code_postal": "68000",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "TP_TECHNICIEN_SUPERIEUR_METHODES_EXPLOITATION_LOGISTIQUE",
+    "diplome_nom": "TP TECHNICIEN SUPÉRIEUR EN MÉTHODES ET EXPLOITATION LOGISTIQUE",
+    "diplome_acronyme": "TP",
+    "niveau": 5,
+    "categorie": "LOGISTIQUE ET TRANSPORT",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "École ISTELI Reims",
+        "ville": "Reims",
+        "code_postal": "51100",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "École ISTELI Nancy",
+        "ville": "Jarville-la-Malgrange",
+        "code_postal": "54140",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "École ISTELI Metz",
+        "ville": "Metz",
+        "code_postal": "57070",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "ECF LLERENA",
+        "ville": "Eckbolsheim",
+        "code_postal": "67201",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "École ISTELI Mulhouse",
+        "ville": "Sausheim",
+        "code_postal": "68390",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "École ISTELI Strasbourg",
+        "ville": "Schiltigheim",
+        "code_postal": "67300",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Bachelor_AFFAIRES_INTERNATIONALES",
+    "diplome_nom": "Bachelor AFFAIRES INTERNATIONALES",
+    "diplome_acronyme": "Bachelor",
+    "niveau": 6,
+    "categorie": "MANAGEMENT, BUSINESS ET NÉGOCIATION",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "EM Strasbourg Business School",
+        "ville": "Strasbourg",
+        "code_postal": "67000",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Bachelor_MANAGEMENT_BUSINESS_ET_NEGOCIATION",
+    "diplome_nom": "Bachelor MANAGEMENT, BUSINESS ET NÉGOCIATION",
+    "diplome_acronyme": "Bachelor",
+    "niveau": 6,
+    "categorie": "MANAGEMENT, BUSINESS ET NÉGOCIATION",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "École ISTELI Reims",
+        "ville": "Reims",
+        "code_postal": "51100",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "École ISTELI Nancy",
+        "ville": "Jarville-la-Malgrange",
+        "code_postal": "54140",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "École ISTELI Metz",
+        "ville": "Metz",
+        "code_postal": "57070",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "École ISTELI Mulhouse",
+        "ville": "Sausheim",
+        "code_postal": "68390",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "École ISTELI Strasbourg",
+        "ville": "Schiltigheim",
+        "code_postal": "67300",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Bachelor_RESPONSABLE_DE_PERFORMANCE_INDUSTRIELLE_RPI",
+    "diplome_nom": "Bachelor RESPONSABLE DE PERFORMANCE INDUSTRIELLE (RPI)",
+    "diplome_acronyme": "Bachelor",
+    "niveau": 6,
+    "categorie": "INDUSTRIE, PRODUCTION, PROCÉDÉS ET USINAGE",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "CESI Campus de Nancy",
+        "ville": "Vandœuvre-lès-Nancy",
+        "code_postal": "54500",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "CESI Campus de Strasbourg",
+        "ville": "Lingolsheim",
+        "code_postal": "67380",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Pôle de formation UIMM – Alsace",
+        "ville": "Mulhouse",
+        "code_postal": "68100",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "BUT_CHIMIE",
+    "diplome_nom": "BUT CHIMIE",
+    "diplome_acronyme": "BUT",
+    "niveau": 6,
+    "categorie": "CHIMIE ET BIOTECHNOLOGIES",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "IUT Moselle-Est, Univ. Lorraine",
+        "ville": "Saint-Avold",
+        "code_postal": "57500",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "IUT R. Schuman, Univ. Strasbourg",
+        "ville": "Illkirch-Graffenstaden",
+        "code_postal": "67400",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Licence_CHIMIE",
+    "diplome_nom": "Licence CHIMIE",
+    "diplome_acronyme": "Licence",
+    "niveau": 6,
+    "categorie": "CHIMIE ET BIOTECHNOLOGIES",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "FST, Univ. Lorraine",
+        "ville": "Vandœuvre-lès-Nancy",
+        "code_postal": "54500",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "UFR SciFA, Univ. Lorraine",
+        "ville": "Metz",
+        "code_postal": "57070",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "UFR de chimie, Univ. Strasbourg",
+        "ville": "Strasbourg",
+        "code_postal": "67000",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "FST, Univ. Haute-Alsace",
+        "ville": "Mulhouse",
+        "code_postal": "68200",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Licence_PHYSIQUE",
+    "diplome_nom": "Licence PHYSIQUE",
+    "diplome_acronyme": "Licence",
+    "niveau": 6,
+    "categorie": "PHYSIQUE",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "FST, Univ. Lorraine",
+        "ville": "Vandœuvre-lès-Nancy",
+        "code_postal": "54500",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "UFR SciFA, Univ. Lorraine",
+        "ville": "Metz",
+        "code_postal": "57070",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "UFR de physique, Univ. Strasbourg",
+        "ville": "Strasbourg",
+        "code_postal": "67000",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "FST, Univ. Haute-Alsace",
+        "ville": "Mulhouse",
+        "code_postal": "68200",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Licence_SCIENCES_DE_LA_VIE_SV",
+    "diplome_nom": "Licence SCIENCES DE LA VIE (SV)",
+    "diplome_acronyme": "Licence",
+    "niveau": 6,
+    "categorie": "SCIENCES DE LA VIE",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "UFR SEN, Univ. Reims Champagne-Ardenne",
+        "ville": "Reims",
+        "code_postal": "51100",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "FST, Univ. Lorraine",
+        "ville": "Vandœuvre-lès-Nancy",
+        "code_postal": "54500",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "UFR SciFA, Univ. Lorraine",
+        "ville": "Metz",
+        "code_postal": "57070",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "IUT Colmar, Univ. Haute-Alsace",
+        "ville": "Colmar",
+        "code_postal": "68000",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "FSV, Univ. Strasbourg",
+        "ville": "Strasbourg",
+        "code_postal": "67000",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Licence_Pro_BIO_INDUSTRIES_ET_BIOTECHNOLOGIES_BBT",
+    "diplome_nom": "Licence Pro BIO-INDUSTRIES ET BIOTECHNOLOGIES (BBT)",
+    "diplome_acronyme": "Licence Pro",
+    "niveau": 6,
+    "categorie": "CHIMIE ET BIOTECHNOLOGIES",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "UFR SEN, Univ. Reims Champagne-Ardenne",
+        "ville": "Reims",
+        "code_postal": "51100",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "IUT Colmar, Univ. Haute-Alsace",
+        "ville": "Colmar",
+        "code_postal": "68000",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Licence_Pro_MAINTENANCE_DES_SYSTEMES_INDUSTRIELS",
+    "diplome_nom": "Licence Pro MAINTENANCE DES SYSTÈMES INDUSTRIELS",
+    "diplome_acronyme": "Licence Pro",
+    "niveau": 6,
+    "categorie": "MÉCANIQUE ET MAINTENANCE",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "Pôle de formation UIMM – Champagne-A.",
+        "ville": "Saint-Dizier",
+        "code_postal": "52100",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "CNAM Grand Est",
+        "ville": "Saint-Dizier",
+        "code_postal": "52100",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "IUT Thionville-Yutz, Univ. Lorraine",
+        "ville": "Yutz",
+        "code_postal": "57970",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "FST, Univ. Lorraine",
+        "ville": "Vandœuvre-lès-Nancy",
+        "code_postal": "54500",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "Pôle de formation UIMM – Alsace",
+        "ville": "Colmar",
+        "code_postal": "68000",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "TP_RESPONSABLE_EN_LOGISTIQUE_REL",
+    "diplome_nom": "TP RESPONSABLE EN LOGISTIQUE (REL)",
+    "diplome_acronyme": "TP",
+    "niveau": 6,
+    "categorie": "LOGISTIQUE ET TRANSPORT",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "École ISTELI Reims",
+        "ville": "Reims",
+        "code_postal": "51100",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "École ISTELI Nancy",
+        "ville": "Jarville-la-Malgrange",
+        "code_postal": "54140",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "École ISTELI Metz",
+        "ville": "Metz",
+        "code_postal": "57070",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "École ISTELI Strasbourg",
+        "ville": "Schiltigheim",
+        "code_postal": "67300",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "École ISTELI Mulhouse",
+        "ville": "Sausheim",
+        "code_postal": "68390",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "CP_MANAGER_DES_ORGANISATIONS_ET_PROCESSUS_LOGISTIQUES",
+    "diplome_nom": "CP MANAGER DES ORGANISATIONS ET PROCESSUS LOGISTIQUES",
+    "diplome_acronyme": "CP",
+    "niveau": 7,
+    "categorie": "LOGISTIQUE ET TRANSPORT",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "École ISTELI Nancy",
+        "ville": "Jarville-la-Malgrange",
+        "code_postal": "54140",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "CP_MANAGER_TRANSPORT_LOGISTIQUE_ET_COMMERCE_INTERNATIONAL",
+    "diplome_nom": "CP MANAGER TRANSPORT LOGISTIQUE ET COMMERCE INTERNATIONAL",
+    "diplome_acronyme": "CP",
+    "niveau": 7,
+    "categorie": "LOGISTIQUE ET TRANSPORT",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "École ISTELI Strasbourg",
+        "ville": "Schiltigheim",
+        "code_postal": "67300",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Master_AGROSCIENCES_ENVIRONNEMENT_TERRITOIRES_PAYSAGE_FORET",
+    "diplome_nom": "Master AGROSCIENCES, ENVIRONNEMENT, TERRITOIRES, PAYSAGE, FORÊT",
+    "diplome_acronyme": "Master",
+    "niveau": 7,
+    "categorie": "AGRONOMIE ET ENVIRONNEMENT",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "FST, Univ. Lorraine & AgroParisTech",
+        "ville": "Vandœuvre-lès-Nancy",
+        "code_postal": "54500",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "Avec partenaires",
+        "coordonnees": []
+      },
+      {
+        "nom": "ENSAIA, Univ. Lorraine",
+        "ville": "Vandœuvre-lès-Nancy",
+        "code_postal": "54500",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Master_BIOTECHNOLOGIES",
+    "diplome_nom": "Master BIOTECHNOLOGIES",
+    "diplome_acronyme": "Master",
+    "niveau": 7,
+    "categorie": "BIOTECHNOLOGIES",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "ESBS, Univ. Strasbourg",
+        "ville": "Illkirch-Graffenstaden",
+        "code_postal": "67400",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Master_BIOLOGIE_AGROSCIENCES_BAS",
+    "diplome_nom": "Master BIOLOGIE, AGROSCIENCES (BAS)",
+    "diplome_acronyme": "Master",
+    "niveau": 7,
+    "categorie": "BIOLOGIE ET AGRONOMIE",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "UFR SEN, Univ. Reims Champagne-Ardenne",
+        "ville": "Reims",
+        "code_postal": "51100",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Master_CHIMIE",
+    "diplome_nom": "Master CHIMIE",
+    "diplome_acronyme": "Master",
+    "niveau": 7,
+    "categorie": "CHIMIE ET BIOTECHNOLOGIES",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "UFR SEN, Univ. Reims Champagne-Ardenne",
+        "ville": "Reims",
+        "code_postal": "51100",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "UFR SciFA, Univ. Lorraine",
+        "ville": "Metz",
+        "code_postal": "57070",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "FST, Univ. Lorraine",
+        "ville": "Vandœuvre-lès-Nancy",
+        "code_postal": "54500",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "UFR de chimie, Univ. Strasbourg",
+        "ville": "Strasbourg",
+        "code_postal": "67000",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "FST, Univ. Haute-Alsace",
+        "ville": "Mulhouse",
+        "code_postal": "68200",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Ingenieur_AGRONOME",
+    "diplome_nom": "Ingénieur AGRONOME",
     "diplome_acronyme": "Ingénieur",
     "niveau": 7,
-    "categorie": "BIOECONOMIE, CHIMIE VERTE ET BIO-RESSOURCES",
-    "description": "Formation d'ingénieur de pointe axée sur la valorisation de la biomasse végétale et les biotechnologies. Les diplômés travaillent sur les bioénergies, les biomatériaux et les molécules d'intérêt pour la chimie verte.",
-    "etablissements": [{"nom": "ENSAIA - Université de Lorraine", "ville": "Vandœuvre-lès-Nancy", "code_postal": "54500", "region_nom": "Lorraine", "site_web": "https://ensaia.univ-lorraine.fr/", "lien_formation": "https://ensaia.univ-lorraine.fr/fr/formation/ingenieur-agronomie", "jpo_dates": "Généralement en février/mars", "coordonnees": [48.66, 6.16]}]
+    "categorie": "AGRONOMIE ET ENVIRONNEMENT",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "ENSAIA, Univ. Lorraine",
+        "ville": "Vandœuvre-lès-Nancy",
+        "code_postal": "54500",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Mastere_Specialise_MANAGEMENT_QUALITE_SECURITE_ENVIRONNEMENT_RSE",
+    "diplome_nom": "Mastère Spécialisé MANAGEMENT QUALITÉ SÉCURITÉ ENVIRONNEMENT – RSE",
+    "diplome_acronyme": "Mastère Spécialisé",
+    "niveau": 7,
+    "categorie": "QUALITÉ, SÉCURITÉ ET ENVIRONNEMENT",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "CESI Campus de Reims",
+        "ville": "Reims",
+        "code_postal": "51100",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "CESI Campus de Nancy",
+        "ville": "Vandœuvre-lès-Nancy",
+        "code_postal": "54500",
+        "region_nom": "Lorraine",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      },
+      {
+        "nom": "CESI Campus de Strasbourg",
+        "ville": "Lingolsheim",
+        "code_postal": "67380",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Ecole_doctorale_AGRICULTURE_ALIMENTATION_BIOLOGIE_ENVIRONNEMENT_SANTE",
+    "diplome_nom": "École doctorale AGRICULTURE, ALIMENTATION, BIOLOGIE, ENVIRONNEMENT ET SANTÉ",
+    "diplome_acronyme": "École doctorale",
+    "niveau": 8,
+    "categorie": "RECHERCHE ET DOCTORAT",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "Univ. Reims Champagne-Ardenne",
+        "ville": "Reims",
+        "code_postal": "51100",
+        "region_nom": "Champagne-Ardenne",
+        "site_web": "",
+        "lien_formation": "",
+        "jpo_dates": "Avec partenaires",
+        "coordonnees": []
+      }
+    ]
+  },
+  {
+    "id": "Ecole_doctorale_AUGUSTIN_COURNOT",
+    "diplome_nom": "École doctorale AUGUSTIN COURNOT",
+    "diplome_acronyme": "École doctorale",
+    "niveau": 8,
+    "categorie": "SCIENCESS HUMAINES ET GESTION",
+    "description": "",
+    "etablissements": [
+      {
+        "nom": "Univ. Strasbourg & Univ Haute-Alsace",
+        "ville": "Strasbourg",
+        "code_postal": "67000",
+        "region_nom": "Alsace",
+        "site_web": "",
+        "lien_formation": "Sciences de gestion et économiques",
+        "jpo_dates": "",
+        "coordonnees": []
+      }
+    ]
   }
 ]
