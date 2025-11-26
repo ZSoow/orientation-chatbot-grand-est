@@ -1,133 +1,92 @@
-/* --- Style Général --- */
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f0f5f1;
-    margin: 0;
-    padding: 20px; /* Ajout d'un peu d'espace autour */
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Aligner en haut */
-    min-height: 100vh;
-    color: #333;
+:root {
+    --primary-color: #007AFF;
+    --primary-gradient: linear-gradient(135deg, #007AFF, #0056b3);
+    --bg-color: #f5f7fa;
+    --chat-bg: #ffffff;
+    --user-msg-bg: #007AFF;
+    --bot-msg-bg: #f0f0f0;
+    --text-color: #333;
+    --subtext-color: #666;
+    --border-radius: 16px;
+}
+
+* {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-/* NOUVEAU : Conteneur principal pour le layout */
-.main-container {
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    height: 100vh;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
-    width: 99%;
-    max-width: 1400px;
 }
 
-/* --- Conteneur Principal du Chat --- */
 .chat-container {
     width: 100%;
-    max-width: 600px;
-    height: 90vh;
-    max-height: 850px; /* Un peu plus haut */
-    background-color: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    max-width: 600px; /* Largeur maximale type mobile */
+    background-color: var(--chat-bg);
+    height: 100%;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    flex-shrink: 0; /* Empêche le chat de rétrécir */
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    position: relative;
 }
 
-/* --- En-tête du Chat --- */
+/* Header */
 .chat-header {
-    background: linear-gradient(135deg, #4CAF50, #388E3C);
-    color: white;
-    padding: 20px;
-    text-align: center;
-    border-bottom: 1px solid #dee2e6;
+    padding: 15px 20px;
+    background: var(--chat-bg);
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 10;
 }
 
-.chat-header h1 {
-    margin: 0;
-    font-size: 1.8em;
-    font-weight: 700;
+.avatar {
+    width: 40px;
+    height: 40px;
+    background: #e6f0ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
 }
 
-.chat-header p {
-    margin: 5px 0 0;
-    font-size: 1em;
-    opacity: 0.9;
+.header-info h1 {
+    font-size: 16px;
+    font-weight: 600;
 }
 
-/* --- Boîte des Messages --- */
-.chat-box {
-    flex-grow: 1;
+.header-info .status {
+    font-size: 12px;
+    color: #2ecc71;
+    font-weight: 500;
+}
+
+/* Zone de messages */
+.chat-messages {
+    flex: 1;
     padding: 20px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-}
-
-/* --- Style des Bulles de Message --- */
-.message {
-    padding: 12px 18px;
-    border-radius: 20px;
-    margin-bottom: 15px;
-    max-width: 80%;
-    line-height: 1.5;
-    word-wrap: break-word;
-}
-
-.bot-message {
-    background-color: #e9ecef;
-    color: #333;
-    align-self: flex-start;
-    border-bottom-left-radius: 5px;
-}
-
-.user-message {
-    background-color: #4CAF50;
-    color: white;
-    align-self: flex-end;
-    border-bottom-right-radius: 5px;
-}
-
-/* --- Zone de Réponse Utilisateur (Boutons) --- */
-.user-input {
-    padding: 20px;
-    border-top: 1px solid #e9ecef;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.choice-button {
+    gap: 15px;
     background-color: #fff;
-    color: #4CAF50;
-    border: 2px solid #4CAF50;
-    padding: 12px 20px;
-    border-radius: 25px;
-    cursor: pointer;
-    text-align: center;
-    font-size: 1em;
-    font-weight: 500;
-    transition: all 0.2s ease-in-out;
 }
 
-.choice-button:hover {
-    background-color: #4CAF50;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
-}
-
-/* --- Cartes de Résultat --- */
-.result-card {
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 12px;
-    padding: 15px;
-    margin-bottom: 15px;
-    animation: fadeIn 0.5s ease-in-out;
+.message {
+    max-width: 85%;
+    padding: 12px 16px;
+    border-radius: var(--border-radius);
+    font-size: 15px;
+    line-height: 1.4;
+    position: relative;
+    animation: fadeIn 0.3s ease-out;
 }
 
 @keyframes fadeIn {
@@ -135,72 +94,125 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-.result-card h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    color: #388E3C;
-    font-size: 1.2em;
+.bot-message {
+    align-self: flex-start;
+    background-color: var(--bot-msg-bg);
+    color: var(--text-color);
+    border-bottom-left-radius: 4px;
 }
 
-.result-card p {
-    margin: 5px 0;
+.user-message {
+    align-self: flex-end;
+    background: var(--primary-gradient);
+    color: white;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,122,255,0.2);
+}
+
+/* Cartes de formation */
+.formation-card {
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 15px;
+    margin-top: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+
+.formation-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.formation-title {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+    display: block;
+}
+
+.formation-school {
+    font-weight: 600;
+    color: #333;
     font-size: 0.95em;
 }
 
-.result-card a {
-    color: #4CAF50;
+.formation-details {
+    font-size: 0.85em;
+    color: var(--subtext-color);
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    background: #f0f0f0;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.formation-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.85em;
     text-decoration: none;
-    font-weight: 500;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 4px 10px;
+    border-radius: 20px;
 }
 
-.result-card a:hover {
-    text-decoration: underline;
+.formation-link:hover {
+    background-color: var(--primary-color);
+    color: white;
 }
 
-/* --- Style du Logo --- */
-.header-logo {
-    max-width: 80px;
-    margin-bottom: 10px;
+/* Zone de saisie */
+.chat-input-area {
+    padding: 15px;
+    background: white;
+    border-top: 1px solid #eee;
+}
+
+.input-wrapper {
+    display: flex;
+    gap: 10px;
+    background: #f0f2f5;
+    padding: 8px;
+    border-radius: 25px;
+    border: 1px solid transparent;
+    transition: border 0.3s;
+}
+
+.input-wrapper:focus-within {
+    border-color: var(--primary-color);
+    background: white;
+}
+
+#user-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 8px 12px;
+    font-size: 16px;
+    outline: none;
+}
+
+#send-btn {
+    background: var(--primary-color);
+    border: none;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background-color: white;
-    padding: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
 }
 
-/* --- NOUVEAU : Styles pour la carte --- */
-.map-container {
-    display: none; /* Caché par défaut */
-    flex-grow: 1; /* Prend l'espace restant */
-    width: 100%;
-    max-width: 700px;
-    height: 90vh; /* Même hauteur que le chat */
-    max-height: 850px;
-    border-radius: 16px;
-    overflow: hidden; /* Important pour les coins arrondis */
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-}
-
-#map {
-    width: 100%;
-    height: 100%;
-}
-
-/* Style pour les popups sur la carte */
-.leaflet-popup-content-wrapper {
-    border-radius: 8px;
-}
-
-.leaflet-popup-content h3 {
-    margin: 0 0 10px 0;
-    font-size: 1.1em;
-    color: #388E3C;
-}
-
-.leaflet-popup-content p {
-    margin: 4px 0;
-    font-size: 0.9em;
-}
-
-.leaflet-popup-content a {
-    color: #4CAF50;
+#send-btn:hover {
+    transform: scale(1.05);
 }
