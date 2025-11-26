@@ -1,30 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => {
     let formationsData = [];
+    let currentFilters = {
+        keywords: []
+    };
+
     const messagesContainer = document.getElementById('chat-messages');
     const userInput = document.getElementById('user-input');
     const sendBtn = document.getElementById('send-btn');
+    const resetBtn = document.getElementById('reset-btn');
 
-    // 1. Chargement des données CSV
+    // 1. Chargement CSV
     fetch('data/formations.csv')
         .then(response => response.text())
         .then(csvText => {
             formationsData = parseCSV(csvText);
             console.log(`${formationsData.length} formations chargées.`);
-            // Message d'accueil personnalisé CMQ
-            addBotMessage("Bonjour ! Je suis l'assistant virtuel du <strong>CMQ Bioéco Grand Est</strong>. 🌱");
-            addBotMessage("Je peux vous aider à trouver une formation parmi nos 300 références.");
-            addBotMessage("Essayez de combiner des mots-clés, par exemple : <br><em>'BTS Nancy'</em>, <em>'Agriculture Reims'</em> ou <em>'Commerce Alsace'</em>.");
+            welcomeUser();
         })
         .catch(err => {
-            console.error("Erreur chargement CSV:", err);
-            addBotMessage("Oups, je n'arrive pas à lire ma base de données de formations. 😕");
+            console.error("Erreur CSV:", err);
+            addBotMessage("Erreur technique : Impossible de charger les formations.");
         });
 
-    // 2. Fonction pour parser le CSV
+    function welcomeUser() {
+        addBotMessage("Bonjour ! Je suis l'assistant du <strong>CMQ Bioéco Grand Est</strong>. 🌱");
+        addBotMessage("Je peux vous aider à trouver une formation. Dites-moi ce que vous cherchez (ex: 'Commerce', 'BTS', 'Reims'...).");
+    }
+
+    // 2. Parser CSV
     function parseCSV(text) {
         const lines = text.trim().split('\n');
         const headers = lines[0].split(';').map(h => h.trim());
-        
         return lines.slice(1).map(line => {
             const values = line.split(';');
             let obj = {};
@@ -35,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. Gestion de l'envoi de message
+    // 3. Gestion Messages & Reset
     function handleUserMessage() {
         const text = userInput.value.trim();
         if (!text) return;
@@ -43,61 +49,75 @@ document.addEventListener('DOMContentLoaded', () => {
         addUserMessage(text);
         userInput.value = '';
         
+        // Petit délai pour effet naturel
         setTimeout(() => {
             processUserQuery(text);
-        }, 600);
+        }, 500);
     }
 
-    userInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') handleUserMessage();
-    });
-    sendBtn.addEventListener('click', handleUserMessage);
+    function resetChat() {
+        messagesContainer.innerHTML = ''; // Vide le chat
+        currentFilters.keywords = []; // Vide la mémoire
+        welcomeUser(); // Relance l'accueil
+    }
 
-    // 4. Moteur de réponse (AMÉLIORÉ : Recherche multi-critères)
+    userInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleUserMessage(); });
+    sendBtn.addEventListener('click', handleUserMessage);
+    resetBtn.addEventListener('click', resetChat);
+
+    // 4. Cœur du Chatbot (Logique Guidée)
     function processUserQuery(query) {
         const rawQuery = query.toLowerCase();
         
-        // Découpage de la recherche en mots-clés (on enlève les petits mots comme "à", "de", "le"...)
-        const keywords = rawQuery.split(' ').filter(word => word.length > 1 && !['le', 'la', 'les', 'de', 'du', 'en', 'au', 'à', 'pour'].includes(word));
+        // Extraction des mots-clés
+        const newKeywords = rawQuery.split(' ').filter(word => word.length > 2 && !['les', 'des', 'pour', 'une', 'dans', 'avec', 'sur'].includes(word));
 
-        // Mots clés simples pour les salutations
-        if (['bonjour', 'salut', 'hello', 'cc', 'yo'].some(greet => rawQuery.includes(greet)) && keywords.length <= 1) {
-            addBotMessage("Bonjour ! Dites-moi ce que vous cherchez (Ville, Diplôme, Domaine...).");
-            return;
-        }
+        // MÉMOIRE : On ajoute les nouveaux mots aux anciens
+        // Si l'utilisateur dit "Reims" puis "Commerce", on cherche "Reims" ET "Commerce"
+        currentFilters.keywords = [...new Set([...currentFilters.keywords, ...newKeywords])];
 
-        // Filtrage : On garde les formations qui contiennent TOUS les mots clés
+        // Recherche
         const results = formationsData.filter(f => {
-            // On crée une grande chaîne de texte qui contient toutes les infos de la formation pour chercher dedans
-            const formationFullText = `
-                ${f.Nom_Complet_Diplome} 
-                ${f.Acronyme_Diplome} 
-                ${f.Grande_Categorie} 
-                ${f.Description_Diplome} 
-                ${f.Nom_Etablissement} 
-                ${f.Ville} 
-                ${f.Region}
+            const fullText = `
+                ${f.Nom_Complet_Diplome} ${f.Acronyme_Diplome} 
+                ${f.Grande_Categorie} ${f.Ville} ${f.Region}
             `.toLowerCase();
-
-            // Vérifie si CHAQUE mot clé est présent dans le texte de la formation
-            return keywords.every(keyword => formationFullText.includes(keyword));
+            // Vérifie que TOUS les mots-clés (anciens + nouveaux) sont présents
+            return currentFilters.keywords.every(k => fullText.includes(k));
         });
 
-        // Affichage des résultats
+        // Logique de réponse guidée
         if (results.length === 0) {
-            addBotMessage(`Je n'ai rien trouvé pour "${query}". 😕 <br>Essayez d'autres mots-clés ou vérifiez l'orthographe.`);
-        } else if (results.length > 10) {
-            addBotMessage(`J'ai trouvé <strong>${results.length} formations</strong> ! C'est un peu trop pour tout afficher.`);
-            addBotMessage("Pouvez-vous préciser ? (Ajoutez une ville ou un niveau d'étude par exemple).");
-            // On affiche quand même les 3 premières pour l'exemple
+            addBotMessage(`Oups, je ne trouve rien avec "${currentFilters.keywords.join(' + ')}". 😕`);
+            addBotMessage("Voulez-vous recommencer ? (Cliquez sur 'Nouveau' en haut à droite)");
+            // On pourrait vider le dernier mot clé ici si on voulait être gentil, mais le Reset est mieux.
+        } 
+        else if (results.length > 10) {
+            // TROP DE RÉSULTATS -> LE BOT POSE UNE QUESTION
+            addBotMessage(`J'ai trouvé <strong>${results.length} formations</strong> ! C'est encore un peu large.`);
+            
+            // Est-ce qu'on a déjà filtré par ville ? (astuce simple : regarde si un mot clé ressemble à une ville connue)
+            const cities = [...new Set(formationsData.map(f => f.Ville.toLowerCase()))];
+            const hasCity = currentFilters.keywords.some(k => cities.includes(k));
+
+            if (!hasCity) {
+                addBotMessage("🔎 <strong>Dans quelle ville</strong> cherchez-vous ? (ex: Reims, Nancy, Strasbourg...)");
+            } else {
+                addBotMessage("🎓 Quel <strong>niveau</strong> ou domaine précis ? (ex: BTS, Ingénieur, Vigne, Bois...)");
+            }
+            
+            // On montre quand même les 3 premiers pour donner une idée
+            addBotMessage("Voici quelques exemples :");
             showFormations(results.slice(0, 3));
-        } else {
-            addBotMessage(`Voici les <strong>${results.length} formations</strong> trouvées pour votre recherche :`);
+        } 
+        else {
+            // RÉSULTATS OK (<= 10)
+            addBotMessage(`C'est précis ! Voici les <strong>${results.length} formations</strong> correspondantes :`);
             showFormations(results);
         }
     }
 
-    // 5. Affichage des messages et cartes
+    // 5. Affichage
     function addUserMessage(text) {
         const div = document.createElement('div');
         div.className = 'message user-message';
