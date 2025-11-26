@@ -1,107 +1,318 @@
-/* --- DESIGN DES BOUTONS DE CHOIX (Quick Replies) --- */
+:root {
+    --primary-color: #007AFF; /* Bleu Apple */
+    --primary-gradient: linear-gradient(135deg, #007AFF, #0056b3);
+    --bg-color: #f0f2f5;
+    --chat-bg: #ffffff;
+    --bot-msg-bg: #f2f2f7; /* Gris clair type iMessage */
+    --text-color: #1c1c1e;
+    --subtext-color: #8e8e93;
+    --border-radius: 18px;
+}
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.chat-container {
+    width: 100%;
+    max-width: 600px; /* Format mobile */
+    background-color: var(--chat-bg);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 40px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+/* --- HEADER --- */
+.chat-header {
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #e5e5ea;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    background: #e4f2ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.header-info h1 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.header-info .status {
+    font-size: 12px;
+    color: #34c759; /* Vert statut */
+    font-weight: 500;
+}
+
+/* --- BOUTON RESET --- */
+.reset-button {
+    background-color: transparent;
+    border: 1px solid #e5e5ea;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--primary-color);
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.reset-button:hover {
+    background-color: #f2f2f7;
+}
+
+/* --- ZONE DE MESSAGES --- */
+.chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: #fff;
+    scroll-behavior: smooth;
+}
+
+.message {
+    max-width: 85%;
+    padding: 12px 18px;
+    border-radius: var(--border-radius);
+    font-size: 15px;
+    line-height: 1.5;
+    position: relative;
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.9) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Bulle Robot */
+.bot-message {
+    align-self: flex-start;
+    background-color: var(--bot-msg-bg);
+    color: var(--text-color);
+    border-bottom-left-radius: 4px;
+    margin-right: auto;
+}
+
+/* Bulle Utilisateur */
+.user-message {
+    align-self: flex-end;
+    background: var(--primary-gradient);
+    color: white;
+    border-bottom-right-radius: 4px;
+    margin-left: auto;
+    box-shadow: 0 4px 10px rgba(0, 122, 255, 0.25);
+}
+
+/* --- BOUTONS DE CHOIX (Quick Replies) --- */
+/* C'est ici le design "2025" que tu aimais bien */
 .quick-replies {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 15px;
+    gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     animation: fadeIn 0.5s ease;
+    width: 100%;
 }
 
 .reply-btn {
     background: white;
-    border: 1px solid #e0e0e0;
-    color: #333;
+    border: 1px solid #d1d1d6;
+    color: var(--text-color);
     padding: 12px 20px;
-    border-radius: 12px; /* Arrondi plus moderne, moins "pilule" */
+    border-radius: 14px;
     cursor: pointer;
     font-size: 14px;
     font-weight: 500;
-    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    flex-grow: 1; /* Les boutons prennent de la place */
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    flex: 1 1 auto; /* S'adapte à la largeur */
     text-align: center;
-    max-width: 100%;
+    min-width: 120px; /* Évite qu'ils soient trop petits */
 }
 
 .reply-btn:hover {
     background: var(--primary-color);
     border-color: var(--primary-color);
     color: white;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 122, 255, 0.3); /* Ombre portée colorée */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
 }
 
 .reply-btn:active {
     transform: scale(0.98);
 }
 
-/* --- DESIGN DES CARTES FORMATION --- */
-
+/* --- CARTES RÉSULTATS --- */
 .formation-card {
     background: white;
-    border: none; /* On enlève la bordure grise moche */
+    border: 1px solid #f2f2f7;
     border-radius: 16px;
-    padding: 16px;
-    margin-top: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08); /* Ombre douce et large */
-    transition: transform 0.2s;
+    padding: 18px;
+    margin-top: 15px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
     position: relative;
     overflow: hidden;
+    width: 100%;
 }
 
 .formation-card::before {
-    /* Petite barre de couleur sur la gauche */
     content: '';
     position: absolute;
     left: 0;
     top: 0;
     bottom: 0;
-    width: 4px;
+    width: 5px;
     background: var(--primary-color);
 }
 
 .formation-title {
-    font-size: 1.1em;
-    color: #1a1a1a;
-    margin-bottom: 8px;
-    line-height: 1.3;
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 6px;
 }
 
 .formation-school {
-    color: #666;
-    font-size: 0.9em;
+    color: var(--subtext-color);
+    font-size: 14px;
     margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.formation-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
 }
 
 .tag {
-    background: #f3f4f6;
-    color: #4b5563;
+    background: #f2f2f7;
+    color: #666;
     border-radius: 6px;
-    padding: 4px 8px;
+    padding: 4px 10px;
     font-size: 12px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .tag.level {
-    background: #e0f2fe;
-    color: #0369a1; /* Bleu pour le niveau */
+    background: #eaf4ff;
+    color: var(--primary-color);
 }
 
 .formation-link {
-    background-color: var(--primary-color);
-    color: white !important; /* Force blanc */
-    border: none;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-weight: 500;
+    display: block;
     text-align: center;
-    display: block; /* Prend toute la largeur en bas */
-    margin-top: 15px;
-    transition: background 0.2s;
+    background-color: var(--primary-color);
+    color: white;
     text-decoration: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: opacity 0.2s;
 }
 
 .formation-link:hover {
-    background-color: #0056b3;
+    opacity: 0.9;
+}
+
+/* --- INPUT AREA (Même si désactivé, pour le look) --- */
+.chat-input-area {
+    padding: 15px 20px;
+    background: white;
+    border-top: 1px solid #e5e5ea;
+}
+
+.input-wrapper {
+    display: flex;
+    gap: 10px;
+    background: #f2f2f7;
+    padding: 5px;
+    padding-left: 15px;
+    border-radius: 25px;
+}
+
+#user-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 10px 0;
+    font-size: 15px;
+    outline: none;
+    color: var(--text-color);
+}
+
+#user-input:disabled {
+    background: transparent;
+    color: #999;
+}
+
+#send-btn {
+    background: var(--primary-color);
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+#send-btn svg {
+    margin-left: -2px; /* Petit ajustement optique */
+}
+
+/* Scrollbar propre */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #d1d1d6;
+    border-radius: 3px;
 }
