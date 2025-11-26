@@ -11,24 +11,27 @@
 </head>
 <body>
     <div class="chat-container">
-        <!-- En-tête du chat -->
         <header class="chat-header">
-            <div class="avatar">🌱</div> <!-- J'ai mis une plante pour le côté Bioéco, on peut changer -->
-            <div class="header-info">
-                <h1>CMQ Bioéco Grand Est</h1>
-                <span class="status">Assistant d'orientation • En ligne</span>
+            <div class="header-left">
+                <div class="avatar">🌱</div>
+                <div class="header-info">
+                    <h1>CMQ Bioéco Grand Est</h1>
+                    <span class="status">Assistant d'orientation • En ligne</span>
+                </div>
             </div>
+            <!-- BOUTON RESET AJOUTÉ ICI -->
+            <button id="reset-btn" class="reset-button" title="Nouvelle recherche">
+                🔄 Nouveau
+            </button>
         </header>
 
-        <!-- Zone des messages -->
         <main id="chat-messages" class="chat-messages">
-            <!-- Les messages seront ajoutés ici dynamiquement par JS -->
+            <!-- Messages dynamiques -->
         </main>
 
-        <!-- Zone de saisie -->
         <footer class="chat-input-area">
             <div class="input-wrapper">
-                <input type="text" id="user-input" placeholder="Ex: BTS Nancy, Agriculture Reims..." autocomplete="off">
+                <input type="text" id="user-input" placeholder="Ex: BTS, Nancy, Agriculture..." autocomplete="off">
                 <button id="send-btn" aria-label="Envoyer">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
