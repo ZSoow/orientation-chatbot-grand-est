@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formationsData = parseCSV(csvText);
             startOrientation();
         })
-        .catch(err => console.error("Erreur CSV:", err));
+        .catch(err => console.error("Erreur CSV :", err));
 
     function parseCSV(text) {
         const lines = text.trim().split('\n');
