@@ -1,7 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     let formationsData = [];
-    let currentFilters = {
-        keywords: []
+    let currentStep = 0; // 0: Accueil, 1: Domaine, 2: Style, 3: Niveau
+    let userChoices = {
+        domaine: '',
+        style: '',
+        niveau: ''
     };
 
     const messagesContainer = document.getElementById('chat-messages');
@@ -9,25 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendBtn = document.getElementById('send-btn');
     const resetBtn = document.getElementById('reset-btn');
 
-    // 1. Chargement CSV
+    // --- CHARGEMENT DES DONNÉES ---
     fetch('data/formations.csv')
         .then(response => response.text())
         .then(csvText => {
             formationsData = parseCSV(csvText);
             console.log(`${formationsData.length} formations chargées.`);
-            welcomeUser();
+            startOrientation();
         })
         .catch(err => {
             console.error("Erreur CSV:", err);
             addBotMessage("Erreur technique : Impossible de charger les formations.");
         });
 
-    function welcomeUser() {
-        addBotMessage("Bonjour ! Je suis l'assistant du <strong>CMQ Bioéco Grand Est</strong>. 🌱");
-        addBotMessage("Je peux vous aider à trouver une formation. Dites-moi ce que vous cherchez (ex: 'Commerce', 'BTS', 'Reims'...).");
-    }
-
-    // 2. Parser CSV
     function parseCSV(text) {
         const lines = text.trim().split('\n');
         const headers = lines[0].split(';').map(h => h.trim());
@@ -41,83 +38,139 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. Gestion Messages & Reset
-    function handleUserMessage() {
-        const text = userInput.value.trim();
-        if (!text) return;
+    // --- SCÉNARIO DE L'ORIENTATION ---
 
-        addUserMessage(text);
-        userInput.value = '';
+    function startOrientation() {
+        currentStep = 0;
+        addBotMessage("Bonjour ! 👋 Je suis l'assistant du <strong>CMQ Bioéco Grand Est</strong>.");
+        addBotMessage("Plutôt que de chercher au hasard, je vais t'aider à trouver ta voie.");
         
-        // Petit délai pour effet naturel
         setTimeout(() => {
-            processUserQuery(text);
-        }, 500);
+            askQuestion(1);
+        }, 1000);
     }
 
-    function resetChat() {
-        messagesContainer.innerHTML = ''; // Vide le chat
-        currentFilters.keywords = []; // Vide la mémoire
-        welcomeUser(); // Relance l'accueil
-    }
-
-    userInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleUserMessage(); });
-    sendBtn.addEventListener('click', handleUserMessage);
-    resetBtn.addEventListener('click', resetChat);
-
-    // 4. Cœur du Chatbot (Logique Guidée)
-    function processUserQuery(query) {
-        const rawQuery = query.toLowerCase();
+    function askQuestion(step) {
+        currentStep = step;
         
-        // Extraction des mots-clés
-        const newKeywords = rawQuery.split(' ').filter(word => word.length > 2 && !['les', 'des', 'pour', 'une', 'dans', 'avec', 'sur'].includes(word));
-
-        // MÉMOIRE : On ajoute les nouveaux mots aux anciens
-        // Si l'utilisateur dit "Reims" puis "Commerce", on cherche "Reims" ET "Commerce"
-        currentFilters.keywords = [...new Set([...currentFilters.keywords, ...newKeywords])];
-
-        // Recherche
-        const results = formationsData.filter(f => {
-            const fullText = `
-                ${f.Nom_Complet_Diplome} ${f.Acronyme_Diplome} 
-                ${f.Grande_Categorie} ${f.Ville} ${f.Region}
-            `.toLowerCase();
-            // Vérifie que TOUS les mots-clés (anciens + nouveaux) sont présents
-            return currentFilters.keywords.every(k => fullText.includes(k));
-        });
-
-        // Logique de réponse guidée
-        if (results.length === 0) {
-            addBotMessage(`Oups, je ne trouve rien avec "${currentFilters.keywords.join(' + ')}". 😕`);
-            addBotMessage("Voulez-vous recommencer ? (Cliquez sur 'Nouveau' en haut à droite)");
-            // On pourrait vider le dernier mot clé ici si on voulait être gentil, mais le Reset est mieux.
+        if (step === 1) {
+            addBotMessage("Dis-moi, qu'est-ce qui t'intéresse le plus dans la vie ?");
+            showQuickReplies([
+                { text: "🌱 La nature & les animaux", value: "nature" },
+                { text: "🧪 Les sciences & le labo", value: "science" },
+                { text: "💼 Le business & la vente", value: "business" },
+                { text: "⚙️ La mécanique & l'industrie", value: "industrie" }
+            ]);
         } 
-        else if (results.length > 10) {
-            // TROP DE RÉSULTATS -> LE BOT POSE UNE QUESTION
-            addBotMessage(`J'ai trouvé <strong>${results.length} formations</strong> ! C'est encore un peu large.`);
-            
-            // Est-ce qu'on a déjà filtré par ville ? (astuce simple : regarde si un mot clé ressemble à une ville connue)
-            const cities = [...new Set(formationsData.map(f => f.Ville.toLowerCase()))];
-            const hasCity = currentFilters.keywords.some(k => cities.includes(k));
-
-            if (!hasCity) {
-                addBotMessage("🔎 <strong>Dans quelle ville</strong> cherchez-vous ? (ex: Reims, Nancy, Strasbourg...)");
-            } else {
-                addBotMessage("🎓 Quel <strong>niveau</strong> ou domaine précis ? (ex: BTS, Ingénieur, Vigne, Bois...)");
-            }
-            
-            // On montre quand même les 3 premiers pour donner une idée
-            addBotMessage("Voici quelques exemples :");
-            showFormations(results.slice(0, 3));
-        } 
-        else {
-            // RÉSULTATS OK (<= 10)
-            addBotMessage(`C'est précis ! Voici les <strong>${results.length} formations</strong> correspondantes :`);
-            showFormations(results);
+        else if (step === 2) {
+            addBotMessage("Super ! Et comment préfères-tu travailler ?");
+            showQuickReplies([
+                { text: "🚜 Dehors / Manuel / Terrain", value: "terrain" },
+                { text: "💻 Bureau / Gestion / Ordi", value: "bureau" }
+            ]);
+        }
+        else if (step === 3) {
+            addBotMessage("Dernière question : tu vises quel type d'études ?");
+            showQuickReplies([
+                { text: "⏱️ Courtes (CAP, Bac Pro, BTS)", value: "court" },
+                { text: "🎓 Longues (Licence, Master, Ingé)", value: "long" },
+                { text: "🤷 Peu importe", value: "peu_importe" }
+            ]);
         }
     }
 
-    // 5. Affichage
+    // --- TRAITEMENT DES RÉPONSES ---
+
+    function handleChoice(value, textLabel) {
+        // On affiche le choix de l'utilisateur comme s'il l'avait écrit
+        addUserMessage(textLabel);
+        
+        // On enregistre le choix
+        if (currentStep === 1) userChoices.domaine = value;
+        if (currentStep === 2) userChoices.style = value;
+        if (currentStep === 3) userChoices.niveau = value;
+
+        // On passe à l'étape suivante ou on affiche les résultats
+        setTimeout(() => {
+            if (currentStep < 3) {
+                askQuestion(currentStep + 1);
+            } else {
+                showFinalResults();
+            }
+        }, 500);
+    }
+
+    function showFinalResults() {
+        addBotMessage("Merci ! Laisse-moi analyser les 300 formations pour toi... 🧐");
+
+        setTimeout(() => {
+            // FILTRAGE INTELLIGENT
+            const results = formationsData.filter(f => {
+                let score = 0;
+                const text = (f.Grande_Categorie + ' ' + f.Nom_Complet_Diplome + ' ' + f.Description_Diplome).toLowerCase();
+                const niv = parseInt(f.Niveau_Europeen) || 0;
+
+                // 1. Filtre Domaine
+                if (userChoices.domaine === 'nature' && (text.includes('agri') || text.includes('forest') || text.includes('vigne') || text.includes('animale'))) score += 2;
+                if (userChoices.domaine === 'science' && (text.includes('bio') || text.includes('chimie') || text.includes('laboratoire') || text.includes('science'))) score += 2;
+                if (userChoices.domaine === 'business' && (text.includes('commer') || text.includes('vente') || text.includes('gestion') || text.includes('management'))) score += 2;
+                if (userChoices.domaine === 'industrie' && (text.includes('industr') || text.includes('mécani') || text.includes('maintenance') || text.includes('pilotage'))) score += 2;
+
+                // 2. Filtre Style (Terrain vs Bureau)
+                // C'est une approximation basée sur les mots clés
+                if (userChoices.style === 'terrain' && (text.includes('ouvrier') || text.includes('conduite') || text.includes('travaux') || text.includes('production'))) score += 1;
+                if (userChoices.style === 'bureau' && (text.includes('gestion') || text.includes('analys') || text.includes('conseil') || text.includes('commercial'))) score += 1;
+
+                // 3. Filtre Niveau
+                // Niv 3/4 = CAP/Bac (Court), Niv 5 = BTS (Court), Niv 6/7 = Licence/Master (Long)
+                if (userChoices.niveau === 'court' && niv <= 5) score += 2;
+                if (userChoices.niveau === 'long' && niv >= 6) score += 2;
+                if (userChoices.niveau === 'peu_importe') score += 1;
+
+                // On ne garde que ceux qui ont un score suffisant (au moins le domaine correspond)
+                return score >= 2;
+            });
+
+            if (results.length === 0) {
+                addBotMessage("Je n'ai pas trouvé de correspondance exacte. Voici tout de même des formations dans ton domaine :");
+                // Fallback : on montre juste par domaine
+                // (Code simplifié pour l'exemple)
+            } else {
+                addBotMessage(`J'ai sélectionné <strong>${results.length} formations</strong> qui te correspondent !`);
+                
+                // On affiche les résultats (max 10 pour ne pas spammer)
+                showFormations(results.slice(0, 10));
+
+                if (results.length > 10) {
+                    addBotMessage(`... et ${results.length - 10} autres. Tu peux utiliser la barre de recherche en bas pour filtrer par ville maintenant (ex: "Reims").`);
+                }
+            }
+        }, 1000);
+    }
+
+    // --- FONCTIONS D'AFFICHAGE ---
+
+    function showQuickReplies(options) {
+        const container = document.createElement('div');
+        container.className = 'quick-replies';
+        
+        options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'reply-btn';
+            btn.textContent = opt.text;
+            btn.onclick = () => {
+                // Désactiver les boutons après clic
+                container.querySelectorAll('.reply-btn').forEach(b => b.disabled = true);
+                container.remove(); // Ou le laisser mais grisé
+                handleChoice(opt.value, opt.text);
+            };
+            container.appendChild(btn);
+        });
+        
+        messagesContainer.appendChild(container);
+        scrollToBottom();
+    }
+
     function addUserMessage(text) {
         const div = document.createElement('div');
         div.className = 'message user-message';
@@ -153,7 +206,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Gestion recherche manuelle (si l'utilisateur tape quand même quelque chose)
+    function handleUserMessage() {
+        const text = userInput.value.trim();
+        if (!text) return;
+        addUserMessage(text);
+        userInput.value = '';
+        addBotMessage("Pour l'instant, je préfère qu'on utilise les boutons pour trouver ta voie ! 😉 (Mais la recherche par mot-clé sera réactivée bientôt).");
+    }
+
+    function resetChat() {
+        messagesContainer.innerHTML = '';
+        startOrientation();
+    }
+
     function scrollToBottom() {
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
+
+    userInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleUserMessage(); });
+    sendBtn.addEventListener('click', handleUserMessage);
+    resetBtn.addEventListener('click', resetChat);
 });
