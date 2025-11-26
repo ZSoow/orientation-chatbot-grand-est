@@ -316,35 +316,32 @@ body {
     background: #d1d1d6;
     border-radius: 3px;
 }
-/* --- LOGO PARFAITEMENT AJUSTÉ --- */
+/* --- LOGO LIBRE (SANS ROND) --- */
 
 .header-left {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 15px; /* Un peu plus d'espace entre le logo et le texte */
 }
 
 .avatar {
-    /* Le rond extérieur */
-    width: 45px;           /* Un tout petit peu plus grand */
-    height: 45px;
-    min-width: 45px;       /* Empêche l'écrasement sur mobile */
-    background-color: white;
-    border-radius: 50%;    /* La forme ronde */
-    border: 1px solid #eee; /* Petite bordure grise propre */
+    /* On enlève le cercle et les bords */
+    height: 50px;          /* Une bonne hauteur pour le header */
+    width: auto;           /* La largeur s'adapte au logo */
+    min-width: 50px;       /* Pour être sûr qu'il ne disparaisse pas */
+    background: transparent; /* Pas de fond blanc forcé */
+    border-radius: 0;      /* Pas d'arrondi */
+    border: none;          /* Pas de bordure */
+    box-shadow: none;      /* Pas d'ombre */
+    padding: 0;
     
-    /* La magie pour centrer */
     display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;      /* Coupe ce qui dépasse du rond */
+    align-items: center;   /* Centre verticalement */
 }
 
 .avatar img {
-    /* L'image à l'intérieur */
-    width: auto;           /* Largeur auto */
-    height: auto;          /* Hauteur auto */
-    max-width: 90%;        /* Ne touche pas les bords (marge de sécurité) */
-    max-height: 90%;       /* Ne touche pas les bords */
-    object-fit: contain;   /* S'assure qu'on voit TOUT le logo */
+    height: 100%;          /* L'image prend toute la hauteur de 50px */
+    width: auto;           /* La largeur s'ajuste automatiquement pour ne pas déformer */
+    object-fit: contain;   /* Assure qu'on voit tout le logo */
+    display: block;
 }
