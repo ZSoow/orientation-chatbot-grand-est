@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(err => {
             console.error("Erreur CSV:", err);
-            addBotMessage("Erreur technique : Impossible de charger les formations.");
+            addBotMessage("Erreur technique : Impossible de charger les formations");
         });
 
     function parseCSV(text) {
