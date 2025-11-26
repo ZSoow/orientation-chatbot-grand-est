@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     let formationsData = [];
-    let currentStep = 0; // 0: Accueil, 1: Domaine, 2: Style, 3: Niveau
+    let currentStep = 0;
     let userChoices = {
         domaine: '',
         style: '',
-        niveau: ''
+        niveau: '',
+        region: '' // Nouveau critère
     };
 
     const messagesContainer = document.getElementById('chat-messages');
@@ -12,18 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendBtn = document.getElementById('send-btn');
     const resetBtn = document.getElementById('reset-btn');
 
-    // --- CHARGEMENT DES DONNÉES ---
+    // --- CHARGEMENT ---
     fetch('data/formations.csv')
         .then(response => response.text())
         .then(csvText => {
             formationsData = parseCSV(csvText);
-            console.log(`${formationsData.length} formations chargées.`);
             startOrientation();
         })
-        .catch(err => {
-            console.error("Erreur CSV:", err);
-            addBotMessage("Erreur technique : Impossible de charger les formations.");
-        });
+        .catch(err => console.error("Erreur CSV:", err));
 
     function parseCSV(text) {
         const lines = text.trim().split('\n');
@@ -38,117 +35,120 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- SCÉNARIO DE L'ORIENTATION ---
+    // --- SCÉNARIO ---
 
     function startOrientation() {
         currentStep = 0;
+        userChoices = { domaine: '', style: '', niveau: '', region: '' }; // Reset total
         addBotMessage("Bonjour ! 👋 Je suis l'assistant du <strong>CMQ Bioéco Grand Est</strong>.");
-        addBotMessage("Plutôt que de chercher au hasard, je vais t'aider à trouver ta voie.");
+        addBotMessage("Je vais t'aider à trouver ta formation idéale en quelques clics.");
         
-        setTimeout(() => {
-            askQuestion(1);
-        }, 1000);
+        setTimeout(() => askQuestion(1), 800);
     }
 
     function askQuestion(step) {
         currentStep = step;
         
         if (step === 1) {
-            addBotMessage("Dis-moi, qu'est-ce qui t'intéresse le plus dans la vie ?");
+            addBotMessage("D'abord, quel univers t'attire le plus ?");
             showQuickReplies([
-                { text: "🌱 La nature & les animaux", value: "nature" },
-                { text: "🧪 Les sciences & le labo", value: "science" },
-                { text: "💼 Le business & la vente", value: "business" },
-                { text: "⚙️ La mécanique & l'industrie", value: "industrie" }
+                { text: "🌱 Nature & Agriculture", value: "nature" },
+                { text: "🍇 Vigne & Vin", value: "vigne" }, // Séparé pour le CMQ Bioéco
+                { text: "🧪 Sciences & Labo", value: "science" },
+                { text: "💼 Commerce & Gestion", value: "business" },
+                { text: "⚙️ Industrie & Maintenance", value: "industrie" },
+                { text: "🪵 Bois & Forêt", value: "bois" } // Séparé aussi
             ]);
         } 
         else if (step === 2) {
-            addBotMessage("Super ! Et comment préfères-tu travailler ?");
+            addBotMessage("C'est noté. Dans quelle zone du Grand Est cherches-tu ?");
             showQuickReplies([
-                { text: "🚜 Dehors / Manuel / Terrain", value: "terrain" },
-                { text: "💻 Bureau / Gestion / Ordi", value: "bureau" }
+                { text: "🍾 Champagne-Ardenne (Reims/Troyes...)", value: "champagne" },
+                { text: "🥨 Alsace (Strasbourg/Mulhouse...)", value: "alsace" },
+                { text: "🏭 Lorraine (Nancy/Metz...)", value: "lorraine" },
+                { text: "🌍 Peu importe / Je suis mobile", value: "tout" }
             ]);
         }
         else if (step === 3) {
-            addBotMessage("Dernière question : tu vises quel type d'études ?");
+            addBotMessage("Quel niveau d'études vises-tu ?");
             showQuickReplies([
-                { text: "⏱️ Courtes (CAP, Bac Pro, BTS)", value: "court" },
-                { text: "🎓 Longues (Licence, Master, Ingé)", value: "long" },
-                { text: "🤷 Peu importe", value: "peu_importe" }
+                { text: "⏱️ Courtes (CAP à BTS)", value: "court" },
+                { text: "🎓 Longues (Licence à Ingénieur)", value: "long" },
+                { text: "🚀 Tout voir", value: "tout" }
             ]);
         }
     }
 
-    // --- TRAITEMENT DES RÉPONSES ---
+    // --- MOTEUR DE RECHERCHE ---
 
     function handleChoice(value, textLabel) {
-        // On affiche le choix de l'utilisateur comme s'il l'avait écrit
         addUserMessage(textLabel);
         
-        // On enregistre le choix
         if (currentStep === 1) userChoices.domaine = value;
-        if (currentStep === 2) userChoices.style = value;
-        if (currentStep === 3) userChoices.niveau = value;
-
-        // On passe à l'étape suivante ou on affiche les résultats
-        setTimeout(() => {
-            if (currentStep < 3) {
-                askQuestion(currentStep + 1);
-            } else {
-                showFinalResults();
-            }
-        }, 500);
+        if (currentStep === 2) userChoices.region = value;
+        if (currentStep === 3) {
+            userChoices.niveau = value;
+            showFinalResults();
+        } else {
+            setTimeout(() => askQuestion(currentStep + 1), 600);
+        }
     }
 
     function showFinalResults() {
-        addBotMessage("Merci ! Laisse-moi analyser les 300 formations pour toi... 🧐");
+        addBotMessage("🔍 Analyse en cours...");
 
         setTimeout(() => {
-            // FILTRAGE INTELLIGENT
             const results = formationsData.filter(f => {
-                let score = 0;
                 const text = (f.Grande_Categorie + ' ' + f.Nom_Complet_Diplome + ' ' + f.Description_Diplome).toLowerCase();
+                const region = f.Region ? f.Region.toLowerCase() : '';
+                const ville = f.Ville ? f.Ville.toLowerCase() : '';
                 const niv = parseInt(f.Niveau_Europeen) || 0;
 
-                // 1. Filtre Domaine
-                if (userChoices.domaine === 'nature' && (text.includes('agri') || text.includes('forest') || text.includes('vigne') || text.includes('animale'))) score += 2;
-                if (userChoices.domaine === 'science' && (text.includes('bio') || text.includes('chimie') || text.includes('laboratoire') || text.includes('science'))) score += 2;
-                if (userChoices.domaine === 'business' && (text.includes('commer') || text.includes('vente') || text.includes('gestion') || text.includes('management'))) score += 2;
-                if (userChoices.domaine === 'industrie' && (text.includes('industr') || text.includes('mécani') || text.includes('maintenance') || text.includes('pilotage'))) score += 2;
+                let match = true;
 
-                // 2. Filtre Style (Terrain vs Bureau)
-                // C'est une approximation basée sur les mots clés
-                if (userChoices.style === 'terrain' && (text.includes('ouvrier') || text.includes('conduite') || text.includes('travaux') || text.includes('production'))) score += 1;
-                if (userChoices.style === 'bureau' && (text.includes('gestion') || text.includes('analys') || text.includes('conseil') || text.includes('commercial'))) score += 1;
+                // 1. Filtre DOMAINE (Strict)
+                if (userChoices.domaine === 'nature' && !(text.includes('agri') || text.includes('elevage') || text.includes('animale'))) match = false;
+                if (userChoices.domaine === 'vigne' && !(text.includes('vigne') || text.includes('vin') || text.includes('vitico'))) match = false;
+                if (userChoices.domaine === 'bois' && !(text.includes('bois') || text.includes('foret') || text.includes('bûcheron'))) match = false;
+                if (userChoices.domaine === 'science' && !(text.includes('bio') || text.includes('chimie') || text.includes('labo'))) match = false;
+                if (userChoices.domaine === 'business' && !(text.includes('commer') || text.includes('vente') || text.includes('manage'))) match = false;
+                if (userChoices.domaine === 'industrie' && !(text.includes('industr') || text.includes('mécani') || text.includes('mainten'))) match = false;
 
-                // 3. Filtre Niveau
-                // Niv 3/4 = CAP/Bac (Court), Niv 5 = BTS (Court), Niv 6/7 = Licence/Master (Long)
-                if (userChoices.niveau === 'court' && niv <= 5) score += 2;
-                if (userChoices.niveau === 'long' && niv >= 6) score += 2;
-                if (userChoices.niveau === 'peu_importe') score += 1;
+                // 2. Filtre RÉGION
+                if (userChoices.region !== 'tout') {
+                    if (userChoices.region === 'champagne' && !region.includes('champagne') && !ville.includes('reims') && !ville.includes('troyes')) match = false;
+                    if (userChoices.region === 'alsace' && !region.includes('alsace') && !ville.includes('strasbourg')) match = false;
+                    if (userChoices.region === 'lorraine' && !region.includes('lorraine') && !ville.includes('nancy') && !ville.includes('metz')) match = false;
+                }
 
-                // On ne garde que ceux qui ont un score suffisant (au moins le domaine correspond)
-                return score >= 2;
+                // 3. Filtre NIVEAU
+                if (userChoices.niveau === 'court' && niv > 5) match = false; // Max BTS (Niv 5)
+                if (userChoices.niveau === 'long' && niv < 6) match = false;  // Min Licence (Niv 6)
+
+                return match;
             });
 
             if (results.length === 0) {
-                addBotMessage("Je n'ai pas trouvé de correspondance exacte. Voici tout de même des formations dans ton domaine :");
-                // Fallback : on montre juste par domaine
-                // (Code simplifié pour l'exemple)
+                addBotMessage("😕 Aïe, aucune formation ne correspond exactement à ces 3 critères combinés.");
+                addBotMessage("Essaie de relancer en mettant 'Peu importe' pour la région ou le niveau.");
+                showQuickReplies([{ text: "🔄 Recommencer", value: "reset" }]);
             } else {
-                addBotMessage(`J'ai sélectionné <strong>${results.length} formations</strong> qui te correspondent !`);
+                const count = results.length;
+                addBotMessage(`Bingo ! J'ai trouvé <strong>${count} formation(s)</strong> parfaite(s) pour toi :`);
                 
-                // On affiche les résultats (max 10 pour ne pas spammer)
-                showFormations(results.slice(0, 10));
+                // Tri par niveau d'étude croissant
+                results.sort((a, b) => a.Niveau_Europeen - b.Niveau_Europeen);
 
-                if (results.length > 10) {
-                    addBotMessage(`... et ${results.length - 10} autres. Tu peux utiliser la barre de recherche en bas pour filtrer par ville maintenant (ex: "Reims").`);
+                showFormations(results);
+                
+                if (count > 1) {
+                    addBotMessage("Tu peux cliquer sur 'Nouveau' en haut pour une autre recherche.");
                 }
             }
         }, 1000);
     }
 
-    // --- FONCTIONS D'AFFICHAGE ---
+    // --- AFFICHAGE ---
 
     function showQuickReplies(options) {
         const container = document.createElement('div');
@@ -157,12 +157,14 @@ document.addEventListener('DOMContentLoaded', () => {
         options.forEach(opt => {
             const btn = document.createElement('button');
             btn.className = 'reply-btn';
-            btn.textContent = opt.text;
+            btn.innerHTML = opt.text; // innerHTML permet le gras ou span si besoin
             btn.onclick = () => {
-                // Désactiver les boutons après clic
-                container.querySelectorAll('.reply-btn').forEach(b => b.disabled = true);
-                container.remove(); // Ou le laisser mais grisé
-                handleChoice(opt.value, opt.text);
+                if (opt.value === 'reset') {
+                    resetChat();
+                } else {
+                    container.remove(); 
+                    handleChoice(opt.value, opt.text);
+                }
             };
             container.appendChild(btn);
         });
@@ -196,23 +198,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="formation-details">
                         <span class="tag">📍 ${f.Ville}</span>
                         <span class="tag">${f.Acronyme_Diplome}</span>
-                        <span class="tag">Niv ${f.Niveau_Europeen}</span>
+                        <span class="tag level">Niv ${f.Niveau_Europeen}</span>
                     </div>
                     ${f.URL_Page_Formation ? `<a href="${f.URL_Page_Formation}" target="_blank" class="formation-link">Voir la fiche</a>` : ''}
-                    ${f.URL_Site_Etablissement ? `<a href="${f.URL_Site_Etablissement}" target="_blank" class="formation-link">Site école</a>` : ''}
                 </div>
             `;
             addBotMessage(cardHtml);
         });
-    }
-
-    // Gestion recherche manuelle (si l'utilisateur tape quand même quelque chose)
-    function handleUserMessage() {
-        const text = userInput.value.trim();
-        if (!text) return;
-        addUserMessage(text);
-        userInput.value = '';
-        addBotMessage("Pour l'instant, je préfère qu'on utilise les boutons pour trouver ta voie ! 😉 (Mais la recherche par mot-clé sera réactivée bientôt).");
     }
 
     function resetChat() {
@@ -224,7 +216,8 @@ document.addEventListener('DOMContentLoaded', () => {
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
 
-    userInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleUserMessage(); });
-    sendBtn.addEventListener('click', handleUserMessage);
     resetBtn.addEventListener('click', resetChat);
+    // Désactivation temporaire de l'input texte pour forcer l'usage des boutons
+    userInput.disabled = true;
+    userInput.placeholder = "Utilisez les boutons de choix 👆";
 });
