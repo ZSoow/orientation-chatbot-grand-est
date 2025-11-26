@@ -2,40 +2,43 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ton Bio Conseillé d'orientation</title>
-    
-    <!-- Ajouts pour la carte Leaflet -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Orientation Grand Est - Chatbot</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="main-container">
-        <div class="chat-container">
-            <div class="chat-header">
-                <img src="assets/logo.png" alt="Logo CMQ Bioéconomie" class="header-logo">
-                <h1>Ton Bio Conseillé d'orientation</h1>
-                <p>Ta voie verte pour les métiers de demain dans le Grand Est !</p>
+    <div class="chat-container">
+        <!-- En-tête du chat -->
+        <header class="chat-header">
+            <div class="avatar">🤖</div>
+            <div class="header-info">
+                <h1>Conseiller Orientation</h1>
+                <span class="status">En ligne • Grand Est</span>
             </div>
-            <div class="chat-box" id="chat-box">
-                <!-- Les messages du chat apparaîtront ici -->
-            </div>
-            <div class="user-input" id="user-input">
-                <!-- Les boutons de réponse apparaîtront ici -->
-            </div>
-        </div>
+        </header>
 
-        <!-- Conteneur pour la carte -->
-        <div id="map-container" class="map-container">
-            <div id="map"></div>
-        </div>
+        <!-- Zone des messages -->
+        <main id="chat-messages" class="chat-messages">
+            <!-- Les messages seront ajoutés ici dynamiquement par JS -->
+        </main>
+
+        <!-- Zone de saisie -->
+        <footer class="chat-input-area">
+            <div class="input-wrapper">
+                <input type="text" id="user-input" placeholder="Posez une question ou cherchez une formation..." autocomplete="off">
+                <button id="send-btn" aria-label="Envoyer">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </footer>
     </div>
 
-    <script src="app.js?v=3"></script> <!-- J'incrémente la version pour vider le cache -->
+    <script src="app.js"></script>
 </body>
 </html>
