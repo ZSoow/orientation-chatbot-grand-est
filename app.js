@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         userChoices = { domaine: '', style: '', niveau: '', region: '' };
         messagesContainer.innerHTML = ''; // Nettoyer au démarrage
         
-        addBotMessage("Bonjour ! 👋 Je suis l'assistant du <strong>CMQ Bioéco Grand Est</strong>.");
+        addBotMessage("Bonjour ! 👋 Je suis l'assistant du <strong>CMQ Bioeco Academy Grand Est</strong>.");
         addBotMessage("Je vais t'aider à trouver ta formation parmi notre nouvelle base de données.");
         
         setTimeout(() => askQuestion(1), 800);
