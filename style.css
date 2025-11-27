@@ -1,7 +1,7 @@
 :root {
     --primary-color: #007AFF;
     --primary-gradient: linear-gradient(135deg, #007AFF, #0056b3);
-    --secondary-btn-bg: #e9e9eb; /* Pour le 2ème bouton */
+    --secondary-btn-bg: #e9e9eb;
     --secondary-btn-text: #007AFF;
     --bg-color: #f0f2f5;
     --chat-bg: #ffffff;
@@ -251,7 +251,7 @@ body {
 /* Nouveau : Date JPO */
 .formation-date {
     font-size: 12px;
-    color: #FF3B30; /* Rouge alert */
+    color: #FF3B30; /* Rouge alerte */
     background: #fff0f0;
     padding: 6px 10px;
     border-radius: 8px;
@@ -331,5 +331,6 @@ body {
     justify-content: center;
 }
 
+/* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-thumb { background: #d1d1d6; border-radius: 3px; }
