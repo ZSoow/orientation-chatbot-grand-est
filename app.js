@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentStep = 0;
     let userChoices = {
         domaine: '',
-        style: '', // Laissé pour compatibilité future
         niveau: '',
         region: ''
     };
@@ -30,8 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const headers = lines[0].split(';').map(h => h.trim());
         
         return lines.slice(1).map(line => {
-            // Utilisation d'une Regex pour gérer les point-virgules à l'intérieur des champs si jamais il y en a (optionnel mais plus robuste)
-            // Ici on garde le split simple car ton CSV a l'air propre
             const values = line.split(';');
             let obj = {};
             headers.forEach((header, index) => {
@@ -45,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function startOrientation() {
         currentStep = 0;
-        userChoices = { domaine: '', style: '', niveau: '', region: '' };
+        userChoices = { domaine: '', niveau: '', region: '' };
         messagesContainer.innerHTML = ''; // Nettoyer au démarrage
         
         addBotMessage("Bonjour ! 👋 Je suis l'assistant du <strong>CMQ Bioeco Academy Grand Est</strong>.");
@@ -59,14 +56,14 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (step === 1) {
             addBotMessage("Quel domaine t'intéresse ?");
-            // J'ai mis à jour les choix pour correspondre aux catégories de ton fichier CSV
             showQuickReplies([
                 { text: "⚙️ Mécanique & Maintenance", value: "meca" },
                 { text: "🚛 Logistique & Transport", value: "logistique" },
                 { text: "🌱 Nature & Agronomie", value: "nature" },
                 { text: "🧪 Sciences & Laboratoire", value: "science" },
                 { text: "💼 Commerce & Gestion", value: "business" },
-                { text: "🪵 Bois & Forêt", value: "bois" }
+                { text: "🪵 Bois & Forêt", value: "bois" },
+                { text: "💻 Informatique & Numérique", value: "info" } // J'ai rajouté Info car présent dans ton CSV
             ]);
         } 
         else if (step === 2) {
@@ -80,10 +77,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         else if (step === 3) {
             addBotMessage("Quel niveau d'études vises-tu ?");
+            // C'est ici que la segmentation change :
             showQuickReplies([
-                { text: "⏱️ 3e / CAP / Bac", value: "court" },
-                { text: "🎓 BTS / Licence / Master", value: "long" },
-                { text: "🚀 Peu importe", value: "tout" }
+                { text: "🎓 Avant le Bac (CAP, Bac Pro)", value: "avant_bac" },
+                { text: "🚀 Bac +2 / +3 (BTS, Licence)", value: "bac_2_3" },
+                { text: "🧠 Master / Ingénieur (Bac +5)", value: "master" },
+                { text: "🔬 Doctorat / Recherche", value: "doctorat" }
             ]);
         }
     }
@@ -117,41 +116,59 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 const region = f.Region ? f.Region.toLowerCase() : '';
                 const ville = f.Ville ? f.Ville.toLowerCase() : '';
-                const niveau = parseInt(f.Niveau_Europeen) || 0; // Convertir "3" en entier 3
+                
+                // Conversion du niveau en entier pour comparaison numérique
+                const niveau = parseInt(f.Niveau_Europeen) || 0;
 
                 let match = true;
 
-                // 1. Filtre DOMAINE (Adapté à tes nouvelles catégories CSV)
-                if (userChoices.domaine === 'meca' && !fullText.includes('mécani') && !fullText.includes('mainten') && !fullText.includes('industri') && !fullText.includes('usinage')) match = false;
+                // 1. Filtre DOMAINE
+                if (userChoices.domaine === 'meca' && !fullText.includes('mécani') && !fullText.includes('mainten') && !fullText.includes('industri') && !fullText.includes('usinage') && !fullText.includes('robotique')) match = false;
                 
                 if (userChoices.domaine === 'logistique' && !fullText.includes('logist') && !fullText.includes('transport') && !fullText.includes('achat') && !fullText.includes('supply')) match = false;
                 
-                if (userChoices.domaine === 'nature' && !fullText.includes('agri') && !fullText.includes('agro') && !fullText.includes('nature') && !fullText.includes('paysage')) match = false;
+                if (userChoices.domaine === 'nature' && !fullText.includes('agri') && !fullText.includes('agro') && !fullText.includes('nature') && !fullText.includes('paysage') && !fullText.includes('enviro')) match = false;
                 
                 if (userChoices.domaine === 'science' && !fullText.includes('scien') && !fullText.includes('labo') && !fullText.includes('bio') && !fullText.includes('chimie') && !fullText.includes('physique')) match = false;
                 
-                if (userChoices.domaine === 'business' && !fullText.includes('commer') && !fullText.includes('vent') && !fullText.includes('manage') && !fullText.includes('négocia')) match = false;
+                if (userChoices.domaine === 'business' && !fullText.includes('commer') && !fullText.includes('vent') && !fullText.includes('manage') && !fullText.includes('négocia') && !fullText.includes('eco')) match = false;
                 
                 if (userChoices.domaine === 'bois' && !fullText.includes('bois') && !fullText.includes('forêt') && !fullText.includes('menuisier')) match = false;
 
+                if (userChoices.domaine === 'info' && !fullText.includes('infor') && !fullText.includes('numér') && !fullText.includes('réseau') && !fullText.includes('data')) match = false;
+
+
                 // 2. Filtre RÉGION
                 if (userChoices.region !== 'tout') {
-                    // On vérifie si la région ou une ville majeure est présente
                     let regionMatch = false;
-                    if (userChoices.region === 'champagne' && (region.includes('champagne') || ville.includes('reims') || ville.includes('troyes'))) regionMatch = true;
-                    if (userChoices.region === 'alsace' && (region.includes('alsace') || ville.includes('strasbourg') || ville.includes('mulhouse'))) regionMatch = true;
-                    if (userChoices.region === 'lorraine' && (region.includes('lorraine') || ville.includes('nancy') || ville.includes('metz'))) regionMatch = true;
+                    if (userChoices.region === 'champagne' && (region.includes('champagne') || ville.includes('reims') || ville.includes('troyes') || ville.includes('charleville') || ville.includes('chaumont'))) regionMatch = true;
+                    if (userChoices.region === 'alsace' && (region.includes('alsace') || ville.includes('strasbourg') || ville.includes('mulhouse') || ville.includes('colmar'))) regionMatch = true;
+                    if (userChoices.region === 'lorraine' && (region.includes('lorraine') || ville.includes('nancy') || ville.includes('metz') || ville.includes('epinal') || ville.includes('bar-le-duc'))) regionMatch = true;
                     
                     if (!regionMatch) match = false;
                 }
 
-                // 3. Filtre NIVEAU
-                // Niv 3 = CAP, Niv 4 = Bac, Niv 5 = BTS, Niv 6 = Licence, Niv 7 = Master, Niv 8 = Doc
-                if (userChoices.niveau === 'court') {
-                    if (niveau > 4) match = false; // On garde CAP (3) et Bac (4)
+                // 3. Filtre NIVEAU (NOUVELLE LOGIQUE)
+                // Niv 3 = CAP, Niv 4 = Bac
+                // Niv 5 = Bac+2 (BTS), Niv 6 = Bac+3 (Licence/BUT)
+                // Niv 7 = Master/Ingénieur
+                // Niv 8 = Doctorat
+                
+                if (userChoices.niveau === 'avant_bac') {
+                    // On garde niveau 3 et 4
+                    if (niveau !== 3 && niveau !== 4) match = false;
                 }
-                if (userChoices.niveau === 'long') {
-                    if (niveau < 5) match = false; // On garde BTS (5) et plus
+                else if (userChoices.niveau === 'bac_2_3') {
+                    // On garde niveau 5 et 6
+                    if (niveau !== 5 && niveau !== 6) match = false;
+                }
+                else if (userChoices.niveau === 'master') {
+                    // On garde niveau 7
+                    if (niveau !== 7) match = false;
+                }
+                else if (userChoices.niveau === 'doctorat') {
+                    // On garde niveau 8 ou les lignes contenant "Doctorale"
+                    if (niveau !== 8 && !fullText.includes('doctorale')) match = false;
                 }
 
                 return match;
@@ -159,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (results.length === 0) {
                 addBotMessage("😕 Je n'ai trouvé aucune formation correspondant exactement.");
-                addBotMessage("Essaie d'élargir ta recherche (par exemple : Région 'Peu importe').");
+                addBotMessage("Essaie d'élargir ta recherche (par exemple : Région 'Toute la région').");
                 showQuickReplies([{ text: "🔄 Recommencer", value: "reset" }]);
             } else {
                 const count = results.length;
@@ -177,6 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (count > 3) {
                     addBotMessage("💡 Astuce : utilise le bouton 'Nouveau' pour changer de critères.");
                 }
+                showQuickReplies([{ text: "🔄 Nouvelle recherche", value: "reset" }]);
             }
         }, 800);
     }
@@ -195,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (opt.value === 'reset') {
                     resetChat();
                 } else {
-                    container.remove(); // Supprime les boutons après clic
+                    container.remove();
                     handleChoice(opt.value, opt.text);
                 }
             };
@@ -224,15 +242,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showFormations(formations) {
         formations.forEach(f => {
-            // Construction des boutons URL (si les liens existent)
+            // Construction des boutons URL
             let buttonsHtml = '';
             
-            // Priorité 1 : Page formation spécifique
             if (f.URL_Page_Formation && f.URL_Page_Formation.length > 5) {
                 buttonsHtml += `<a href="${f.URL_Page_Formation}" target="_blank" class="formation-link primary">Voir la fiche</a>`;
             }
-            
-            // Priorité 2 : Site établissement
             if (f.URL_Site_Etablissement && f.URL_Site_Etablissement.length > 5) {
                 buttonsHtml += `<a href="${f.URL_Site_Etablissement}" target="_blank" class="formation-link secondary">Site école</a>`;
             }
@@ -272,11 +287,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     resetBtn.addEventListener('click', resetChat);
-    
-    // Gestion de l'input "Entrée" pour envoyer (même si désactivé par défaut ici)
-    userInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            // Logique textuelle si tu veux la réactiver plus tard
-        }
-    });
 });
