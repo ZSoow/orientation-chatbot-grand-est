@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         messagesContainer.innerHTML = ''; // Nettoyer au démarrage
         
         addBotMessage("Bonjour ! 👋 Je suis l'assistant du <strong>CMQ Bioeco Academy Grand Est</strong>.");
-        addBotMessage("Je vais t'aider à trouver ta formation parmi notre nouvelle base de données.");
+        addBotMessage("Je vais t'aider à trouver ta formation parmi notre base de données.");
         
         setTimeout(() => askQuestion(1), 800);
     }
