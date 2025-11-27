@@ -3,9 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentStep = 0;
     let userChoices = {
         domaine: '',
-        style: '',
+        style: '', // Laissé pour compatibilité future
         niveau: '',
-        region: '' // Nouveau critère
+        region: ''
     };
 
     const messagesContainer = document.getElementById('chat-messages');
@@ -20,12 +20,18 @@ document.addEventListener('DOMContentLoaded', () => {
             formationsData = parseCSV(csvText);
             startOrientation();
         })
-        .catch(err => console.error("Erreur CSV :", err));
+        .catch(err => {
+            console.error("Erreur CSV :", err);
+            addBotMessage("⚠️ Erreur lors du chargement des données. Vérifiez que le fichier 'data/formations.csv' existe bien.");
+        });
 
     function parseCSV(text) {
         const lines = text.trim().split('\n');
         const headers = lines[0].split(';').map(h => h.trim());
+        
         return lines.slice(1).map(line => {
+            // Utilisation d'une Regex pour gérer les point-virgules à l'intérieur des champs si jamais il y en a (optionnel mais plus robuste)
+            // Ici on garde le split simple car ton CSV a l'air propre
             const values = line.split(';');
             let obj = {};
             headers.forEach((header, index) => {
@@ -39,9 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function startOrientation() {
         currentStep = 0;
-        userChoices = { domaine: '', style: '', niveau: '', region: '' }; // Reset total
+        userChoices = { domaine: '', style: '', niveau: '', region: '' };
+        messagesContainer.innerHTML = ''; // Nettoyer au démarrage
+        
         addBotMessage("Bonjour ! 👋 Je suis l'assistant du <strong>CMQ Bioéco Grand Est</strong>.");
-        addBotMessage("Je vais t'aider à trouver ta formation idéale en quelques clics.");
+        addBotMessage("Je vais t'aider à trouver ta formation parmi notre nouvelle base de données.");
         
         setTimeout(() => askQuestion(1), 800);
     }
@@ -50,31 +58,32 @@ document.addEventListener('DOMContentLoaded', () => {
         currentStep = step;
         
         if (step === 1) {
-            addBotMessage("D'abord, quel univers t'attire le plus ?");
+            addBotMessage("Quel domaine t'intéresse ?");
+            // J'ai mis à jour les choix pour correspondre aux catégories de ton fichier CSV
             showQuickReplies([
-                { text: "🌱 Nature & Agriculture", value: "nature" },
-                { text: "🍇 Vigne & Vin", value: "vigne" }, // Séparé pour le CMQ Bioéco
-                { text: "🧪 Sciences & Labo", value: "science" },
+                { text: "⚙️ Mécanique & Maintenance", value: "meca" },
+                { text: "🚛 Logistique & Transport", value: "logistique" },
+                { text: "🌱 Nature & Agronomie", value: "nature" },
+                { text: "🧪 Sciences & Laboratoire", value: "science" },
                 { text: "💼 Commerce & Gestion", value: "business" },
-                { text: "⚙️ Industrie & Maintenance", value: "industrie" },
-                { text: "🪵 Bois & Forêt", value: "bois" } // Séparé aussi
+                { text: "🪵 Bois & Forêt", value: "bois" }
             ]);
         } 
         else if (step === 2) {
-            addBotMessage("C'est noté. Dans quelle zone du Grand Est cherches-tu ?");
+            addBotMessage("Dans quelle zone du Grand Est ?");
             showQuickReplies([
-                { text: "🍾 Champagne-Ardenne (Reims/Troyes...)", value: "champagne" },
-                { text: "🥨 Alsace (Strasbourg/Mulhouse...)", value: "alsace" },
-                { text: "🏭 Lorraine (Nancy/Metz...)", value: "lorraine" },
-                { text: "🌍 Peu importe / Je suis mobile", value: "tout" }
+                { text: "🍾 Champagne-Ardenne", value: "champagne" },
+                { text: "🥨 Alsace", value: "alsace" },
+                { text: "🏭 Lorraine", value: "lorraine" },
+                { text: "🌍 Toute la région", value: "tout" }
             ]);
         }
         else if (step === 3) {
             addBotMessage("Quel niveau d'études vises-tu ?");
             showQuickReplies([
-                { text: "⏱️ Courtes (CAP à BTS)", value: "court" },
-                { text: "🎓 Longues (Licence à Ingénieur)", value: "long" },
-                { text: "🚀 Tout voir", value: "tout" }
+                { text: "⏱️ 3e / CAP / Bac", value: "court" },
+                { text: "🎓 BTS / Licence / Master", value: "long" },
+                { text: "🚀 Peu importe", value: "tout" }
             ]);
         }
     }
@@ -95,57 +104,81 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showFinalResults() {
-        addBotMessage("🔍 Analyse en cours...");
+        addBotMessage("🔍 Analyse de la base de données...");
 
         setTimeout(() => {
             const results = formationsData.filter(f => {
-                const text = (f.Grande_Categorie + ' ' + f.Nom_Complet_Diplome + ' ' + f.Description_Diplome).toLowerCase();
+                // Création d'une chaîne de recherche complète pour être souple
+                const fullText = (
+                    f.Grande_Categorie + ' ' + 
+                    f.Nom_Complet_Diplome + ' ' + 
+                    f.Description_Diplome
+                ).toLowerCase();
+                
                 const region = f.Region ? f.Region.toLowerCase() : '';
                 const ville = f.Ville ? f.Ville.toLowerCase() : '';
-                const niv = parseInt(f.Niveau_Europeen) || 0;
+                const niveau = parseInt(f.Niveau_Europeen) || 0; // Convertir "3" en entier 3
 
                 let match = true;
 
-                // 1. Filtre DOMAINE (Strict)
-                if (userChoices.domaine === 'nature' && !(text.includes('agri') || text.includes('elevage') || text.includes('animale'))) match = false;
-                if (userChoices.domaine === 'vigne' && !(text.includes('vigne') || text.includes('vin') || text.includes('vitico'))) match = false;
-                if (userChoices.domaine === 'bois' && !(text.includes('bois') || text.includes('foret') || text.includes('bûcheron'))) match = false;
-                if (userChoices.domaine === 'science' && !(text.includes('bio') || text.includes('chimie') || text.includes('labo'))) match = false;
-                if (userChoices.domaine === 'business' && !(text.includes('commer') || text.includes('vente') || text.includes('manage'))) match = false;
-                if (userChoices.domaine === 'industrie' && !(text.includes('industr') || text.includes('mécani') || text.includes('mainten'))) match = false;
+                // 1. Filtre DOMAINE (Adapté à tes nouvelles catégories CSV)
+                if (userChoices.domaine === 'meca' && !fullText.includes('mécani') && !fullText.includes('mainten') && !fullText.includes('industri') && !fullText.includes('usinage')) match = false;
+                
+                if (userChoices.domaine === 'logistique' && !fullText.includes('logist') && !fullText.includes('transport') && !fullText.includes('achat') && !fullText.includes('supply')) match = false;
+                
+                if (userChoices.domaine === 'nature' && !fullText.includes('agri') && !fullText.includes('agro') && !fullText.includes('nature') && !fullText.includes('paysage')) match = false;
+                
+                if (userChoices.domaine === 'science' && !fullText.includes('scien') && !fullText.includes('labo') && !fullText.includes('bio') && !fullText.includes('chimie') && !fullText.includes('physique')) match = false;
+                
+                if (userChoices.domaine === 'business' && !fullText.includes('commer') && !fullText.includes('vent') && !fullText.includes('manage') && !fullText.includes('négocia')) match = false;
+                
+                if (userChoices.domaine === 'bois' && !fullText.includes('bois') && !fullText.includes('forêt') && !fullText.includes('menuisier')) match = false;
 
                 // 2. Filtre RÉGION
                 if (userChoices.region !== 'tout') {
-                    if (userChoices.region === 'champagne' && !region.includes('champagne') && !ville.includes('reims') && !ville.includes('troyes')) match = false;
-                    if (userChoices.region === 'alsace' && !region.includes('alsace') && !ville.includes('strasbourg')) match = false;
-                    if (userChoices.region === 'lorraine' && !region.includes('lorraine') && !ville.includes('nancy') && !ville.includes('metz')) match = false;
+                    // On vérifie si la région ou une ville majeure est présente
+                    let regionMatch = false;
+                    if (userChoices.region === 'champagne' && (region.includes('champagne') || ville.includes('reims') || ville.includes('troyes'))) regionMatch = true;
+                    if (userChoices.region === 'alsace' && (region.includes('alsace') || ville.includes('strasbourg') || ville.includes('mulhouse'))) regionMatch = true;
+                    if (userChoices.region === 'lorraine' && (region.includes('lorraine') || ville.includes('nancy') || ville.includes('metz'))) regionMatch = true;
+                    
+                    if (!regionMatch) match = false;
                 }
 
                 // 3. Filtre NIVEAU
-                if (userChoices.niveau === 'court' && niv > 5) match = false; // Max BTS (Niv 5)
-                if (userChoices.niveau === 'long' && niv < 6) match = false;  // Min Licence (Niv 6)
+                // Niv 3 = CAP, Niv 4 = Bac, Niv 5 = BTS, Niv 6 = Licence, Niv 7 = Master, Niv 8 = Doc
+                if (userChoices.niveau === 'court') {
+                    if (niveau > 4) match = false; // On garde CAP (3) et Bac (4)
+                }
+                if (userChoices.niveau === 'long') {
+                    if (niveau < 5) match = false; // On garde BTS (5) et plus
+                }
 
                 return match;
             });
 
             if (results.length === 0) {
-                addBotMessage("😕 Aïe, aucune formation ne correspond exactement à ces 3 critères combinés.");
-                addBotMessage("Essaie de relancer en mettant 'Peu importe' pour la région ou le niveau.");
+                addBotMessage("😕 Je n'ai trouvé aucune formation correspondant exactement.");
+                addBotMessage("Essaie d'élargir ta recherche (par exemple : Région 'Peu importe').");
                 showQuickReplies([{ text: "🔄 Recommencer", value: "reset" }]);
             } else {
                 const count = results.length;
-                addBotMessage(`Bingo ! J'ai trouvé <strong>${count} formation(s)</strong> parfaite(s) pour toi :`);
+                addBotMessage(`Bingo ! J'ai trouvé <strong>${count} formation(s)</strong> :`);
                 
-                // Tri par niveau d'étude croissant
-                results.sort((a, b) => a.Niveau_Europeen - b.Niveau_Europeen);
+                // Tri : d'abord par niveau, puis par nom
+                results.sort((a, b) => {
+                    const nivA = parseInt(a.Niveau_Europeen) || 0;
+                    const nivB = parseInt(b.Niveau_Europeen) || 0;
+                    return nivA - nivB;
+                });
 
                 showFormations(results);
                 
-                if (count > 1) {
-                    addBotMessage("Tu peux cliquer sur 'Nouveau' en haut pour une autre recherche.");
+                if (count > 3) {
+                    addBotMessage("💡 Astuce : utilise le bouton 'Nouveau' pour changer de critères.");
                 }
             }
-        }, 1000);
+        }, 800);
     }
 
     // --- AFFICHAGE ---
@@ -157,12 +190,12 @@ document.addEventListener('DOMContentLoaded', () => {
         options.forEach(opt => {
             const btn = document.createElement('button');
             btn.className = 'reply-btn';
-            btn.innerHTML = opt.text; // innerHTML permet le gras ou span si besoin
+            btn.innerHTML = opt.text;
             btn.onclick = () => {
                 if (opt.value === 'reset') {
                     resetChat();
                 } else {
-                    container.remove(); 
+                    container.remove(); // Supprime les boutons après clic
                     handleChoice(opt.value, opt.text);
                 }
             };
@@ -191,16 +224,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showFormations(formations) {
         formations.forEach(f => {
+            // Construction des boutons URL (si les liens existent)
+            let buttonsHtml = '';
+            
+            // Priorité 1 : Page formation spécifique
+            if (f.URL_Page_Formation && f.URL_Page_Formation.length > 5) {
+                buttonsHtml += `<a href="${f.URL_Page_Formation}" target="_blank" class="formation-link primary">Voir la fiche</a>`;
+            }
+            
+            // Priorité 2 : Site établissement
+            if (f.URL_Site_Etablissement && f.URL_Site_Etablissement.length > 5) {
+                buttonsHtml += `<a href="${f.URL_Site_Etablissement}" target="_blank" class="formation-link secondary">Site école</a>`;
+            }
+
+            // Gestion de la date de portes ouvertes
+            let dateHtml = '';
+            if (f.Dates_Portes_Ouvertes && f.Dates_Portes_Ouvertes.length > 2) {
+                dateHtml = `<div class="formation-date">📅 JPO : ${f.Dates_Portes_Ouvertes}</div>`;
+            }
+
             const cardHtml = `
                 <div class="formation-card">
                     <span class="formation-title">${f.Nom_Complet_Diplome}</span>
                     <div class="formation-school">🏫 ${f.Nom_Etablissement}</div>
+                    
                     <div class="formation-details">
                         <span class="tag">📍 ${f.Ville}</span>
                         <span class="tag">${f.Acronyme_Diplome}</span>
                         <span class="tag level">Niv ${f.Niveau_Europeen}</span>
                     </div>
-                    ${f.URL_Page_Formation ? `<a href="${f.URL_Page_Formation}" target="_blank" class="formation-link">Voir la fiche</a>` : ''}
+
+                    ${dateHtml}
+
+                    ${buttonsHtml ? `<div class="formation-actions">${buttonsHtml}</div>` : ''}
                 </div>
             `;
             addBotMessage(cardHtml);
@@ -208,7 +264,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function resetChat() {
-        messagesContainer.innerHTML = '';
         startOrientation();
     }
 
@@ -217,7 +272,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     resetBtn.addEventListener('click', resetChat);
-    // Désactivation temporaire de l'input texte pour forcer l'usage des boutons
-    userInput.disabled = true;
-    userInput.placeholder = "Utilisez les boutons de choix 👆";
+    
+    // Gestion de l'input "Entrée" pour envoyer (même si désactivé par défaut ici)
+    userInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            // Logique textuelle si tu veux la réactiver plus tard
+        }
+    });
 });
