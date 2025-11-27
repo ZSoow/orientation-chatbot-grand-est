@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Chatbot Orientation - CMQ Bioéco </title>
+    <title>Chatbot Orientation - CMQ Bioéco</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="chat-container">
         <header class="chat-header">
             <div class="header-left">
-                <!-- C'est ici que ça change : on met ton logo -->
                 <div class="avatar">
                    <img src="assets/logo.png" alt="CMQ Logo">
                 </div>
@@ -28,12 +27,12 @@
         </header>
 
         <main id="chat-messages" class="chat-messages">
-            <!-- Messages dynamiques -->
+            <!-- Les messages du bot et de l'utilisateur s'afficheront ici -->
         </main>
 
         <footer class="chat-input-area">
             <div class="input-wrapper">
-                <input type="text" id="user-input" placeholder="Ex: BTS, Nancy, Agriculture..." autocomplete="off">
+                <input type="text" id="user-input" placeholder="Utilisez les boutons..." autocomplete="off" disabled>
                 <button id="send-btn" aria-label="Envoyer">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
