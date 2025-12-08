@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function startOrientation() {
         currentStep = 0;
         userChoices = { domaine: '', niveau: '', region: '' };
-        messagesContainer.innerHTML = '';
+        messagesContainer.innerHTML = ''; // Nettoyage
         
         addBotMessage("Bonjour ! 👋 Je suis l'assistant du <strong>CMQ Bioeco Academy Grand Est</strong>.");
         addBotMessage("Je vais t'aider à trouver ta formation parmi notre base de données.");
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- MOTEUR DE RECHERCHE ---
+    // --- LOGIQUE DE RECHERCHE ---
 
     function handleChoice(value, textLabel) {
         addUserMessage(textLabel);
@@ -145,15 +145,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (results.length === 0) {
                 addBotMessage("😕 Je n'ai trouvé aucune formation correspondant exactement.");
-                addBotMessage("Essaie d'élargir ta recherche (par exemple : Région 'Toute la région').");
+                addBotMessage("Essaie d'élargir ta recherche.");
                 showQuickReplies([{ text: "🔄 Recommencer", value: "reset" }]);
             } else {
                 const count = results.length;
                 
-                // LOGIQUE DE REGROUPEMENT
-                // On regroupe les formations par leur "Nom_Complet_Diplome"
+                // --- LOGIQUE DE REGROUPEMENT ---
                 const groupedResults = results.reduce((acc, curr) => {
-                    const key = curr.Nom_Complet_Diplome || "Formation inconnue";
+                    const key = curr.Nom_Complet_Diplome || "Formation";
                     if (!acc[key]) {
                         acc[key] = [];
                     }
@@ -162,8 +161,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, {});
 
                 const numberOfGroups = Object.keys(groupedResults).length;
-                addBotMessage(`Bingo ! J'ai trouvé <strong>${count} formation(s)</strong> réparties sur <strong>${numberOfGroups} diplôme(s)</strong> :`);
+                addBotMessage(`Bingo ! J'ai trouvé <strong>${count} formation(s)</strong> (regroupées en ${numberOfGroups} diplômes) :`);
 
+                // Appel de la fonction qui crée la grille
                 showFormationsGrouped(groupedResults);
                 
                 if (numberOfGroups > 3) {
@@ -174,86 +174,47 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 800);
     }
 
-    // --- FONCTION D'AFFICHAGE REGROUPÉ ---
+    // --- FONCTION D'AFFICHAGE REGROUPÉ EN GRILLE ---
+    function showFormationsGrouped(groups) {
+        // Début de la grille
+        let gridHtml = '<div class="formations-grid">';
 
-        // ... (Le reste du code avant reste identique)
+        for (const [diplomeName, formations] of Object.entries(groups)) {
+            
+            const commonInfo = formations[0];
+            const niveau = commonInfo.Niveau_Europeen || "?";
+            const acronyme = commonInfo.Acronyme_Diplome || "";
 
-    function showGroupedFormations(groupedResults) {
-        // 1. CRÉATION DU CONTENEUR GRILLE (C'est ce qui manquait !)
-        const gridContainer = document.createElement('div');
-        gridContainer.className = 'results-grid'; 
-
-        // 2. On parcourt chaque groupe (chaque type de diplôme unique)
-        Object.keys(groupedResults).forEach(key => {
-            const group = groupedResults[key];
-            const firstFormation = group[0]; // On prend les infos communes du premier élément
-
-            // On prépare la liste des établissements
-            let schoolsHtml = '<ul class="schools-list">';
-            group.forEach(f => {
-                // Bouton "Site école" s'il existe
-                let linkHtml = '';
-                if (f.URL_Site_Etablissement && f.URL_Site_Etablissement.length > 5) {
-                    linkHtml = `<a href="${f.URL_Site_Etablissement}" target="_blank" title="Site web">🌐</a>`;
+            // Construction de la liste des écoles pour cette carte
+            let schoolsListHtml = '<div class="schools-list">';
+            
+            formations.forEach(f => {
+                let buttonsHtml = '';
+                if (f.URL_Page_Formation && f.URL_Page_Formation.length > 5) {
+                    buttonsHtml += `<a href="${f.URL_Page_Formation}" target="_blank" class="btn-small info">Fiche</a>`;
                 }
-                
-                // JPO
+                if (f.URL_Site_Etablissement && f.URL_Site_Etablissement.length > 5) {
+                    buttonsHtml += `<a href="${f.URL_Site_Etablissement}" target="_blank" class="btn-small web">Site</a>`;
+                }
+
                 let jpoHtml = '';
                 if (f.Dates_Portes_Ouvertes && f.Dates_Portes_Ouvertes.length > 2) {
-                    jpoHtml = `<div class="mini-jpo">📅 ${f.Dates_Portes_Ouvertes}</div>`;
+                    jpoHtml = `<div class="school-jpo">📅 ${f.Dates_Portes_Ouvertes}</div>`;
                 }
 
-                schoolsHtml += `
-                    <li>
-                        <div class="school-header">
-                            <strong>${f.Nom_Etablissement}</strong> (${f.Ville})
-                            ${linkHtml}
-                        </div>
+                schoolsListHtml += `
+                    <div class="school-item">
+                        <div class="school-name">${f.Nom_Etablissement}</div>
+                        <div class="school-location">📍 ${f.Ville}</div>
                         ${jpoHtml}
-                    </li>`;
+                        ${buttonsHtml ? `<div class="school-actions">${buttonsHtml}</div>` : ''}
+                    </div>
+                `;
             });
-            schoolsHtml += '</ul>';
 
-            // Lien fiche formation (commun à tous, on prend le premier qui a un lien)
-            const ficheUrl = group.find(g => g.URL_Page_Formation && g.URL_Page_Formation.length > 5)?.URL_Page_Formation;
-            let mainButtonHtml = '';
-            if (ficheUrl) {
-                mainButtonHtml = `<a href="${ficheUrl}" target="_blank" class="formation-link primary">📄 Voir la fiche formation</a>`;
-            }
+            schoolsListHtml += '</div>';
 
-            // 3. Création de la carte
-            const card = document.createElement('div');
-            card.className = 'formation-card';
-            card.innerHTML = `
-                <span class="formation-title">${firstFormation.Nom_Complet_Diplome}</span>
-                
-                <div class="formation-details">
-                    <span class="tag">${firstFormation.Acronyme_Diplome}</span>
-                    <span class="tag level">Niv ${firstFormation.Niveau_Europeen}</span>
-                    <span class="tag count">${group.length} établissement(s)</span>
-                </div>
-
-                <div class="schools-container">
-                    ${schoolsHtml}
-                </div>
-
-                ${mainButtonHtml ? `<div class="formation-actions">${mainButtonHtml}</div>` : ''}
-            `;
-            
-            // 4. Ajout de la carte DANS la grille (et non directement dans le chat)
-            gridContainer.appendChild(card);
-        });
-
-        // 5. Ajout de la grille complète au chat
-        messagesContainer.appendChild(gridContainer);
-        scrollToBottom();
-    }
-    
-    // ... (Le reste du code resetChat etc. reste identique)
-
-            schoolsListHtml += '</div>'; // Fin de la liste
-
-            // Création de la carte complète
+            // Création de la carte HTML
             gridHtml += `
                 <div class="formation-card">
                     <div class="card-header">
@@ -270,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         gridHtml += '</div>'; // Fin de la grille
 
-        // Envoi en mode "full-width" pour prendre tout l'écran
+        // Envoi avec la classe 'full-width' pour permettre l'affichage côte à côte
         addBotMessage(gridHtml, 'full-width');
     }
 
@@ -307,9 +268,10 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollToBottom();
     }
 
+    // Fonction modifiée pour accepter une classe CSS supplémentaire
     function addBotMessage(htmlContent, className = '') {
         const div = document.createElement('div');
-        div.className = 'message bot-message ' + className;
+        div.className = 'message bot-message ' + className; // Ajoute la classe 'full-width' ici si nécessaire
         div.innerHTML = htmlContent;
         messagesContainer.appendChild(div);
         scrollToBottom();
