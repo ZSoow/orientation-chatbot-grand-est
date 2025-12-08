@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 3. TRAITEMENT ET AFFICHAGE ---
 
     function processResults() {
-        addBotMessage("🔍 Recherche des formations...");
+        addBotMessage("🔍 Recherche des formations... ");
 
         setTimeout(() => {
             // A. FILTRAGE
