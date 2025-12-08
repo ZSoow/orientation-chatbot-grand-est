@@ -1,116 +1,375 @@
-/* ... (Gardez vos variables :root au début) ... */
+:root {
+    --primary-color: #007AFF;
+    --primary-gradient: linear-gradient(135deg, #007AFF, #0056b3);
+    --secondary-btn-bg: #e9e9eb;
+    --secondary-btn-text: #007AFF;
+    --bg-color: #f0f2f5;
+    --chat-bg: #ffffff;
+    --bot-msg-bg: #f2f2f7;
+    --text-color: #1c1c1e;
+    --subtext-color: #8e8e93;
+    --border-radius: 18px;
+}
 
-/* Modifiez body pour qu'il ne centre plus une petite colonne */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 body {
     background-color: var(--bg-color);
     height: 100vh;
-    width: 100vw; /* Utilise toute la largeur */
-    display: flex; /* Flexbox pour gérer la hauteur */
-    overflow: hidden; /* Empêche le scroll sur le body lui-même */
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Empêche le scroll global, on scrollera dans la zone de chat */
 }
 
-/* Modifiez .chat-container pour prendre tout l'espace */
 .chat-container {
     width: 100%;
-    max-width: 100%; /* Supprime la limite de 600px */
     height: 100%;
     background-color: var(--chat-bg);
     display: flex;
     flex-direction: column;
-    box-shadow: none; /* Plus besoin d'ombre si c'est plein écran */
     position: relative;
 }
 
 /* --- HEADER --- */
-/* (Le header peut rester le même, peut-être juste limiter sa largeur max interne si vous voulez) */
 .chat-header {
-    /* ... gardez le reste ... */
-    justify-content: space-between; 
-    /* Ajout optionnel pour que le contenu ne soit pas trop écarté sur grand écran */
-    padding: 15px 30px; 
+    padding: 15px 30px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #e5e5ea;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10;
+    flex-shrink: 0; /* Le header ne rétrécit pas */
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.avatar {
+    height: 50px;
+    width: auto;
+    min-width: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.avatar img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+.header-info h1 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.header-info .status {
+    font-size: 13px;
+    color: #34c759;
+    font-weight: 500;
+}
+
+.reset-button {
+    background-color: transparent;
+    border: 1px solid #e5e5ea;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    color: var(--primary-color);
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.reset-button:hover {
+    background-color: #f2f2f7;
 }
 
 /* --- MESSAGES --- */
 .chat-messages {
     flex: 1;
-    padding: 20px 30px; /* Un peu plus d'espace sur les côtés */
+    padding: 20px 10%; /* Marge sur les côtés pour centrer le contenu sur grand écran */
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 15px;
     background-color: #fff;
     scroll-behavior: smooth;
-    align-items: center; /* Centre les messages utilisateurs et bot */
 }
 
 .message {
-    max-width: 800px; /* Limite la largeur du texte pour la lisibilité */
-    width: 100%;
-    /* ... gardez le reste des animations/padding ... */
+    max-width: 800px; /* Largeur max pour le texte (lisibilité) */
+    width: fit-content;
+    padding: 12px 18px;
+    border-radius: var(--border-radius);
+    font-size: 15px;
+    line-height: 1.5;
+    position: relative;
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* --- LE CONTENEUR DE RÉSULTATS (Nouveau concept) --- */
-/* 
-   Pour que les cartes s'affichent en grille, on ne peut pas les laisser
-   simplement dans le flux vertical des messages classiques.
-   On va créer une classe spécifique pour le conteneur de cartes via JS plus tard,
-   mais on prépare le CSS ici.
-*/
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.9) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.bot-message {
+    align-self: flex-start;
+    background-color: var(--bot-msg-bg);
+    color: var(--text-color);
+    border-bottom-left-radius: 4px;
+    margin-right: auto;
+}
+
+.user-message {
+    align-self: flex-end;
+    background: var(--primary-gradient);
+    color: white;
+    border-bottom-right-radius: 4px;
+    margin-left: auto;
+    box-shadow: 0 4px 10px rgba(0, 122, 255, 0.25);
+}
+
+.bot-message strong {
+    font-weight: 600;
+    color: #000;
+}
+
+/* --- BOUTONS CHOIX --- */
+.quick-replies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    animation: fadeIn 0.5s ease;
+    width: 100%;
+    max-width: 800px;
+}
+
+.reply-btn {
+    background: white;
+    border: 1px solid #d1d1d6;
+    color: var(--text-color);
+    padding: 12px 16px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    flex: 1 1 auto;
+    text-align: center;
+    min-width: 120px;
+}
+
+.reply-btn:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+}
+
+/* --- NOUVEAU : GRILLE DE RÉSULTATS --- */
 .results-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Magie responsive */
+    /* Crée autant de colonnes que possible avec une largeur min de 320px */
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 20px;
     width: 100%;
-    max-width: 1400px; /* Pour ne pas que ça soit trop large sur écran géant */
     margin-top: 15px;
-    align-self: center; /* Centre la grille dans la zone de chat */
+    animation: popIn 0.5s ease;
 }
 
-/* --- CARTES FORMATION --- */
-/* On adapte la carte pour qu'elle s'intègre dans la grille */
+/* --- CARTES FORMATION (Adaptées pour la grille) --- */
 .formation-card {
     background: white;
     border: 1px solid #e5e5ea;
     border-radius: 16px;
     padding: 20px;
-    /* margin-top: 10px;  <-- On enlève ça car géré par le gap de la grille */
     box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     position: relative;
     overflow: hidden;
-    width: 100%; /* Prend la largeur de sa colonne de grille */
+    width: 100%;
     display: flex;
     flex-direction: column;
-    height: 100%; /* Pour que toutes les cartes aient la même hauteur */
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 100%; /* Important pour que les cartes aient la même hauteur */
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .formation-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-color: var(--primary-color);
+}
+
+.formation-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    background: var(--primary-color);
+}
+
+.formation-title {
+    display: block;
+    font-size: 17px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+.formation-school {
+    color: var(--subtext-color);
+    font-size: 14px;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.formation-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.tag {
+    background: #f2f2f7;
+    color: #555;
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.tag.level {
+    background: #eaf4ff;
+    color: var(--primary-color);
+}
+
+.formation-date {
+    font-size: 13px;
+    color: #FF3B30;
+    background: #fff0f0;
+    padding: 6px 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: inline-block;
+    font-weight: 600;
+    align-self: flex-start;
+}
+
+.formation-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto; /* Pousse les boutons vers le bas */
+}
+
+.formation-link {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: opacity 0.2s;
+}
+
+.formation-link.primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.formation-link.secondary {
+    background-color: var(--secondary-btn-bg);
+    color: var(--secondary-btn-text);
+}
+
+.formation-link:hover {
+    opacity: 0.85;
 }
 
 /* --- FOOTER --- */
 .chat-input-area {
-    /* ... gardez le reste ... */
+    padding: 20px;
+    background: white;
+    border-top: 1px solid #e5e5ea;
     display: flex;
-    justify-content: center; /* Centre la zone de saisie */
+    justify-content: center;
 }
 
 .input-wrapper {
+    display: flex;
+    gap: 10px;
+    background: #f2f2f7;
+    padding: 6px;
+    padding-left: 20px;
+    border-radius: 30px;
     width: 100%;
     max-width: 800px; /* Limite la largeur de la barre de saisie */
-    /* ... gardez le reste ... */
 }
 
-/* --- RESPONSIVE MOBILE --- */
-/* Si l'écran est petit (téléphone), on revient à une colonne */
+#user-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 12px 0;
+    font-size: 16px;
+    outline: none;
+    color: var(--text-color);
+}
+
+#send-btn {
+    background: var(--primary-color);
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+#send-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb { background: #d1d1d6; border-radius: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* RESPONSIVE MOBILE */
 @media (max-width: 768px) {
-    .results-grid {
-        grid-template-columns: 1fr; /* Une seule colonne */
-        padding: 0 10px;
+    .chat-messages {
+        padding: 15px; /* Moins de marge sur mobile */
     }
     
-    .chat-messages {
-        padding: 10px;
+    .results-grid {
+        grid-template-columns: 1fr; /* Une seule colonne sur mobile */
+    }
+    
+    .chat-header h1 {
+        font-size: 14px;
     }
 }
