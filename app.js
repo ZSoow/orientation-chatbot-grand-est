@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const messagesContainer = document.getElementById('chat-messages');
     const resetBtn = document.getElementById('reset-btn');
 
-    // --- CHARGEMENT ---
+    // --- 1. CHARGEMENT DES DONNÉES ---
     fetch('data/formations.csv')
         .then(response => response.text())
         .then(csvText => {
@@ -19,11 +19,14 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(err => {
             console.error("Erreur CSV :", err);
-            addBotMessage("⚠️ Erreur lors du chargement des données. Vérifiez que le fichier 'data/formations.csv' existe bien.");
+            addBotMessage("⚠️ Erreur : Impossible de charger le fichier data/formations.csv");
         });
 
     function parseCSV(text) {
         const lines = text.trim().split('\n');
+        // Si le fichier est vide ou mal formé
+        if (lines.length < 2) return [];
+
         const headers = lines[0].split(';').map(h => h.trim());
         
         return lines.slice(1).map(line => {
@@ -36,15 +39,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- SCÉNARIO ---
+    // --- 2. LOGIQUE DU CHAT ---
 
     function startOrientation() {
         currentStep = 0;
         userChoices = { domaine: '', niveau: '', region: '' };
-        messagesContainer.innerHTML = ''; // Nettoyage
+        messagesContainer.innerHTML = ''; // Vide le chat
         
         addBotMessage("Bonjour ! 👋 Je suis l'assistant du <strong>CMQ Bioeco Academy Grand Est</strong>.");
-        addBotMessage("Je vais t'aider à trouver ta formation parmi notre base de données.");
+        addBotMessage("Je vais t'aider à trouver ta formation.");
         
         setTimeout(() => askQuestion(1), 800);
     }
@@ -84,8 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- LOGIQUE DE RECHERCHE ---
-
     function handleChoice(value, textLabel) {
         addUserMessage(textLabel);
         
@@ -93,197 +94,186 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentStep === 2) userChoices.region = value;
         if (currentStep === 3) {
             userChoices.niveau = value;
-            showFinalResults();
+            processResults(); // Lance la recherche
         } else {
-            setTimeout(() => askQuestion(currentStep + 1), 600);
+            setTimeout(() => askQuestion(currentStep + 1), 500);
         }
     }
 
-    function showFinalResults() {
-        addBotMessage("🔍 Analyse de la base de données...");
+    // --- 3. TRAITEMENT ET AFFICHAGE ---
+
+    function processResults() {
+        addBotMessage("🔍 Recherche des formations...");
 
         setTimeout(() => {
-            const results = formationsData.filter(f => {
-                const fullText = (
-                    f.Grande_Categorie + ' ' + 
-                    f.Nom_Complet_Diplome + ' ' + 
-                    f.Description_Diplome
-                ).toLowerCase();
-                
-                const region = f.Region ? f.Region.toLowerCase() : '';
-                const ville = f.Ville ? f.Ville.toLowerCase() : '';
+            // A. FILTRAGE
+            const filtered = formationsData.filter(f => {
+                const fullText = (f.Grande_Categorie + ' ' + f.Nom_Complet_Diplome).toLowerCase();
+                const region = (f.Region || '').toLowerCase();
+                const ville = (f.Ville || '').toLowerCase();
                 const niveau = parseInt(f.Niveau_Europeen) || 0;
 
                 let match = true;
 
-                // 1. Filtre DOMAINE
-                if (userChoices.domaine === 'meca' && !fullText.includes('mécani') && !fullText.includes('mainten') && !fullText.includes('industri') && !fullText.includes('usinage') && !fullText.includes('robotique')) match = false;
-                if (userChoices.domaine === 'logistique' && !fullText.includes('logist') && !fullText.includes('transport') && !fullText.includes('achat') && !fullText.includes('supply')) match = false;
-                if (userChoices.domaine === 'nature' && !fullText.includes('agri') && !fullText.includes('agro') && !fullText.includes('nature') && !fullText.includes('paysage') && !fullText.includes('enviro')) match = false;
-                if (userChoices.domaine === 'science' && !fullText.includes('scien') && !fullText.includes('labo') && !fullText.includes('bio') && !fullText.includes('chimie') && !fullText.includes('physique')) match = false;
-                if (userChoices.domaine === 'business' && !fullText.includes('commer') && !fullText.includes('vent') && !fullText.includes('manage') && !fullText.includes('négocia') && !fullText.includes('eco')) match = false;
-                if (userChoices.domaine === 'bois' && !fullText.includes('bois') && !fullText.includes('forêt') && !fullText.includes('menuisier')) match = false;
-                if (userChoices.domaine === 'info' && !fullText.includes('infor') && !fullText.includes('numér') && !fullText.includes('réseau') && !fullText.includes('data')) match = false;
+                // Domaine
+                if (userChoices.domaine === 'meca' && !fullText.includes('mécani') && !fullText.includes('mainten') && !fullText.includes('industri')) match = false;
+                if (userChoices.domaine === 'logistique' && !fullText.includes('logist') && !fullText.includes('transport')) match = false;
+                if (userChoices.domaine === 'nature' && !fullText.includes('agri') && !fullText.includes('agro') && !fullText.includes('nature') && !fullText.includes('enviro')) match = false;
+                if (userChoices.domaine === 'science' && !fullText.includes('scien') && !fullText.includes('labo') && !fullText.includes('bio') && !fullText.includes('chimie')) match = false;
+                if (userChoices.domaine === 'business' && !fullText.includes('commer') && !fullText.includes('vent') && !fullText.includes('manage')) match = false;
+                if (userChoices.domaine === 'bois' && !fullText.includes('bois') && !fullText.includes('forêt')) match = false;
+                if (userChoices.domaine === 'info' && !fullText.includes('infor') && !fullText.includes('numér') && !fullText.includes('réseau')) match = false;
 
-                // 2. Filtre RÉGION
+                // Région
                 if (userChoices.region !== 'tout') {
                     let regionMatch = false;
-                    if (userChoices.region === 'champagne' && (region.includes('champagne') || ville.includes('reims') || ville.includes('troyes') || ville.includes('charleville') || ville.includes('chaumont'))) regionMatch = true;
-                    if (userChoices.region === 'alsace' && (region.includes('alsace') || ville.includes('strasbourg') || ville.includes('mulhouse') || ville.includes('colmar'))) regionMatch = true;
-                    if (userChoices.region === 'lorraine' && (region.includes('lorraine') || ville.includes('nancy') || ville.includes('metz') || ville.includes('epinal') || ville.includes('bar-le-duc'))) regionMatch = true;
+                    if (userChoices.region === 'champagne' && (region.includes('champagne') || ville.includes('reims') || ville.includes('troyes'))) regionMatch = true;
+                    if (userChoices.region === 'alsace' && (region.includes('alsace') || ville.includes('strasbourg') || ville.includes('mulhouse'))) regionMatch = true;
+                    if (userChoices.region === 'lorraine' && (region.includes('lorraine') || ville.includes('nancy') || ville.includes('metz'))) regionMatch = true;
                     if (!regionMatch) match = false;
                 }
 
-                // 3. Filtre NIVEAU
+                // Niveau
                 if (userChoices.niveau === 'avant_bac' && (niveau !== 3 && niveau !== 4)) match = false;
-                else if (userChoices.niveau === 'bac_2_3' && (niveau !== 5 && niveau !== 6)) match = false;
-                else if (userChoices.niveau === 'master' && niveau !== 7) match = false;
-                else if (userChoices.niveau === 'doctorat' && niveau !== 8 && !fullText.includes('doctorale')) match = false;
+                if (userChoices.niveau === 'bac_2_3' && (niveau !== 5 && niveau !== 6)) match = false;
+                if (userChoices.niveau === 'master' && niveau !== 7) match = false;
+                if (userChoices.niveau === 'doctorat' && niveau !== 8) match = false;
 
                 return match;
             });
 
-            if (results.length === 0) {
-                addBotMessage("😕 Je n'ai trouvé aucune formation correspondant exactement.");
-                addBotMessage("Essaie d'élargir ta recherche.");
+            if (filtered.length === 0) {
+                addBotMessage("😕 Aucune formation trouvée avec ces critères exacts.");
                 showQuickReplies([{ text: "🔄 Recommencer", value: "reset" }]);
-            } else {
-                const count = results.length;
-                
-                // --- LOGIQUE DE REGROUPEMENT ---
-                const groupedResults = results.reduce((acc, curr) => {
-                    const key = curr.Nom_Complet_Diplome || "Formation";
-                    if (!acc[key]) {
-                        acc[key] = [];
-                    }
-                    acc[key].push(curr);
-                    return acc;
-                }, {});
-
-                const numberOfGroups = Object.keys(groupedResults).length;
-                addBotMessage(`Bingo ! J'ai trouvé <strong>${count} formation(s)</strong> (regroupées en ${numberOfGroups} diplômes) :`);
-
-                // Appel de la fonction qui crée la grille
-                showFormationsGrouped(groupedResults);
-                
-                if (numberOfGroups > 3) {
-                    addBotMessage("💡 Astuce : utilise le bouton 'Nouveau' pour changer de critères.");
-                }
-                showQuickReplies([{ text: "🔄 Nouvelle recherche", value: "reset" }]);
+                return;
             }
+
+            // B. REGROUPEMENT PAR DIPLÔME
+            const grouped = {};
+            filtered.forEach(f => {
+                const key = f.Nom_Complet_Diplome || "Autre";
+                if (!grouped[key]) grouped[key] = [];
+                grouped[key].push(f);
+            });
+
+            const nbDiplomes = Object.keys(grouped).length;
+            addBotMessage(`J'ai trouvé <strong>${filtered.length} formations</strong> réparties sur <strong>${nbDiplomes} diplômes</strong> :`);
+
+            // C. AFFICHAGE EN GRILLE
+            showGrid(grouped);
+            
+            showQuickReplies([{ text: "🔄 Nouvelle recherche", value: "reset" }]);
+
         }, 800);
     }
 
-    // --- FONCTION D'AFFICHAGE REGROUPÉ EN GRILLE ---
-    function showFormationsGrouped(groups) {
-        // Début de la grille
-        let gridHtml = '<div class="formations-grid">';
+    function showGrid(groupedData) {
+        // 1. Création du conteneur grille
+        const gridContainer = document.createElement('div');
+        gridContainer.className = 'results-grid';
 
-        for (const [diplomeName, formations] of Object.entries(groups)) {
-            
-            const commonInfo = formations[0];
-            const niveau = commonInfo.Niveau_Europeen || "?";
-            const acronyme = commonInfo.Acronyme_Diplome || "";
+        // 2. Boucle sur chaque diplôme unique
+        for (const [title, group] of Object.entries(groupedData)) {
+            const info = group[0]; // Infos communes (niveau, acronyme)
 
-            // Construction de la liste des écoles pour cette carte
-            let schoolsListHtml = '<div class="schools-list">';
-            
-            formations.forEach(f => {
-                let buttonsHtml = '';
-                if (f.URL_Page_Formation && f.URL_Page_Formation.length > 5) {
-                    buttonsHtml += `<a href="${f.URL_Page_Formation}" target="_blank" class="btn-small info">Fiche</a>`;
-                }
-                if (f.URL_Site_Etablissement && f.URL_Site_Etablissement.length > 5) {
-                    buttonsHtml += `<a href="${f.URL_Site_Etablissement}" target="_blank" class="btn-small web">Site</a>`;
+            // Liste des écoles (HTML)
+            let schoolsHtml = `<ul class="schools-list">`;
+            group.forEach(ecole => {
+                let linkHtml = '';
+                if (ecole.URL_Site_Etablissement && ecole.URL_Site_Etablissement.length > 5) {
+                    linkHtml = `<a href="${ecole.URL_Site_Etablissement}" target="_blank" class="school-link">Site</a>`;
                 }
 
-                let jpoHtml = '';
-                if (f.Dates_Portes_Ouvertes && f.Dates_Portes_Ouvertes.length > 2) {
-                    jpoHtml = `<div class="school-jpo">📅 ${f.Dates_Portes_Ouvertes}</div>`;
-                }
-
-                schoolsListHtml += `
-                    <div class="school-item">
-                        <div class="school-name">${f.Nom_Etablissement}</div>
-                        <div class="school-location">📍 ${f.Ville}</div>
-                        ${jpoHtml}
-                        ${buttonsHtml ? `<div class="school-actions">${buttonsHtml}</div>` : ''}
-                    </div>
+                schoolsHtml += `
+                    <li>
+                        <span class="school-name">${ecole.Nom_Etablissement}</span>
+                        <div class="school-meta">
+                            <span>📍 ${ecole.Ville}</span>
+                            ${linkHtml}
+                        </div>
+                    </li>
                 `;
             });
+            schoolsHtml += `</ul>`;
 
-            schoolsListHtml += '</div>';
-
-            // Création de la carte HTML
-            gridHtml += `
-                <div class="formation-card">
-                    <div class="card-header">
-                        <span class="formation-title">${diplomeName}</span>
-                        <div class="card-tags">
-                            ${acronyme ? `<span class="tag">${acronyme}</span>` : ''}
-                            <span class="tag level">Niv ${niveau}</span>
-                        </div>
+            // Bouton fiche formation (si dispo)
+            let footerHtml = '';
+            if (info.URL_Page_Formation && info.URL_Page_Formation.length > 5) {
+                footerHtml = `
+                    <div class="card-footer">
+                        <a href="${info.URL_Page_Formation}" target="_blank" class="btn-full">Voir la fiche complète</a>
                     </div>
-                    ${schoolsListHtml}
+                `;
+            }
+
+            // Création de la carte DOM
+            const card = document.createElement('div');
+            card.className = 'formation-card';
+            card.innerHTML = `
+                <div class="card-header">
+                    <span class="formation-title">${title}</span>
+                    <div class="card-tags">
+                        <span class="tag level">Niv ${info.Niveau_Europeen}</span>
+                        ${info.Acronyme_Diplome ? `<span class="tag">${info.Acronyme_Diplome}</span>` : ''}
+                    </div>
                 </div>
+                ${schoolsHtml}
+                ${footerHtml}
             `;
+
+            gridContainer.appendChild(card);
         }
 
-        gridHtml += '</div>'; // Fin de la grille
-
-        // Envoi avec la classe 'full-width' pour permettre l'affichage côte à côte
-        addBotMessage(gridHtml, 'full-width');
+        // 3. Ajout au chat
+        messagesContainer.appendChild(gridContainer);
+        scrollToBottom();
     }
 
     // --- UTILITAIRES ---
 
     function showQuickReplies(options) {
-        const container = document.createElement('div');
-        container.className = 'quick-replies';
-        
+        const div = document.createElement('div');
+        div.className = 'quick-replies';
         options.forEach(opt => {
             const btn = document.createElement('button');
             btn.className = 'reply-btn';
-            btn.innerHTML = opt.text;
+            btn.innerText = opt.text;
             btn.onclick = () => {
-                if (opt.value === 'reset') {
-                    resetChat();
-                } else {
-                    container.remove();
+                if (opt.value === 'reset') resetChat();
+                else {
+                    div.remove();
                     handleChoice(opt.value, opt.text);
                 }
             };
-            container.appendChild(btn);
+            div.appendChild(btn);
         });
-        
-        messagesContainer.appendChild(container);
+        messagesContainer.appendChild(div);
+        scrollToBottom();
+    }
+
+    function addBotMessage(html) {
+        const div = document.createElement('div');
+        div.className = 'message bot-message';
+        div.innerHTML = html;
+        messagesContainer.appendChild(div);
         scrollToBottom();
     }
 
     function addUserMessage(text) {
         const div = document.createElement('div');
         div.className = 'message user-message';
-        div.textContent = text;
+        div.innerText = text;
         messagesContainer.appendChild(div);
         scrollToBottom();
-    }
-
-    // Fonction modifiée pour accepter une classe CSS supplémentaire
-    function addBotMessage(htmlContent, className = '') {
-        const div = document.createElement('div');
-        div.className = 'message bot-message ' + className; // Ajoute la classe 'full-width' ici si nécessaire
-        div.innerHTML = htmlContent;
-        messagesContainer.appendChild(div);
-        scrollToBottom();
-    }
-
-    function resetChat() {
-        startOrientation();
     }
 
     function scrollToBottom() {
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
 
-    resetBtn.addEventListener('click', resetChat);
+    function resetChat() {
+        startOrientation();
+    }
+
+    if (resetBtn) resetBtn.addEventListener('click', resetChat);
 });
