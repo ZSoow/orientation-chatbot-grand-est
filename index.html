@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Chatbot Orientation - CMQ Bioeco Academy </title>
+
+    <!-- Ton CSS principal -->
     <link rel="stylesheet" href="style.css">
+    <!-- CSS additionnel pour les cartes / grille responsive -->
+    <link rel="stylesheet" href="cards.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -26,13 +31,14 @@
             </button>
         </header>
 
-        <main id="chat-messages" class="chat-messages">
+        <main id="chat-messages" class="chat-messages" role="log" aria-live="polite">
             <!-- Les messages du bot et de l'utilisateur s'afficheront ici -->
         </main>
 
         <footer class="chat-input-area">
             <div class="input-wrapper">
-                <input type="text" id="user-input" placeholder="Utilisez les boutons..." autocomplete="off" disabled>
+                <!-- input activé pour permettre la recherche par mots-clés -->
+                <input type="text" id="user-input" placeholder="Tapez une recherche (ex : 'BTS Nancy', 'Soudure')" autocomplete="off" aria-label="Saisie recherche">
                 <button id="send-btn" aria-label="Envoyer">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -43,8 +49,10 @@
         </footer>
     </div>
 
+    <!-- Fuse.js (doit être chargé AVANT app.js si app.js utilise Fuse) -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+
+    <!-- Ton application (app.js) -->
     <script src="app.js"></script>
-    <!-- Ajout de Fuse.js pour la recherche intelligente -->
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
 </body>
 </html>
