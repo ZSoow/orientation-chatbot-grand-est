@@ -52,7 +52,7 @@ body {
     align-items: center;
     justify-content: space-between;
     z-index: 10;
-    flex-shrink: 0; /* Le header ne doit pas rétrécir */
+    flex-shrink: 0; /* Le header ne doit pas rétreécir */
 }
 
 .header-left {
