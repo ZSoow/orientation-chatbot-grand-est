@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(err => {
             console.error("Erreur CSV :", err);
-            addBotMessage("⚠️ Erreur : Impossible de charger le fichier data/formations.csv");
+            addBotMessage("⚠️ Erreur : Impossible de charger le fichier data/formations.csv ");
         });
 
     function parseCSV(text) {
