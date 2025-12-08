@@ -24,7 +24,7 @@ body {
     width: 100vw;
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Empêche le scroll global, on scrollera dans la zone de chat */
+    overflow: hidden; /* Empêche le scroll global, on scrollera dans la zone de chat*/
 }
 
 .chat-container {
