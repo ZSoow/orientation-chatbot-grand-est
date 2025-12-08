@@ -24,7 +24,7 @@ body {
     width: 100vw;
     display: flex;
     justify-content: center;
-    align-items: center; /* Centre la fenêtre au milieu de la page */
+    align-items: center; /* Centre la fenêtre au milieu de la page*/
     overflow: hidden;
 }
 
