@@ -1,4 +1,3 @@
-// Remplace ton fichier JS existant par celui-ci (ou fusionne les changeements)
 document.addEventListener('DOMContentLoaded', () => {
     let formationsData = [];
     let currentStep = 0;
@@ -7,11 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
         niveau: '',
         region: ''
     };
-
-    // Pagination / affichage des résultats
-    let resultsCache = [];
-    let resultsIndex = 0;
-    const batchSize = 8; // nombre de cartes affichées par "page"
 
     const messagesContainer = document.getElementById('chat-messages');
     const userInput = document.getElementById('user-input');
@@ -27,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(err => {
             console.error("Erreur CSV :", err);
-            addBotMessage("⚠️ Erreur lors du chargement des données. Vérifiez que le fichier 'data/formations.csv' existe bien svp.");
+            addBotMessage("⚠️ Erreur lors du chargement des données. Vérifiez que le fichier 'data/formations.csv' existe bien.");
         });
 
     function parseCSV(text) {
@@ -49,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function startOrientation() {
         currentStep = 0;
         userChoices = { domaine: '', niveau: '', region: '' };
-        clearMessages();
+        messagesContainer.innerHTML = ''; // Nettoyer au démarrage
         
         addBotMessage("Bonjour ! 👋 Je suis l'assistant du <strong>CMQ Bioeco Academy Grand Est</strong>.");
         addBotMessage("Je vais t'aider à trouver ta formation parmi notre base de données.");
@@ -69,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 { text: "🧪 Sciences & Laboratoire", value: "science" },
                 { text: "💼 Commerce & Gestion", value: "business" },
                 { text: "🪵 Bois & Forêt", value: "bois" },
-                { text: "💻 Informatique & Numérique", value: "info" }
+                { text: "💻 Informatique & Numérique", value: "info" } // J'ai rajouté Info car présent dans ton CSV
             ]);
         } 
         else if (step === 2) {
@@ -83,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         else if (step === 3) {
             addBotMessage("Quel niveau d'études vises-tu ?");
+            // C'est ici que la segmentation change :
             showQuickReplies([
                 { text: "🎓 Avant le Bac (CAP, Bac Pro)", value: "avant_bac" },
                 { text: "🚀 Bac +2 / +3 (BTS, Licence)", value: "bac_2_3" },
@@ -114,26 +109,34 @@ document.addEventListener('DOMContentLoaded', () => {
             const results = formationsData.filter(f => {
                 // Création d'une chaîne de recherche complète pour être souple
                 const fullText = (
-                    (f.Grande_Categorie || '') + ' ' + 
-                    (f.Nom_Complet_Diplome || '') + ' ' + 
-                    (f.Description_Diplome || '')
+                    f.Grande_Categorie + ' ' + 
+                    f.Nom_Complet_Diplome + ' ' + 
+                    f.Description_Diplome
                 ).toLowerCase();
                 
                 const region = f.Region ? f.Region.toLowerCase() : '';
                 const ville = f.Ville ? f.Ville.toLowerCase() : '';
                 
+                // Conversion du niveau en entier pour comparaison numérique
                 const niveau = parseInt(f.Niveau_Europeen) || 0;
 
                 let match = true;
 
                 // 1. Filtre DOMAINE
                 if (userChoices.domaine === 'meca' && !fullText.includes('mécani') && !fullText.includes('mainten') && !fullText.includes('industri') && !fullText.includes('usinage') && !fullText.includes('robotique')) match = false;
+                
                 if (userChoices.domaine === 'logistique' && !fullText.includes('logist') && !fullText.includes('transport') && !fullText.includes('achat') && !fullText.includes('supply')) match = false;
+                
                 if (userChoices.domaine === 'nature' && !fullText.includes('agri') && !fullText.includes('agro') && !fullText.includes('nature') && !fullText.includes('paysage') && !fullText.includes('enviro')) match = false;
+                
                 if (userChoices.domaine === 'science' && !fullText.includes('scien') && !fullText.includes('labo') && !fullText.includes('bio') && !fullText.includes('chimie') && !fullText.includes('physique')) match = false;
+                
                 if (userChoices.domaine === 'business' && !fullText.includes('commer') && !fullText.includes('vent') && !fullText.includes('manage') && !fullText.includes('négocia') && !fullText.includes('eco')) match = false;
+                
                 if (userChoices.domaine === 'bois' && !fullText.includes('bois') && !fullText.includes('forêt') && !fullText.includes('menuisier')) match = false;
+
                 if (userChoices.domaine === 'info' && !fullText.includes('infor') && !fullText.includes('numér') && !fullText.includes('réseau') && !fullText.includes('data')) match = false;
+
 
                 // 2. Filtre RÉGION
                 if (userChoices.region !== 'tout') {
@@ -145,17 +148,26 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!regionMatch) match = false;
                 }
 
-                // 3. Filtre NIVEAU
+                // 3. Filtre NIVEAU (NOUVELLE LOGIQUE)
+                // Niv 3 = CAP, Niv 4 = Bac
+                // Niv 5 = Bac+2 (BTS), Niv 6 = Bac+3 (Licence/BUT)
+                // Niv 7 = Master/Ingénieur
+                // Niv 8 = Doctorat
+                
                 if (userChoices.niveau === 'avant_bac') {
+                    // On garde niveau 3 et 4
                     if (niveau !== 3 && niveau !== 4) match = false;
                 }
                 else if (userChoices.niveau === 'bac_2_3') {
+                    // On garde niveau 5 et 6
                     if (niveau !== 5 && niveau !== 6) match = false;
                 }
                 else if (userChoices.niveau === 'master') {
+                    // On garde niveau 7
                     if (niveau !== 7) match = false;
                 }
                 else if (userChoices.niveau === 'doctorat') {
+                    // On garde niveau 8 ou les lignes contenant "Doctorale"
                     if (niveau !== 8 && !fullText.includes('doctorale')) match = false;
                 }
 
@@ -167,18 +179,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 addBotMessage("Essaie d'élargir ta recherche (par exemple : Région 'Toute la région').");
                 showQuickReplies([{ text: "🔄 Recommencer", value: "reset" }]);
             } else {
-                // Réinitialise le cache de résultats pour la pagination
-                resultsCache = results.sort((a, b) => {
+                const count = results.length;
+                addBotMessage(`Bingo ! J'ai trouvé <strong>${count} formation(s)</strong> :`);
+                
+                // Tri : d'abord par niveau, puis par nom
+                results.sort((a, b) => {
                     const nivA = parseInt(a.Niveau_Europeen) || 0;
                     const nivB = parseInt(b.Niveau_Europeen) || 0;
                     return nivA - nivB;
                 });
-                resultsIndex = 0;
 
-                addBotMessage(`Bingo ! J'ai trouvé <strong>${resultsCache.length} formation(s)</strong> :`);
-                // Affiche la première batch
-                renderNextBatch();
-                if (resultsCache.length > batchSize) addBotMessage("💡 Utilise 'Voir plus' pour charger d'autres résultats.");
+                showFormations(results);
+                
+                if (count > 3) {
+                    addBotMessage("💡 Astuce : utilise le bouton 'Nouveau' pour changer de critères.");
+                }
                 showQuickReplies([{ text: "🔄 Nouvelle recherche", value: "reset" }]);
             }
         }, 800);
@@ -187,10 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- AFFICHAGE ---
 
     function showQuickReplies(options) {
-        // Supprime d'éventuelles quick-replies présentes
-        const existing = document.querySelectorAll('.quick-replies');
-        existing.forEach(n => n.remove());
-
         const container = document.createElement('div');
         container.className = 'quick-replies';
         
@@ -229,84 +240,42 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollToBottom();
     }
 
-    function clearMessages() {
-        messagesContainer.innerHTML = '';
-    }
-
-    // Render a batch of results (responsive grid)
-    function renderNextBatch() {
-        if (!resultsCache || resultsIndex >= resultsCache.length) return;
-
-        // wrapper bot message
-        const botDiv = document.createElement('div');
-        botDiv.className = 'message bot-message formation-grid-wrapper';
-
-        // grid container
-        const grid = document.createElement('div');
-        grid.className = 'formation-grid';
-
-        const end = Math.min(resultsIndex + batchSize, resultsCache.length);
-        for (let i = resultsIndex; i < end; i++) {
-            const f = resultsCache[i];
-
+    function showFormations(formations) {
+        formations.forEach(f => {
             // Construction des boutons URL
-            let actions = '';
+            let buttonsHtml = '';
+            
             if (f.URL_Page_Formation && f.URL_Page_Formation.length > 5) {
-                actions += `<a href="${f.URL_Page_Formation}" target="_blank" class="formation-link primary">Voir la fiche</a>`;
+                buttonsHtml += `<a href="${f.URL_Page_Formation}" target="_blank" class="formation-link primary">Voir la fiche</a>`;
             }
             if (f.URL_Site_Etablissement && f.URL_Site_Etablissement.length > 5) {
-                actions += `<a href="${f.URL_Site_Etablissement}" target="_blank" class="formation-link secondary">Site école</a>`;
+                buttonsHtml += `<a href="${f.URL_Site_Etablissement}" target="_blank" class="formation-link secondary">Site école</a>`;
             }
 
+            // Gestion de la date de portes ouvertes
             let dateHtml = '';
             if (f.Dates_Portes_Ouvertes && f.Dates_Portes_Ouvertes.length > 2) {
                 dateHtml = `<div class="formation-date">📅 JPO : ${f.Dates_Portes_Ouvertes}</div>`;
             }
 
-            const card = document.createElement('div');
-            card.className = 'formation-card';
-            card.innerHTML = `
-                <div class="formation-card-inner">
-                    <div class="formation-title" title="${escapeHtml(f.Nom_Complet_Diplome)}">${f.Nom_Complet_Diplome}</div>
+            const cardHtml = `
+                <div class="formation-card">
+                    <span class="formation-title">${f.Nom_Complet_Diplome}</span>
                     <div class="formation-school">🏫 ${f.Nom_Etablissement}</div>
+                    
                     <div class="formation-details">
                         <span class="tag">📍 ${f.Ville}</span>
                         <span class="tag">${f.Acronyme_Diplome}</span>
                         <span class="tag level">Niv ${f.Niveau_Europeen}</span>
                     </div>
+
                     ${dateHtml}
-                    ${actions ? `<div class="formation-actions">${actions}</div>` : ''}
+
+                    ${buttonsHtml ? `<div class="formation-actions">${buttonsHtml}</div>` : ''}
                 </div>
             `;
-            grid.appendChild(card);
-        }
-
-        botDiv.appendChild(grid);
-
-        // If there are more results, add a "Voir plus" button under the grid
-        if (end < resultsCache.length) {
-            const moreBtn = document.createElement('button');
-            moreBtn.className = 'voir-plus-btn';
-            moreBtn.textContent = 'Voir plus';
-            moreBtn.onclick = () => {
-                moreBtn.remove();
-                resultsIndex = end;
-                renderNextBatch();
-            };
-            botDiv.appendChild(moreBtn);
-        } else {
-            // advance index to end
-            resultsIndex = end;
-        }
-
-        messagesContainer.appendChild(botDiv);
-        scrollToBottom();
-    }
-
-    // small helper to escape html in attributes
-    function escapeHtml(str) {
-        if (!str) return '';
-        return str.replace(/[&<>"']/g, function(m) { return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]); });
+            addBotMessage(cardHtml);
+        });
     }
 
     function resetChat() {
