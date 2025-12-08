@@ -24,19 +24,19 @@ body {
     width: 100vw;
     display: flex;
     justify-content: center;
-    overflow: hidden; /* Empêche le scroll global */
+    align-items: center; /* Centre la fenêtre au milieu de la page */
+    overflow: hidden;
 }
 
-/* --- CONTENEUR PLEIN ÉCRAN --- */
+/* --- FENÊTRE PRINCIPALE --- */
 .chat-container {
-    width: 95%;
-    max-width: 1600px; /* Largeur max augmentée pour le mode bureau */
-    height: 95vh;
-    margin-top: 2.5vh;
+    width: 95%; /* Largeur presque totale */
+    max-width: 1600px; /* Limite pour les très grands écrans */
+    height: 95vh; /* Hauteur presque totale */
     background-color: var(--chat-bg);
     display: flex;
     flex-direction: column;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    box-shadow: 0 0 40px rgba(0,0,0,0.1);
     border-radius: 20px;
     position: relative;
     overflow: hidden;
@@ -52,7 +52,7 @@ body {
     align-items: center;
     justify-content: space-between;
     z-index: 10;
-    flex-shrink: 0; /* Le header ne doit pas rétrécir */
+    flex-shrink: 0;
 }
 
 .header-left {
@@ -92,7 +92,7 @@ body {
     border: 1px solid #e5e5ea;
     border-radius: 20px;
     padding: 8px 16px;
-    font-size: 13px;
+    font-size: 14px;
     cursor: pointer;
     color: var(--primary-color);
     font-weight: 600;
@@ -103,10 +103,10 @@ body {
     background-color: #f2f2f7;
 }
 
-/* --- ZONE DE MESSAGES --- */
+/* --- MESSAGES (ZONE DE SCROLL) --- */
 .chat-messages {
     flex: 1;
-    padding: 20px 30px;
+    padding: 20px 40px; /* Marges sur les côtés */
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -116,13 +116,13 @@ body {
 }
 
 .message {
-    max-width: 700px;
+    max-width: 800px; /* Largeur max pour le texte simple */
     padding: 12px 18px;
     border-radius: var(--border-radius);
     font-size: 15px;
     line-height: 1.5;
     position: relative;
-    animation: popIn 0.3s ease-out;
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 @keyframes popIn {
@@ -147,56 +147,25 @@ body {
     box-shadow: 0 4px 10px rgba(0, 122, 255, 0.25);
 }
 
-/* --- BOUTONS CHOIX --- */
-.quick-replies {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    width: 100%;
-    max-width: 800px;
-}
+/* --- GRILLE DE RÉSULTATS (IMPORTANT POUR L'AFFICHAGE CÔTE À CÔTE) --- */
 
-.reply-btn {
-    background: white;
-    border: 1px solid #d1d1d6;
-    color: var(--text-color);
-    padding: 12px 18px;
-    border-radius: 14px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    flex: 1 1 auto;
-    text-align: center;
-    min-width: 120px;
-}
-
-.reply-btn:hover {
-    background: var(--primary-color);
-    border-color: var(--primary-color);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
-}
-
-/* --- GRILLE DE RÉSULTATS (NOUVEAU) --- */
-.formations-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 20px;
-    width: 100%;
-    margin-top: 15px;
-}
-
-/* Le message conteneur de la grille doit être transparent et large */
+/* 1. Le conteneur du message bot s'élargit */
 .bot-message.full-width {
-    max-width: 100%;
-    background-color: transparent;
+    max-width: 100%; /* Prend toute la largeur disponible */
+    width: 100%;
+    background-color: transparent; /* Fond transparent pour voir la grille */
     padding: 0;
     box-shadow: none;
-    margin-right: 0;
+}
+
+/* 2. La grille elle-même */
+.formations-grid {
+    display: grid;
+    /* C'est ici que la magie opère : crée autant de colonnes de 320px que possible */
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    gap: 20px;
+    width: 100%;
+    margin-top: 10px;
 }
 
 /* --- CARTE REGROUPÉE --- */
@@ -204,26 +173,27 @@ body {
     background: white;
     border: 1px solid #e5e5ea;
     border-radius: 16px;
-    padding: 0; /* Padding géré à l'intérieur */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    height: 100%;
+    overflow: hidden; /* Pour que le contenu ne dépasse pas des bords arrondis */
+    height: 100%; /* Uniformise la hauteur */
+    max-height: 500px; /* Limite la hauteur si la liste est trop longue */
     transition: transform 0.2s;
-    max-height: 500px; /* Évite les cartes trop longues */
 }
 
 .formation-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-color: var(--primary-color);
 }
 
-/* En-tête de la carte (Nom du diplôme) */
+/* En-tête de la carte (fixe) */
 .card-header {
     background: #f9f9fa;
     padding: 15px;
     border-bottom: 1px solid #e5e5ea;
+    flex-shrink: 0; /* Ne rétrécit pas */
 }
 
 .formation-title {
@@ -232,17 +202,18 @@ body {
     font-weight: 700;
     color: #000;
     margin-bottom: 8px;
+    line-height: 1.3;
 }
 
 .card-tags {
     display: flex;
-    gap: 6px;
+    gap: 5px;
     flex-wrap: wrap;
 }
 
 .tag {
     background: #fff;
-    border: 1px solid #e5e5ea;
+    border: 1px solid #d1d1d6;
     color: #555;
     border-radius: 6px;
     padding: 4px 8px;
@@ -254,14 +225,14 @@ body {
 .tag.level {
     background: #eaf4ff;
     color: var(--primary-color);
-    border-color: #d0e3ff;
+    border-color: #cce0ff;
 }
 
-/* Liste des écoles (Zone scrollable si trop d'écoles) */
+/* Liste des écoles (scrollable) */
 .schools-list {
     padding: 0;
-    overflow-y: auto;
-    flex: 1; /* Prend l'espace restant */
+    overflow-y: auto; /* Scroll vertical si trop d'écoles */
+    flex: 1; /* Prend tout l'espace restant */
 }
 
 .school-item {
@@ -269,7 +240,7 @@ body {
     border-bottom: 1px solid #f0f0f5;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 4px;
 }
 
 .school-item:last-child {
@@ -285,26 +256,23 @@ body {
 .school-location {
     font-size: 12px;
     color: var(--subtext-color);
-    display: flex;
-    align-items: center;
-    gap: 4px;
 }
 
 .school-jpo {
     font-size: 11px;
-    color: #d63031;
+    color: #d63031; /* Rouge */
     background: #fff0f0;
     padding: 2px 6px;
     border-radius: 4px;
     display: inline-block;
     align-self: flex-start;
-    margin-top: 2px;
+    margin-top: 3px;
+    font-weight: 600;
 }
 
-/* Boutons d'action petits */
 .school-actions {
     display: flex;
-    gap: 8px;
+    gap: 6px;
     margin-top: 8px;
 }
 
@@ -313,15 +281,10 @@ body {
     text-align: center;
     text-decoration: none;
     font-size: 11px;
-    padding: 6px;
+    padding: 6px 4px;
     border-radius: 6px;
     font-weight: 600;
     transition: opacity 0.2s;
-}
-
-.btn-small.web {
-    background-color: #f2f2f7;
-    color: #007AFF;
 }
 
 .btn-small.info {
@@ -329,13 +292,52 @@ body {
     color: white;
 }
 
+.btn-small.web {
+    background-color: #f2f2f7;
+    color: #007AFF;
+}
+
 .btn-small:hover {
     opacity: 0.8;
 }
 
+
+/* --- BOUTONS RÉPONSES RAPIDES --- */
+.quick-replies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.reply-btn {
+    background: white;
+    border: 1px solid #d1d1d6;
+    color: var(--text-color);
+    padding: 10px 16px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    flex: 1 1 auto; /* S'adapte */
+    max-width: 200px;
+    text-align: center;
+}
+
+.reply-btn:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+}
+
 /* --- FOOTER INPUT --- */
 .chat-input-area {
-    padding: 15px 30px;
+    padding: 20px;
     background: white;
     border-top: 1px solid #e5e5ea;
     display: flex;
@@ -344,22 +346,21 @@ body {
 }
 
 .input-wrapper {
-    width: 100%;
-    max-width: 900px;
     display: flex;
     gap: 10px;
     background: #f2f2f7;
-    padding: 5px;
-    padding-left: 20px;
-    border-radius: 25px;
+    padding: 6px 20px;
+    border-radius: 30px;
+    width: 100%;
+    max-width: 900px;
 }
 
 #user-input {
     flex: 1;
     border: none;
     background: transparent;
-    padding: 12px 0;
-    font-size: 15px;
+    padding: 10px 0;
+    font-size: 16px;
     outline: none;
     color: var(--text-color);
 }
@@ -381,7 +382,18 @@ body {
     transform: scale(1.05);
 }
 
-/* Scrollbar fine */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-thumb { background: #c1c1c4; border-radius: 3px; }
-::-webkit-scrollbar-track { background: transparent; }
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .chat-messages {
+        padding: 15px;
+    }
+    .formations-grid {
+        grid-template-columns: 1fr; /* Une seule colonne sur mobile */
+    }
+    .chat-container {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        margin: 0;
+    }
+}
