@@ -29,7 +29,7 @@ body {
 
 /* --- CONTENEUR PRINCIPAL --- */
 .chat-container {
-    width: 95%; /* Prend presque toute la largeur */
+    width: 95%; /* Prend presque toute la largeurr */
     max-width: 1600px; 
     height: 95vh; /* Prend presque toute la hauteur */
     margin-top: 2.5vh;
