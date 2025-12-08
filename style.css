@@ -24,19 +24,19 @@ body {
     width: 100vw;
     display: flex;
     justify-content: center;
-    align-items: center; /* Centre la fenêtre au milieu de la page*/
-    overflow: hidden;
+    overflow: hidden; /* Important : on ne scroll pas la page, mais le chat */
 }
 
-/* --- FENÊTRE PRINCIPALE --- */
+/* --- CONTENEUR PRINCIPAL --- */
 .chat-container {
-    width: 95%; /* Largeur presque totale */
-    max-width: 1600px; /* Limite pour les très grands écrans */
-    height: 95vh; /* Hauteur presque totale */
+    width: 95%; /* Prend presque toute la largeur */
+    max-width: 1600px; 
+    height: 95vh; /* Prend presque toute la hauteur */
+    margin-top: 2.5vh;
     background-color: var(--chat-bg);
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 40px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
     border-radius: 20px;
     position: relative;
     overflow: hidden;
@@ -46,12 +46,10 @@ body {
 .chat-header {
     padding: 15px 30px;
     background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
     border-bottom: 1px solid #e5e5ea;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    z-index: 10;
     flex-shrink: 0;
 }
 
@@ -62,17 +60,13 @@ body {
 }
 
 .avatar {
-    height: 50px;
+    height: 40px;
     width: auto;
-    min-width: 50px;
-    display: flex;
-    align-items: center;
 }
 
 .avatar img {
     height: 100%;
     width: auto;
-    object-fit: contain;
 }
 
 .header-info h1 {
@@ -81,32 +75,24 @@ body {
     color: var(--text-color);
 }
 
-.header-info .status {
-    font-size: 13px;
-    color: #34c759;
-    font-weight: 500;
-}
-
 .reset-button {
-    background-color: transparent;
+    background: transparent;
     border: 1px solid #e5e5ea;
     border-radius: 20px;
     padding: 8px 16px;
-    font-size: 14px;
     cursor: pointer;
     color: var(--primary-color);
     font-weight: 600;
-    transition: all 0.2s;
 }
 
 .reset-button:hover {
     background-color: #f2f2f7;
 }
 
-/* --- MESSAGES (ZONE DE SCROLL) --- */
+/* --- ZONE DE MESSAGES --- */
 .chat-messages {
     flex: 1;
-    padding: 20px 40px; /* Marges sur les côtés */
+    padding: 20px 30px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -115,17 +101,18 @@ body {
     scroll-behavior: smooth;
 }
 
+/* Messages standards (bulles) */
 .message {
-    max-width: 800px; /* Largeur max pour le texte simple */
+    max-width: 700px;
     padding: 12px 18px;
     border-radius: var(--border-radius);
     font-size: 15px;
     line-height: 1.5;
     position: relative;
-    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: fadeIn 0.3s ease;
 }
 
-@keyframes popIn {
+@keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
@@ -135,7 +122,6 @@ body {
     background-color: var(--bot-msg-bg);
     color: var(--text-color);
     border-bottom-left-radius: 4px;
-    margin-right: auto;
 }
 
 .user-message {
@@ -143,57 +129,43 @@ body {
     background: var(--primary-gradient);
     color: white;
     border-bottom-right-radius: 4px;
-    margin-left: auto;
     box-shadow: 0 4px 10px rgba(0, 122, 255, 0.25);
 }
 
-/* --- GRILLE DE RÉSULTATS (IMPORTANT POUR L'AFFICHAGE CÔTE À CÔTE) --- */
-
-/* 1. Le conteneur du message bot s'élargit */
-.bot-message.full-width {
-    max-width: 100%; /* Prend toute la largeur disponible */
-    width: 100%;
-    background-color: transparent; /* Fond transparent pour voir la grille */
-    padding: 0;
-    box-shadow: none;
-}
-
-/* 2. La grille elle-même */
-.formations-grid {
+/* --- GRILLE DE RÉSULTATS (C'est ici que la magie opère) --- */
+.results-grid {
     display: grid;
-    /* C'est ici que la magie opère : crée autant de colonnes de 320px que possible */
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    /* Colonnes automatiques : min 320px, max autant que possible */
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 20px;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 15px;
+    padding-bottom: 20px;
 }
 
-/* --- CARTE REGROUPÉE --- */
+/* --- CARTE DE FORMATION --- */
 .formation-card {
     background: white;
     border: 1px solid #e5e5ea;
     border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Pour que le contenu ne dépasse pas des bords arrondis */
-    height: 100%; /* Uniformise la hauteur */
-    max-height: 500px; /* Limite la hauteur si la liste est trop longue */
+    overflow: hidden;
+    height: 100%; /* Force la même hauteur */
     transition: transform 0.2s;
 }
 
 .formation-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
     border-color: var(--primary-color);
 }
 
-/* En-tête de la carte (fixe) */
 .card-header {
     background: #f9f9fa;
     padding: 15px;
     border-bottom: 1px solid #e5e5ea;
-    flex-shrink: 0; /* Ne rétrécit pas */
 }
 
 .formation-title {
@@ -202,18 +174,17 @@ body {
     font-weight: 700;
     color: #000;
     margin-bottom: 8px;
-    line-height: 1.3;
 }
 
 .card-tags {
     display: flex;
-    gap: 5px;
+    gap: 6px;
     flex-wrap: wrap;
 }
 
 .tag {
     background: #fff;
-    border: 1px solid #d1d1d6;
+    border: 1px solid #e5e5ea;
     color: #555;
     border-radius: 6px;
     padding: 4px 8px;
@@ -225,82 +196,80 @@ body {
 .tag.level {
     background: #eaf4ff;
     color: var(--primary-color);
-    border-color: #cce0ff;
+    border-color: #d0e3ff;
 }
 
-/* Liste des écoles (scrollable) */
+/* Liste des écoles à l'intérieur de la carte */
 .schools-list {
     padding: 0;
-    overflow-y: auto; /* Scroll vertical si trop d'écoles */
-    flex: 1; /* Prend tout l'espace restant */
+    list-style: none;
+    overflow-y: auto;
+    flex: 1; /* Prend l'espace restant dans la carte */
+    max-height: 250px; /* Limite la hauteur de la liste si trop longue */
 }
 
-.school-item {
+.schools-list li {
     padding: 12px 15px;
     border-bottom: 1px solid #f0f0f5;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+    font-size: 13px;
 }
 
-.school-item:last-child {
+.schools-list li:last-child {
     border-bottom: none;
 }
 
 .school-name {
     font-weight: 600;
-    font-size: 13px;
     color: #333;
+    display: block;
+    margin-bottom: 4px;
 }
 
-.school-location {
+.school-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-size: 12px;
-    color: var(--subtext-color);
+    color: #666;
 }
 
-.school-jpo {
-    font-size: 11px;
-    color: #d63031; /* Rouge */
-    background: #fff0f0;
+.school-link {
+    text-decoration: none;
+    color: var(--primary-color);
+    background: #e9e9eb;
     padding: 2px 6px;
     border-radius: 4px;
-    display: inline-block;
-    align-self: flex-start;
-    margin-top: 3px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
-.school-actions {
-    display: flex;
-    gap: 6px;
-    margin-top: 8px;
+.school-link:hover {
+    background: #d1d1d6;
 }
 
-.btn-small {
-    flex: 1;
+/* Pied de carte (Bouton principal) */
+.card-footer {
+    padding: 10px;
+    background: white;
+    border-top: 1px solid #e5e5ea;
+    margin-top: auto;
+}
+
+.btn-full {
+    display: block;
     text-align: center;
+    background: var(--primary-color);
+    color: white;
     text-decoration: none;
-    font-size: 11px;
-    padding: 6px 4px;
-    border-radius: 6px;
+    padding: 10px;
+    border-radius: 8px;
     font-weight: 600;
+    font-size: 13px;
     transition: opacity 0.2s;
 }
 
-.btn-small.info {
-    background-color: #007AFF;
-    color: white;
+.btn-full:hover {
+    opacity: 0.9;
 }
-
-.btn-small.web {
-    background-color: #f2f2f7;
-    color: #007AFF;
-}
-
-.btn-small:hover {
-    opacity: 0.8;
-}
-
 
 /* --- BOUTONS RÉPONSES RAPIDES --- */
 .quick-replies {
@@ -309,7 +278,6 @@ body {
     gap: 10px;
     margin-top: 5px;
     margin-bottom: 15px;
-    width: 100%;
 }
 
 .reply-btn {
@@ -321,79 +289,55 @@ body {
     cursor: pointer;
     font-size: 14px;
     font-weight: 500;
-    transition: all 0.2s ease;
-    flex: 1 1 auto; /* S'adapte */
-    max-width: 200px;
-    text-align: center;
+    transition: all 0.2s;
 }
 
 .reply-btn:hover {
     background: var(--primary-color);
-    border-color: var(--primary-color);
     color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+    border-color: var(--primary-color);
 }
 
-/* --- FOOTER INPUT --- */
+/* --- INPUT AREA --- */
 .chat-input-area {
     padding: 20px;
     background: white;
     border-top: 1px solid #e5e5ea;
     display: flex;
     justify-content: center;
-    flex-shrink: 0;
 }
 
 .input-wrapper {
+    width: 100%;
+    max-width: 800px;
+    background: #f2f2f7;
+    border-radius: 30px;
+    padding: 5px 20px;
     display: flex;
     gap: 10px;
-    background: #f2f2f7;
-    padding: 6px 20px;
-    border-radius: 30px;
-    width: 100%;
-    max-width: 900px;
 }
 
 #user-input {
     flex: 1;
     border: none;
     background: transparent;
-    padding: 10px 0;
+    padding: 12px 0;
     font-size: 16px;
     outline: none;
-    color: var(--text-color);
 }
 
 #send-btn {
     background: var(--primary-color);
     border: none;
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.2s;
 }
 
-#send-btn:hover {
-    transform: scale(1.05);
-}
-
-/* Mobile responsive */
-@media (max-width: 768px) {
-    .chat-messages {
-        padding: 15px;
-    }
-    .formations-grid {
-        grid-template-columns: 1fr; /* Une seule colonne sur mobile */
-    }
-    .chat-container {
-        width: 100%;
-        height: 100%;
-        border-radius: 0;
-        margin: 0;
-    }
-}
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
