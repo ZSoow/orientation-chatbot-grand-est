@@ -1,4 +1,4 @@
-// Remplace ton fichier JS existant par celui-ci (ou fusionne les changements)
+// Remplace ton fichier JS existant par celui-ci (ou fusionne les changeements)
 document.addEventListener('DOMContentLoaded', () => {
     let formationsData = [];
     let currentStep = 0;
