@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ]);
         }
         else if (step === 3) {
-            addBotMessage("Quel niveau d'études vises-tu ?");
+            addBotMessage("Tu cherches ?");
             showQuickReplies([
                 { text: "🎓 Avant le Bac (CAP, Bac Pro)", value: "avant_bac" },
                 { text: "🚀 Bac +2 / +3 (BTS, Licence)", value: "bac_2_3" },
